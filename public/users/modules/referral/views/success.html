@@ -1,0 +1,92 @@
+<div class="content-wrapper main-inner">
+    <!-- Main content -->
+    <!-- presc details -->
+    <section class="">
+        <div class="container">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-sm-12 ">
+                        <div class="thanksDiv">
+                            <p>{{msg1}} </p>
+                            <button ng-if="showPres" class="btn btn-primary" ng-click="printDiv('prescription');">Print Prescription</button>
+                            <!-- <button ng-if="showPres" class="btn btn-primary" ng-click="nxtReferral()">Add another referral</button>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div id='prescription' style="display: none;">
+        <div style="width: 50%; float: left;">
+            <h2>{{referingUser}}{{degreeRef}}</h2>
+            <h4>Office : {{referingDocPhone | phonenumber}}</h4>
+            <h4>Fax : {{referingDocFax | phonenumber}}</h4>
+        </div>
+        <div style="width: 50%; float: left;">
+            <span style="float: right;"><img src="./../../assets/images/logo_new.png" alt=""></span>
+            <div class="clearfix"></div>
+        </div>
+        <div style="clear: both;"></div>
+        <div style="width: 100%; border-bottom: 2px solid black;"></div>
+        <div style="min-height: 500px; border-bottom: 2px solid black;">
+            <div style="width: 50%; float: left;padding-top: 20px;">
+                <p style="margin-right: 5px;"> <b>Patient Name: </b> ______________________________</p>
+                </n>
+                <p style="margin-right: 5px;"> <b>Chief Complaint:</b> {{referral['chiefComplain']}}</p>
+                </n>
+                <p style="margin-right: 5px;"> <b>Service Requested:</b> {{serviceNames}}</p>
+                </n>
+                <br>
+                <p ng-if="degree[userDegree] != 'Site Manager'" style="margin-right: 5px;"> <b>Referred To:</b> {{referredDocNames}}</p>
+                <p ng-if="degree[userDegree] == 'Site Manager'" style="margin-right: 5px;"> <b>Referred To:</b><span ng-if="[referredUserCenter] == '' ">{{referredDocNames}}</span><span
+                        ng-if="[referredUserCenter] != '' ">{{referredUserCenter}}</span></p>
+                </n>
+                <p style="margin-right: 5px;"> <b>Specialty:</b> {{referredDocSpecialty}}</p>
+                </n>
+                <p style="margin-right: 5px;"> <b>Address:</b> {{referredDocAddress }}</p>
+                </n>
+                <p style="margin-right: 5px;"> <b>Phone:</b> {{referredDocPhone |phonenumber}} (O)</p>
+                </n>
+            </div>
+            <div style="width: 50%; float: left;padding-top: 20px;">
+                <p style="float: right;"> Time: {{refTime | date:'hh:mm a'}} on {{refTime | date:'MMM.d, yyyy'}}</p>
+            </div>
+            <div style="clear: both;"></div>
+            <div style="width:45%; float:right;text-align: right;">
+                <hr style="width:50%; float:right; color:#0000ff; ">
+                <h4 class="ng-binding">{{referingUser}}{{degreeRef}}</h4>
+            </div>
+            <p>
+
+            </p>
+        </div>
+        <div style=" border-bottom: 2px solid black;">
+            <div style="width: 100%; float: left; padding-top: 20px;">
+                <p ng-if="degree[userDegree] != 'Site Manager'">
+                    {{referredDocNames}}: This patient was referred to your office using WhichDocs.
+                </p>
+                <!-- <p ng-if="degree[userDegree] != 'Site Manager'">
+                    {{referredDocNames}}: This patient was referred to your office using WhichDocs. You can confirm and track the status of this
+                    referral and others on your WhichDocs dashboard.
+                </p> -->
+                <p ng-if="degree[userDegree] == 'Site Manager'">
+                    <span ng-if="[referredUserCenter] == '' ">{{referredDocNames}}</span><span ng-if="[referredUserCenter] != '' ">{{referredUserCenter}}</span>:
+                    This patient was referred to your office using WhichDocs.
+                </p>
+                <!-- <p ng-if="degree[userDegree] == 'Site Manager'">
+                    <span ng-if="[referredUserCenter] == '' ">{{referredDocNames}}</span><span ng-if="[referredUserCenter] != '' ">{{referredUserCenter}}</span>:
+                    This patient was referred to your office using WhichDocs. You can confirm and track the status of this
+                    referral and others on your WhichDocs dashboard.
+                </p> -->
+                <p>
+                    WhichDocs makes referring patients easy . If you haven't logged in already, you can sign up for free using the
+                    log-in info sent to you by fax or email at the time of this referral, or create a free account at whichdocs.com
+                </p>
+                <!-- <p>
+                    WhichDocs makes referring patients easy and trackable. If you haven't logged in already, you can sign up for free using the
+                    log-in info sent to you by fax or email at the time of this referral, or create a free account at whichdocs.com
+                </p> -->
+            </div>
+            <div style="clear: both;"></div>
+        </div>
+    </div>

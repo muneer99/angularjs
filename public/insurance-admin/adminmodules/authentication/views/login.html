@@ -1,0 +1,53 @@
+<style>
+    .pdf_table table td {
+        border: none !important;
+    }
+    
+    .pdf_table .from-input {
+        float: none !important;
+        width: 100% !important;
+    }
+    
+    .pdf_table .form-group .from-label {
+        text-align: left !important;
+        width: auto !important;
+    }
+</style>
+<div class="login-box">
+    <div class="login-logo">
+        <a href="/#"><img src="./../../assets/images/logo_new.png" alt="logo" /></a>
+    </div>
+    <!-- /.login-logo -->
+    <div class="login-box-body" ng-controller="adminloginController" ng-init="timmerReset();">
+        <h2 class="login-box-msg">Insurance Admin <br>Sign in</h2>
+        <form name='loginForm' id='loginform' ng-submit="adminlogin(user)" novalidate autocomplete="off">
+            <div class="form-group has-feedback">
+                <input type="email" class="form-control" placeholder="Email@example.com" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9]{1})[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" ng-model="user.email" name="email" required>
+                <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                <span ng-show="loginForm.email.$touched && loginForm.email.$error.required && loginForm.email.$dirty" class="help-block" style="color:maroon">Please Enter Your Email</span>
+                <span class="text-danger" ng-show="loginForm.email.$error.pattern && (loginForm.email.$invalid || loginForm.email.$pristine)">Please enter valid Email</span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" name="pswrd" ng-model="user.password" autocomplete="new-password" required>
+                <!-- {{user.password}} -->
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                <span ng-show="loginForm.pswrd.$touched && loginForm.pswrd.$error.required && loginForm.email.$dirty" class="help-block" style="color:maroon">Enter your Password</span>
+            </div>
+            <div class="row">
+                <div class="col-xs-7 padding-left-none">
+                    <!--<div class="login-checkbox icheck">
+                        <label>
+                            <input type="checkbox"> Remember Me
+                        </label>
+                    </div>-->
+                </div>
+                <div class="col-xs-5 padding-right-none">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat" ng-disabled="loginForm.$invalid">Sign In</button>
+                </div>
+            </div>
+        </form>
+        <!--<a style="cursor:not-allowed">I forgot my password</a>-->
+        <br>
+        <!-- <a style="cursor:not-allowed" class="text-center">Register a new membership</a> -->
+    </div>
+</div>

@@ -1,0 +1,36 @@
+<!--<div class="content-wrapper main-inner" ng-controller="preferranceController">-->
+<div class="content-wrapper main-inner">
+    <!-- Main content -->
+    <section class="">
+        <div class="container">
+            <div class="row" ng-if="nexts == 'speciality'">
+                <div class="col-xs-12">
+                    <div class="box-body" ng-init="getAvailableSpeciality()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main"><strong>New Doctor Registration- Specialties </strong></h2>
+                                    <h2 class="box-title-main">Click or type options in the box to add all your subspecialties. You can click Next to skip and add more later.</h2>
+                                </div>
+                                <div class="form-group">
+                                    <ui-select close-on-select="false" multiple sortable="true" name="specialityName" id="specialityName" ng-model="selected.specialitySelected" style=" padding-left: 0px;" class="height-auto selectpicker form-control" tabindex="1" theme="select2"
+                                        title="Choose a specialty">
+                                        <ui-select-match placeholder="Search a specialty">{{$item.specialityName}}</ui-select-match>
+                                        <ui-select-choices repeat="item._id as item in availableList | filter: $select.search">
+                                            <div ng-bind-html="item.specialityName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 sideBtn">
+                                <button type="submit" class="btn btn-primary" ng-click="back('network')">Prev </button>
+                                <button type="submit" class="btn btn-primary" ng-click="nexttoContact('contactDetails')" ng-disabled="!selected.specialitySelected.length>0">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

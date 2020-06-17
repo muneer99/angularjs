@@ -1,0 +1,36 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar" ng-controller="homeController">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar" style="height:auto;padding-top:25px">
+        <!-- Sidebar Menu -->
+        <ul class="sidebar-menu">
+            <li class="header"><span>Menu</span></li>
+            <!-- Optionally, you can add icons to the links -->
+            <li ng-class="{ active: currentState =='insurancedashboard'}"><a ui-sref="insurancedashboard"><i class="fa">
+
+            <img src="../assets/images/dashboard_icon.png" alt=""/></i> <span>Dashboard</span></a></li>
+            <li ng-class="(menuDoctors.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref="viewInsProviderAll({id:contactDetail.network_id})"><i class="fa fa-user-md" style="font-size:22px"></i> <span>Associated Providers</span></a></li>
+            <!-- <li ng-class="(menuDoctorRatings.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='regDocsRating'><i class="fa fa-user-md" style="font-size:22px"></i> <span>Provider Rating</span></a></li>
+            <li ng-class="(nonRegDoc.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='nonRegDocs'><i class="fa fa-stethoscope" style="font-size:22px"></i> <span>Non-Reg. Providers</span></a></li>
+            <li ng-class="(menuOfficeAdmin.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='officeAdmin-list'><i class="fa fa-user" style="font-size:22px"></i> <span>Front Desk User</span></a></li>
+            <li ng-class="(menuPatients.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='patient-list'><i class="fa fa-users" style="font-size:22px"></i> <span>Patients</span></a></li>
+            <li ng-class="(refAccMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='referral-list'><i class="fa fa-envelope" style="font-size:20px"></i> <span>Referrals</span></a></li>
+            <li ng-class="(menuSpeciality.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='speciality'><i class="fa fa-th-list" style="font-size:22px"></i> <span>Specialties</span></a></li> -->
+            <!-- <li ng-class="(menuServices.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='services'><i class="fa fa-align-justify" style="font-size:22px"></i> <span>Services</span></a></li> -->
+            <!-- <li ng-class="(insuranceMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='insurance'><i class="fa fa-plus-square" style="font-size:22px"></i> <span>Insurances</span></a></li>
+            <li ng-class="(titleMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='title'><i class="fa fa-plus-square" style="font-size:22px"></i> <span>Titles</span></a></li>
+            <li ng-class="(frontdesktitleMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='frontdesktitle'><i class="fa fa-plus-square" style="font-size:22px"></i> <span>Frontdesk Titles</span></a></li>
+            <li ng-class="(hospitalMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='hospital'><i class="fa fa-h-square" style="font-size:22px"></i> <span>Hospitals</span></a></li>
+            <li ng-class="(faqMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='faq'><i class="fa fa-question" style="font-size:22px"></i> <span>Faqs</span></a></li>
+            <li ng-class="(faxmenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='fax-list'><i class="fa fa-fax" style="font-size:20px"></i> <span>Fax Templates</span></a></li>
+            <li ng-class="(emailmenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='email-list'><i class="fa fa-envelope" style="font-size:20px"></i> <span>Email Templates</span></a></li>
+            <li ng-class="(smsmenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='sms-list'><i class="fa fa-comments" style="font-size:20px"></i> <span>SMS Templates</span></a></li>
+            <li ng-class="(phiAccMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='phiLog'><i class="fa fa-list-alt" style="font-size:20px"></i> <span>PHI Access Log</span></a></li>
+            <li ng-class="(userActvMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='userActvLog'><i class="fa fa-list-alt" style="font-size:20px"></i> <span>User Activity Log</span></a></li>
+            <li ng-class="(invitationMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='invitationLog'><i class="fa fa-list-alt" style="font-size:20px"></i> <span>Provider Invitation Log</span></a></li>
+            <li ng-class="(notificationMenu.indexOf(currentState) > -1)? 'active dropdown ' : 'dropdown'"><a ui-sref='notification'><i class="fa fa-bell" style="font-size:20px"></i> <span>Send Notification</span></a></li> -->
+        </ul>
+        <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+</aside>

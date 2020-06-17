@@ -1,0 +1,133 @@
+<div class="content-wrapper main-inner" ng-init="(!notFrontDesk)?getDoctorList({}):lookupReq()">
+    <div class="content-wrapper main-inner">
+        <section class="">
+            <div class="container">
+                <div class="box">
+                    <div class="box-body">
+                        <span class="pull-right" title="Help" ng-click="showFaq('accept_referral');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                        <div class="row">
+
+                            <div class="col-sm-12 form-group">
+
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main"></h2>
+                                </div>
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main">Look-up or Add Provider or Site.</h2>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 ">
+
+                                <label for="email">Search Text:</label>
+                            </div>
+                            <div class="col-sm-6 form-group">
+                                <input type="text" autocomplete="off" class="form-control" id="email" placeholder="Enter the Provider's First Name, Last Name, or the Site Name to search"
+                                    name="" ng-model="search.firstName">
+                            </div>
+
+                        </div>
+
+                        <!-- <div class="form-group">
+                                    <label for="pwd">Provider Last Name:</label>
+                                    <div>
+                                        <input type="text" autocomplete="off" class="form-control" id="pwd" placeholder="Please enter last name of provider" name="pwd" ng-model="search.lastName">
+                                    </div>
+                                </div> -->
+
+                        <div class="col-sm-12">
+                            <div class="arrow-row">
+                                <label for="State">State </label>
+
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                            <!-- <select class="form-control" id="state" placeholder="State" name="state" ng-model="contactDetail.state" ng-options="item.abbreviation as item.abbreviation for item in usStates">
+                                            <option value="">All State</option>
+                                            </select>
+                            <span ng-if="contactDetails.state.$error.required" class="help-block" style="color:maroon">State Required</span> -->
+                                            <!-- ng-change="getDoctors()" -->
+                             <select class="form-control" id="state" placeholder="State" name="state" ng-model="user.state" 
+                                ng-required="!user.state">
+                                        <option value="ALL" > All State  </option>
+                                        <option ng-selected="item == {{user.state}}"  ng-repeat="(key,item) in stateList" value="{{item}}" >{{item}}</option>
+                                        </select>
+                            <span ng-if="!user.state && makeReferral.state.$touched && makeReferral.state.$dirty && makeReferral.state.$error.required"
+                                class="help-block" style="color:maroon">Select at least one state</span> 
+                        </div>
+
+                        <div class="col-sm-12 ">
+                            <div class="form-group" style="margin-top: 15px;">
+                                <button type="submit" class="btn btn-primary" ng-click="selfRefer = 1; getDoctorList(true, true)" ng-disabled="!search.firstName">Search</button>
+                                <button type="submit" class="btn btn-primary" ng-click="selfRefer = 1; addDoc()" ng-show="notFrontDesk">Add New Provider</button>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12" ng-show="!addNew && docsList.length">
+                            <div class="arrow-row">
+                                <h2 class="box-title-main">Registered Providers </h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table ng-table="tableParams" class="table table-striped">
+                                    <tr ng-repeat="docs in docsList">
+                                        <td title="'Provider Name'" sortable="'firstname'" ng-if="docs.degree">{{docs.firstname}} {{docs.lastname}}, {{degree[docs.degree]}}</td>
+                                        <td title="'Provider Name'" sortable="'firstname'" ng-if="!docs.degree">{{docs.firstname}} {{docs.lastname}}</td>
+                                        <td title="'Site'" sortable="'centername'">{{docs.centername}}</td>
+                                        <td title="'Address'" sortable="'location'">{{docs.location}}</td>
+                                        <td title="'Email'" sortable="'email'" ng-if="docs.emailAvailable">{{docs.email}}</td>
+                                        <td title="'Email'" sortable="'email'" ng-if="!docs.emailAvailable">&nbsp;</td>
+                                        <td title="'Phone No.'" sortable="'phone_number'">{{docs.phone_number |phonenumber}}</td>
+                                        <td title="'Action'">
+                                            <button ng-click="selfRefer = 1; startRefer('lookup',docs)" type="submit" class="btn btn-primary">Select</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="tableLoader">
+                                        <td colspan="10" align="center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></td>
+                                    </tr>
+                                    <tr ng-if="doctorList.length == 0 && !tableLoader">
+                                        <td colspan="10" align="center">No record found</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--<div class="box-body" style="background-color: white" ng-if="docsList.length === 0"> No providers found...</div>-->
+                        </div>
+                        <div class="col-sm-12" ng-show="!addNew && nonRegDocsList.length">
+                            <div class="arrow-row">
+                                <h2 class="box-title-main">Non-Registered Providers </h2>
+                            </div>
+                            <div class="table-responsive">
+                                <table ng-table="tableOutsideDoctorParams" class="table table-striped">
+                                    <tr ng-repeat="docs in nonRegDocsList">
+                                        <td title="'Provider Name'" sortable="'firstname'" ng-if="docs.degree">{{docs.firstname}} {{docs.lastname}}, {{degree[docs.degree]}}</td>
+                                        <td title="'Provider Name'" sortable="'firstname'" ng-if="!docs.degree">{{docs.firstname}} {{docs.lastname}}</td>
+                                        <td title="'Site'">{{docs.centername}}</td>
+                                        <td title="'Address'" sortable="'location'">{{docs.location}}</td>
+                                        <td title="'Email'" sortable="'email'" ng-if="docs.email">{{docs.email}}</td>
+                                        <td title="'Email'" sortable="'email'" ng-if="!docs.email">&nbsp;</td>
+                                        <td title="'Phone No.'" sortable="'phone_number'">{{docs.phone_number |phonenumber}}</td>
+                                        <td title="'Action'">
+                                            <button ng-if="!docs.isOutside" ng-click="selfRefer = 1; startRefer('lookup',docs)" type="submit" class="btn btn-primary">Select</button>
+                                            <button ng-if="docs.isOutside" ng-click="selfRefer = 1; view-Provider({id:docs._id})" ui-sref="view-provider({id:docs._id})"  type="submit"
+                                                class="btn btn-primary">Select</button>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="tableNonRegDocLoader">
+                                        <td colspan="10" align="center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></td>
+                                    </tr>
+                                    <tr ng-if="nonRegDocsList.length == 0 && !tableNonRegDocLoader">
+                                        <td colspan="10" align="center">No record found</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <!--<div class="box-body" style="background-color: white" ng-if="nonRegDocsList.length === 0"> No providers found...</div>-->
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+    </div>
+    </section>
+</div>
+</div>

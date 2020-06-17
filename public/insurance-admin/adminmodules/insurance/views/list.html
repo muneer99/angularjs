@@ -1,0 +1,106 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <div class="row" ng-init="getNetworkList()">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="box">
+                    <div class="box-header with-border super-patient-header">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                <h3 class="box-title"><span class="latest-c-icon"><img src="../assets/images/latest_order_icon.png" alt=""/></span>                                    {{pageTitle}}</h3>
+                                <p class="help-block" style="display:block;"><a ng-href="../images/non-reg-docs-sample.xlsx" target="_blank">Click to download sample file to import providers for an Insurance. </a></p>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12 text-right">
+                                <div class="row form-control-margin-top">
+                                    <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12 text-right">
+                                        <div class="input-group pad-30-top-admin margin-bottom-10">
+                                            <input type="text" placeholder=" Search..." ng-change="searchable(searchTextField)" ng-model="searchTextField" class="super-doc-search-txt form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary sup-doc-search-icon" style="background:color:#367FA9;min-height: 45px;" ng-click="searchable(searchTextField)"><i class="fa fa-search"></i></button>
+                                            </span>
+                                            <span class="input-group-btn">
+                                              <input type="file" accept=".xls, .xlsx" style="display:none" id="docfilexlx" name="docfilexlx" opts="nonRegData" file-Insurence="" multiple="false" required/>
+                                        <!-- <button class="icon-1x fa fa-plus btn btn-success" onclick="document.getElementById('docfilexlx').click();">Import</button> -->
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                        <button class="btn btn-success sup-add-doc" ui-sref='addInsurance'><i class="icon-1x fa fa-plus" aria-hidden="true"></i>Add Insurance</button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="input-group pad-30-top-admin" style=" margin: 10px;display: block;">
+                                <form class="form-horizontal" name="sendForm">
+                                    <div style="float:left; margin-top: 10px;"> <input type="checkbox" ng-click="selectAllNetwork()" ng-model="isAllSelectedNetwork">                                        De/Select All
+                                    </div>
+                                    <button class="btn btn-primary sup-doc-search-icon display: inline-block" style="margin-left: 5px;font-size: 14px;padding: 6px;"
+                                        ng-click="sendEmailNetwork(data)">Send Login Details</button>
+
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <!-- /.box-header -->
+
+                    </div>
+                    <div class="box-body" style="padding-top: 45px;">
+                        <div class="table-responsive min-margin-15">
+                            <table ng-table="tableParams" class="table table-striped" show-filter="true">
+                                <tr ng-repeat="data in dataList track by $index">
+                                    <td title="'Select Network'" sortable="'firstLogin'">
+                                        <span ng-if="data.email"> <input type="checkbox" ng-model="data.selected" value="{{data._id}}" ng-change="optionToggledNetwork()"></span>
+                                    </td>
+                                    <td title="'Insurance Name'" sortable="'name'">
+                                        <span ng-if="!data.privateGroup" ></span> <span ng-if="data.privateGroup" title="'Private Group'" style="color:red">*</span>{{data.name}}</td>
+                                    <td title="'Email'" sortable="'email'">
+                                        {{data.email}}</td>
+                                    <td title="'Description'" sortable="'desc'">
+                                        {{data.desc}}</td>
+                                    <td title="'Actions'">
+                                        <!-- ng-click="import(data._id)" -->
+                                        <!-- <span title="View Providers"><a ui-sref="viewInsProvider({id:data._id})" style="cursor:pointer"><i class="icon-2x fa fa-users" style="font-size:2em"></i></a></span>  -->
+                                        <span title="View All Providers"><a ui-sref="viewInsProviderAll({id:data._id})" style="cursor:pointer"><i class="icon-2x fa fa-users" style="font-size:2em"></i></a></span>
+                                        <span title="Edit"><a ui-sref="editInsurance({id:data._id})" style="cursor:pointer"><i class="icon-2x fa fa-pencil" style="font-size:2em"></i></a></span>
+                                        <span title="Delete"><a href="javascript:void(0)" ng-click="deleteNetwork(data._id)"><i class="fa fa-trash-o" aria-hidden="true" style="font-size:2em"></i></a></span>
+                                        <span><a title="To be verified" href="javascript:void(0)" ng-if="!data.verified" ng-click="addNetwork({_id:data._id, verified: true})"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size:2em"></i></a><i title="Verified" ng-if="data.verified" class="fa fa-thumbs-o-up" aria-hidden="true" style="font-size:2em; color: green"></i></span>
+                                        <span title="Import" ng-if="data.verified">     
+                                             <!-- <input type="text" style="display:none" value="data._id" id="data" name="data" >                                      -->
+                                             <!-- <input type="file" accept=".xls, .xlsx" style="display:none" id="dataList" name="dataList" fileRead opts="data" multiple="false" required/> 
+                                             <button class="icon-1x fa fa-plus btn btn-success" aria-hidden="true" style="font-size:2em" ng-click="fileUpload(data._id)"></button>   -->
+                                        <!-- <input type="file" accept=".xls, .xlsx" style="display:none" id="{{ 'docfilexlx_' + $index }}" name="docfilexlx" opts="nonRegData" file-Insurence="" multiple="false" required/> -->
+                                        <button class="icon-1x fa fa-plus btn btn-success" ng-click="onclickFunction(data.name)";>Import</button>
+                                        <!-- <button class="icon-1x fa fa-plus btn btn-success" onclick="document.getElementById('docfilexlx_'+$index).click();">Import</button> -->
+                                        
+
+                                             <!-- <button class="icon-1x fa fa-plus" aria-hidden="true" style="font-size:2em"  onclick="document.getElementById('dataList').click();" ></button>  -->
+                                            <!-- <a href="javascript:void(0)" onclick="document.getElementById('dataList').click();" ><i class="icon-1x fa fa-plus" aria-hidden="true" style="font-size:2em"></i></a>  -->
+                                              <!-- <input type="file" accept=".xls, .xlsx" style="display:none" name="file" id="fileUpload" file-model="myFile" title="ChooseYour file" onchange="return ValidateExtension()" required="required" />                                        -->
+                                            
+                                             <!-- <a href="javascript:void(0)" ng-click="UploadCompanyContact('file')" >
+                                                 <i class="icon-1x fa fa-plus" aria-hidden="true" style="font-size:2em"></i>
+                                             </a> -->
+                                            
+                                        </span>
+                                    </td>
+
+                                </tr>
+                                <tr ng-if="tableLoader">
+                                    <td colspan="7" align="center">
+                                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    </td>
+                                </tr>
+                                <tr ng-if="dataList.length == 0 && !tableLoader">
+                                    <td colspan="7" align="center">No record Found</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

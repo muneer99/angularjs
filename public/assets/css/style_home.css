@@ -1,0 +1,133 @@
+@charset "utf-8";
+/* CSS Document */
+body{font-family: 'Raleway', sans-serif;}
+.main{margin:0 auto;width:100%;}
+.wrapper{float:left;width:100%;}
+.header{float:left;width:100%;background:#fff;padding:15px 0; position:fixed; z-index: 99;border-bottom: 1px solid #eee;}
+.header-left{padding:0;}
+.logo{}
+.header-right{padding:0;}
+.header-right form{padding-top: 5px;float:right;}
+.header-right form input{float:left;border-radius:0;height:40px;color:#5d5d5d;font-size:14px;margin-top: 15px;}
+.header-right form .btn{border-radius:0;margin-top: 15px; padding:0px 20px;height:40px;width:100%; font-size: initial !important;}
+.login-bg{background:#f57d1f;}
+.sign-up-bg{background:#2e96c4;}
+.logo-description{color:#000;font-size:20px;padding-top: 3px;padding: 0;}
+.logo-description span{color:#f57d1f;}
+.DOCS-Pracrice{float:left;width:75%; margin-top:35px;/*padding:30px 0;*/color:#1e94c4;font-size:28px;text-transform: uppercase;}
+.DOCS-Pracrice span{color:#f57d1f!important;position: relative!important;float: none!important;bottom: 0!important;}
+.docs-section-img{float:left;width:100%;/*padding:30px 0;color:#1e94c4;*/font-size:26px; font-style: italic;/*text-transform: uppercase;*/}
+.docs-section-img span{color:#f57d1f;}
+.docs-section-img P{display: block;}
+.patient-insurance-section{float:left;width:100%; margin-top:11%;/*padding:0 0 30px 0;*/position: relative;}
+.patient-insurance-section span{     width: 53%;
+    float: left;
+    font-size: 30px;
+    position: absolute;
+    bottom: 140px;
+    color: #fff;
+  }
+.frgt-pasord{padding-top:5px;display: inline-block;white-space: nowrap;text-decoration:none;color:#000;}
+ .patient-insurance-section .carousel-indicators{bottom: 50px;}
+ .patient-insurance-section .item img {
+    background-size: cover;
+    background-position: 100% 100%;
+}
+.DOCS-description{float:left;width:100%;padding:30px 0 60px 0;}
+.DOCS-description p{color:#333333;font-size:28px;margin-bottom:60px;}
+.DOCS-description span{color:#f57d1f;}
+.docs-section-img-left{padding-top: 30px;}
+.color-blue{color:#1e94c4 !important;}
+.join-colleagues{font-weight:600;background:#f57d1f; padding:30px 0;margin-bottom:60px;float:left;width:100%;font-size:20px;text-transform:uppercase;color:#fff;}
+.account-create{font-weight:700;padding:15px 30px;background:#2e96c4;text-transform:uppercase;font-size:20px;color:#fff !important;}
+.join-colleagues-left{float:left;width:100%;}
+.join-colleagues-right{float:left;width:100%;color:#333333;font-size:28px;}
+.join-colleagues-right span{color:#f57d1f;}
+.padding-column{padding:0;}
+.create-account-section{background:#f5f5f5;float:left;width:100%;padding:60px 0;}
+.create-account-section-left{font-size:23px;color:#333333;text-transform:uppercase;}
+.create-account-section-left p{margin-bottom:50px; font-weight:700;}
+.create-account-section-left p:last-child{margin-bottom:0;}
+.create-account-section-left p span{color:#f57d1f;}
+.create-account-section-right{padding-top:180px;float:right;}
+.create-account-section-right span{font-weight:700;padding:15px 30px;background:#f57d1f;text-transform:uppercase;font-size:20px;color:#fff;}
+.footer{background:#222222;padding:30px 0 0 0;float:left;width:100%;}
+.footer-left h1{color:#cccccc;font-size:24px;margin-bottom:20px;}
+.footer-left p{color:#b9b9b9;font-size:16px;float:left;}
+.footer-left i{float: left;top: 5px;position: relative;padding-right: 10px;}
+.footer-left span{float:left;}
+.footer-right form{border:1px solid #2c2c2c;float:left;width:100%;padding:15px 0;}
+.footer-right h2{color:#cccccc;font-size:24px;margin-bottom:20px;}
+.footer-right input{height:40px;margin-bottom:10px;border-radius:0;color:#b2b2b2;}
+.footer-right textarea{height:80px;margin-bottom:10px;border-radius:0;color:#b2b2b2;}
+.footer-right .btn{padding:10px 15px;background:none;border:1px solid #3e3e3e;border-radius:0;color:#858585;float:right;margin-top:25px;}
+
+.home-video-section, .home-banner-section {
+    width: 48%; float:left; padding:0 0 20px 50px;
+}
+
+.btn.btn-warning.login-bg {
+    background-color: #f57d1f;
+    opacity: 1;
+}
+
+.btn.btn-warning.login-bg.disabled, .btn.btn-warning.login-bg[disabled] {
+    opacity: 0.75;
+}
+
+
+
+@media only screen and (max-width: 767px) {
+.join-colleagues-left img{width:100%;}
+.header-right form input{margin-bottom:10px;}
+.sign-up-bg{float:right;}
+.header-left{margin-bottom:10px;}
+.padd-responsive{padding:0;}
+.logo{text-align:center;}
+.logo-description{padding-top:10px;}
+.DOCS-Pracrice{padding:10px 0;font-size: 20px;}
+.logo-description{font-size: 20px;}
+.patient-insurance-section{padding:10px;}
+.patient-insurance-section span{width:100%;font-size:12px;    bottom: 22px;}
+.patient-insurance-section .carousel-indicators{bottom: 5px;}
+.DOCS-description{padding:10px;}
+.DOCS-description p{font-size:20px;margin-bottom:10px;}
+.account-create{font-size:15px;margin-top: 10px;float: left;}
+.join-colleagues{margin-bottom:15px;padding:10px 0;}
+.join-colleagues-right{font-size:20px;padding-top: 10px;}
+.create-account-section{padding:10px 0;}
+.create-account-section-left{font-size:20px;}
+.create-account-section-left p{margin-bottom:10px;}
+.create-account-section-right{padding-top:30px;padding-bottom:30px;}
+.create-account-section-right span{padding:15px 20px;font-size:18px;}
+.home-video-section, .home-banner-section {width: 100%; float: left; padding: 0 0 20px 10px;}
+.header {position: initial; padding: 15px;}
+}
+
+@media only screen and (min-width: 767px) and (max-width: 1024px) {
+.create-account-section-right span{font-size:15px;}
+.account-create{font-size:15px;margin-top: 5px;float: left;}
+.DOCS-Pracrice{padding:10px 0;font-size: 20px;}
+.patient-insurance-section{padding:10px;background-size: cover;}
+.patient-insurance-section span{font-size:20px;}
+.DOCS-description{padding:10px;}
+.DOCS-description p{font-size:20px;margin-bottom:10px;}
+.join-colleagues{margin-bottom:15px;padding:10px 0;}
+.join-colleagues-right{font-size:20px;padding-top:10px;}
+.create-account-section{padding:10px 0;}
+.create-account-section-left{font-size:20px;}
+.create-account-section-left p{margin-bottom:10px;}
+.create-account-section-right{padding-top:30px;padding-bottom:30px;}
+.create-account-section-right span{padding:15px 20px;font-size:18px;}
+}
+
+@media only screen and (min-width: 990px) and (max-width: 1200px) {
+.patient-insurance-section{margin-top: 16%;}
+}
+
+@media only screen and (min-width: 1025px) and (max-width: 1200px) {
+.create-account-section-right span{font-size:15px;}
+.account-create{font-size:15px;}
+
+}
+

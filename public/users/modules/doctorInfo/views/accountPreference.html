@@ -1,0 +1,35 @@
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container">
+            <div ng-if="isSelected == 'edit'" ng-include="'/modules/doctorInfo/views/updateService.html'">
+            </div>
+            <div class="row" ng-if="isSelected == 'false'">
+                <div class="col-xs-12">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main"><strong>Account Preferences</strong> </h2>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Choose/Rank your Preferred Specialists </button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" ng-click="editService('edit');">Edit the Services you offer </button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary" ng-click="editContact('contact')">Edit Your Contact Info</button>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-primary">Log-off </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

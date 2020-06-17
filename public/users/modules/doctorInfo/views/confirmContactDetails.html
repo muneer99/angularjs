@@ -1,0 +1,87 @@
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container">
+            <div class="box-body" ng-init="getContactDetails()">
+                <div class="row">
+                    <div class="arrow-row" style="padding-left: 15px;">
+                        <h2 class="box-title-main"><strong>{{pageTitle}}</strong></h2>
+                        <h2 class="box-title-main">Please confirm or edit the info for your profile</h2>
+                    </div>
+                    <form name="contactDetails" ng-submit="nexttoService('services')">
+                        <div class="col-sm-6">
+                            <div class="form-group required">
+                                <label for="firstName" class="control-label" style="margin-top: 15px; ">First Name:</label>
+                                <input type="text" class="form-control" id="firstName" placeholder="First name" name="firstName" ng-model="contactDetail.firstname" tabindex="1" required>
+                                <span ng-if="contactDetails.firstName.$touched && contactDetails.firstName.$dirty && contactDetails.firstName.$error.required" class="help-block" style="color:maroon">First Name Required</span>
+                            </div>
+                            <div class="form-group required">
+                                <label for="lastName" class="control-label" style=" margin-top: 15px;">Last Name:</label>
+                                <input type="text" class="form-control" id="lastName" placeholder="Last name" name="lastName" ng-model="contactDetail.lastname" tabindex="2" required>
+                                <span ng-if="contactDetails.lastName.$touched && contactDetails.lastName.$dirty && contactDetails.lastName.$error.required" class="help-block" style="color:maroon">Last Name Required</span>
+                            </div>
+                            
+                            <div class="form-group required">
+                                <label for="email" class="control-label" style=" margin-top: 15px;">Email:</label>
+                                <input type="email" class="form-control" id="emailid" placeholder="Email ID" name="emailId" ng-model="contactDetail.email" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9]{1})[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" tabindex="4" disabled>
+                                <span class="text-danger" ng-show="contactDetails.email.$error.pattern && (contactDetails.email.$invalid || contactDetails.email.$pristine)">Please enter valid Email</span>
+                            </div>
+                            <div class="form-group ">
+                                <label for="sute" class="control-label" style=" margin-top: 15px;">Suite #:</label>
+                                <input type="text" class="form-control" id="sute" placeholder="Suite #" name="sute" ng-model="contactDetail.sute" tabindex="5" ng-maxlength="30" maxlength="31">
+                                <span ng-if="contactDetails.sute.$touched && contactDetails.sute.$dirty && contactDetails.sute.$error.required" class="help-block" style="color:maroon">Suite Required</span>
+                                <span class="" ng-show="contactDetails.sute.$error.maxlength" style="color:maroon">Too long. Use 30 characters or less.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class="control-label" style=" margin-top: 15px;">City:</label>
+                                <input type="text" class="form-control" id="city" placeholder="City" name="city" ng-model="contactDetail.city" tabindex="6">
+                                <span ng-if="contactDetails.city.$touched && contactDetails.city.$dirty && contactDetails.city.$error.required" class="help-block" style="color:maroon">City Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="cell_phone" class="control-label" style=" margin-top: 15px;">Mobile Number:</label>
+                                <select class="form-control faxbtn" id="ccode" placeholder="ccode" name="ccode" ng-model="contactDetail.ccode" tabindex="7">
+                                    <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == contactDetail.ccode">{{item}}</option>
+                                </select>
+                                <input type="text" class="form-control inpPhone" id="cell_phone" name="cell_phone" ng-model="contactDetail.cell_phone" ui-mask="999-999-9999" tabindex="8">
+                                <span ng-if="contactDetails.cell_phone.$touched && contactDetails.cell_phone.$dirty && contactDetails.cell_phone.$error.required" class="help-block" style="color:maroon">Mobile Number Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="fax" class="control-label" style=" margin-top: 15px;">Office Fax Number:</label>
+                                <select class="form-control faxbtn" id="ccode" placeholder="Fax" name="fax" ng-model="contactDetail.ccodeFax" tabindex="9">
+                                    <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == contactDetail.ccodeFax">{{item}}</option>
+                                </select>
+                                <input type="text" class="form-control inpPhone" id="fax" name="fax" ng-model="contactDetail.fax" ui-mask="999-999-9999" tabindex="10">
+                                <span ng-if="contactDetails.fax.$touched && contactDetails.fax.$dirty && contactDetails.fax.$error.required" class="help-block" style="color:maroon">Office fax number required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="control-label" style=" margin-top: 15px;">Street Address:</label>
+                                <input type="text" class="form-control" id="location" placeholder="Street address" name="location" ng-model="contactDetail.location" tabindex="11">
+                                <span ng-if="contactDetails.location.$touched && contactDetails.location.$dirty && contactDetails.location.$error.required" class="help-block" style="color:maroon">Street Address Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="state" class="control-label" style=" margin-top: 15px;">State:</label>
+                                <select class="form-control" id="state" placeholder="State" name="state" ng-model="contactDetail.state" tabindex="12" ng-options="item.abbreviation as item.abbreviation for item in usStates"></select>
+                                <span ng-if="contactDetails.state.$touched && contactDetails.state.$dirty && contactDetails.state.$error.required" class="help-block" style="color:maroon">State Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="zipcode" class="control-label" style=" margin-top: 15px;">ZIP Code:</label>
+                                <input type="text" class="form-control" id="zipcode" placeholder="ZIP code" maxlength="5" name="zipcode" ng-model="contactDetail.zipcode" ng-pattern="/^[0-9]{1,6}$/" tabindex="13">
+                                <span ng-if="contactDetails.zipcode.$error.pattern" class="help-block" style="color:maroon">Please enter valid ZIP code.</span>
+                                <span ng-if="contactDetails.zipcode.$touched && contactDetails.zipcode.$dirty && contactDetails.zipcode.$error.required" class="help-block" style="color:maroon">ZIP Code Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="phone_number" class="control-label" style=" margin-top: 15px;">Office Phone:</label>
+                                <input type="text" class="form-control" id="phone_number" name="phone_number" ng-model="contactDetail.phone_number" ui-mask="999-999-9999" tabindex="14">
+                                <span ng-if="contactDetails.phone_number.$touched && contactDetails.phone_number.$dirty && contactDetails.phone_number.$error.required" class="help-block" style="color:maroon">Office Phone Required</span>
+                            </div>
+                        </div>
+                    <div class="col-sm-12">
+                        <button type="button" class="btn btn-primary" tabindex="16" ng-click="back('speciality')">Prev </button>
+                        <button type="submit" class="btn btn-primary" tabindex="15" ng-disabled="contactDetails.$invalid">Next</button>
+                    </div>
+                    </form>
+                </div>
+                <span class="reqspan"><p class="reqspantitle" style="margin-top:10px;"> indicates a required field.</p></span>
+            </div>
+        </div>
+    </section>
+</div>

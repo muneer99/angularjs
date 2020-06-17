@@ -1,0 +1,121 @@
+<div class="content-wrapper main-inner" ng-init="getContent()">
+    <section class="">
+        <div class="container">
+            <div class="box-body">
+                <span class="pull-right" title="Help" ng-click="showFaq('find_whichdocs');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <div class="arrow-row">
+                            <h1 class="">Find Which Docs</h1>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-12">
+                        <form name="makeReferral" ng-submit="getDocs(); done = true">
+
+                            <div class="form-group ">
+                                <div class="row">
+                                    <label class="control-label col-sm-5 labelInp" for="network"> 1. Which Insurance Network? </label>
+                                    <div class="col-sm-6">
+                                        <!-- referral.network  networkArr.selected-->
+                                        <ui-select ng-model="referral.network.selected" id="network" name="network" theme="select2" class="form-control" style="padding-left: 0px;"
+                                            title="Choose a network">
+                                            <ui-select-match placeholder="Search Insurance">{{ $select.selected.name }}</ui-select-match>
+                                            <ui-select-choices repeat="item._id as item in networkArr | filter: $select.search">
+                                                <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span ng-show="makeReferral.network.$touched && makeReferral.network.$error.required && makeReferral.network.$dirty" class="help-block"
+                                            style="color:maroon" required>Select at least one network</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="networkArr.selected==2">
+                                <div class="row">
+                                    <label class="control-label col-sm-5 makerefTxtAlign" for="insnew"> Add New / Unlisted Insurance:</label>
+
+                                    <div class="col-sm-6">
+                                        <input type="tet" class="form-control makerefInp" id="newInsurance" placeholder="Add New Insurance Network" name="newInsurance"
+                                            ng-model="referral.newInsurance" ng-disabled="networkArr.selected!== 2">
+                                        <md-button class="mdInfoBtn refTooltip" aria-label="Menu with Tooltip Delay">
+                                            <md-tooltip md-delay="demo.delayTooltip">
+                                                <b><u>HERE IS HOW IT WORKS:</u></b><br/> 1) You can add new / nonlisted insurance
+                                                network here.<br/> 2) Once approved, the new insurance will appear in the
+                                                search list.
+                                                <br/>
+                                            </md-tooltip>
+                                            <i class="fa fa-info-circle tooltip-icon ng-scope"></i>
+                                        </md-button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mtrefpage">
+                                <div class="row">
+                                    <label class="control-label col-sm-5 labelInp " for="spec" > 2. Which Specialty?</label>
+                                    <div class="col-sm-6 ">
+                                        <ui-select ng-model="referral.specialities" id="specialities" name="specialities" theme="select2" style="padding-left: 0px;"
+                                            class="form-control height-auto" title="Choose a specialty" required>
+                                            <ui-select-match placeholder="Search a specialty">{{$select.selected.specialityName}}</ui-select-match>
+                                            <ui-select-choices repeat="item._id as item in specialityData | filter: $select.search">
+                                                <div ng-bind-html="item.specialityName | highlight: $select.search"></div>
+                                            </ui-select-choices>
+                                        </ui-select>
+                                        <span ng-show="makeReferral.specialities.$touched && makeReferral.specialities.$error.required && makeReferral.specialities.$dirty"
+                                            class="help-block" style="color:maroon" required>Select at least one specialty</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group mtrefpage">
+                                <div class="row">
+                                    <label for="state" class="control-label col-sm-5 labelInp ">3. Which State? </label>
+                                    <div class="col-sm-6 ">
+                                        <select class="form-control" id="state" placeholder="State" name="state" ng-model="user.state" style="width: 500px;" ng-required="!user.state">
+                                        <option value="ALL" > All State  </option>
+                                        <option ng-selected="item == {{user.state}}"  ng-repeat="(key,item) in stateList" value="{{item}}" >{{item}}</option>
+                                        </select>
+                                        <!-- <select class="form-control" id="state" placeholder="State" name="state" ng-model="contactDetail.state" ng-options="item.abbreviation as item.abbreviation for item in usStates">
+                                            <option value="">All State</option>
+                                            </select>
+                                            <span ng-if="contactDetails.state.$error.required" class="help-block" style="color:maroon">State Required</span> -->
+
+                                        <span ng-if="!user.state && makeReferral.state.$touched && makeReferral.state.$dirty && makeReferral.state.$error.required"
+                                            class="help-block" style="color:maroon">Select at least one state</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group mtrefpage">
+                                <div class="row"> <label for="zipcode" class="control-label col-sm-5 labelInp ">4. ZIP Code</label>                                       
+                                    <div class="col-sm-6 ">
+                                         <!-- <label for="zipcode" class="control-label col-sm-5 labelInp ">4. ZIP Code</label>                                        -->
+                                        <input type="text" maxlength="5" minlength="5" class="form-control"  style="width: 500px;" id="zipcode" placeholder="ZIP code" name="zipcode" ng-model="user.zipcode"
+                                            ng-pattern="/^[0-9]{1,6}$/">
+                                        <span ng-if="user.zipcode.$error.pattern && makeReferral.zipcode.$touched && makeReferral.zipcode.$dirty && makeReferral.zipcode.$error.required" class="help-block" style="color:maroon">Please enter valid ZIP code.</span>
+                                        <span ng-if="user.zipcode.$error.required && makeReferral.zipcode.$touched && makeReferral.zipcode.$dirty && makeReferral.zipcode.$error.required" class="help-block" style="color:maroon">ZIP Code Required</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--<div class="form-group ">
+                                <label class="control-label col-sm-5 labelInp mtrefpage" for="service"> 3. Which Service?</label>
+                                <div class="col-sm-6 mtrefpage">
+                                    <input type="text" class="form-control makerefInp" id="serviceName" placeholder="Enter service" name="serviceName" ng-model="referral.serviceName">
+                                    
+                                     <span ng-show="makeReferral.serviceName.$touched && makeReferral.serviceName.$error.required && makeReferral.serviceName.$dirty" class="help-block" style="color:maroon" required>Enter service required</span>
+                                </div>
+                            </div>-->
+                            <div class="form-group clearfix">
+                                <label class="control-label col-sm-5" for=""></label>
+                                <div class="col-sm-6">
+                                    <button type="submit" class="btn btn-primary makerefBtn" ng-disabled="makeReferral.$invalid  || !(referral.network.selected || referral.newInsurance || user.zipcode)">Which Docs?</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!--</div>
+            </div>-->
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

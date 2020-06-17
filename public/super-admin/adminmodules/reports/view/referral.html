@@ -1,0 +1,117 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) content-header class has been removed-->
+    <!-- <section class="">
+    <ol class="breadcrumb">
+        <li><a ui-sref='admindashboard'>Home </a></li>
+        <li>
+            <a ui-sref='admindashboard' class="active"> </a>Dashboard</li>
+    </ol>
+</section>
+ -->
+    <!-- Main content -->
+    <section class="content">
+        <!-- Your Page Content Here -->
+        <div class="row" ng-init="getReferralList(); loadUsers(); ">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><span class="latest-c-icon"><img src="../assets/images/latest_order_icon.png" alt=""/></span> {{pageTitle}}</h3>
+
+                        <span class="pull-right" style="padding-right:5px"><input type="text" placeholder=" Search..."  ng-change="searchable(searchTextField)" ng-model="searchTextField" style="min-height: 45px;min-width: 250px;">
+                        
+                        <button class="btn btn-primary" style="background-color:#367FA9;min-height: 45px;margin-left: -5px;" ng-click="searchable(searchTextField)"><i class="fa fa-search"></i></button></span>
+                        <!-- /.box-header -->
+                    </div>
+                    <div class="box-header with-border">
+                        <form name="searchForm">
+                            <div style="float: left; margin-right:10px">
+                                <md-datepicker ng-model="search.fromDate" md-placeholder="From date" onkeydown="return false"></md-datepicker>
+                            </div>
+                            <div style="float: left; margin-right:16px">
+                                <md-datepicker ng-model="search.toDate" md-placeholder="To date" onkeydown="return false"></md-datepicker>
+                            </div>
+                            <div style="float: left; margin-right:10px">
+                                <!--<md-select placeholder="Filter by referred By" md-on-close="clearSearchTerm()" ng-model="referredDoc" md-on-open="loadUsers()" style="width: 200px;">
+                                    <input ng-model="searchTerm" ng-keydown="$event.stopPropagation()" type="search" placeholder="Search" class="select-header-searchbox _md-text" />
+                                    <md-option ng-value="user._id" ng-repeat="user in docArr | filter:searchTerm">{{user.lastname}}</md-option>
+                                </md-select>-->
+
+
+                                <!--<md-form-field class="example-full-width">
+                                    <input type="text" placeholder="Pick one" aria-label="Number" mdInput [formControl]="myControl" [mdAutocomplete]="auto">
+                                    <md-autocomplete #auto="mdAutocomplete">
+                                        <md-option *ngFor="let option of docArr | async" [value]="option._id">
+                                            {{ option.name }}
+                                        </md-option>
+                                    </md-autocomplete>
+                                </md-form-field>-->
+                                <md-autocomplete style="width: 180px;" md-selected-item="search.referringDoc" md-search-text="search.searchText" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearch(search.searchText)" md-item-text="item.lastname" md-min-length="0"
+                                    placeholder="Search Referring Doctor">
+                                    <md-item-template>
+                                        <span md-highlight-text="search.searchText" md-highlight-flags="^i">{{item.lastname}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        No matching for "{{search.searchText}}".
+                                    </md-not-found>
+                                </md-autocomplete>
+                            </div>
+
+                            <div style="float: left; margin-right:10px">
+                                <md-autocomplete style="width: 180px;" md-selected-item="search.referredDoc" md-search-text="search.searchText2" md-selected-item-change="selectedItemChange(item)" md-items="item in querySearchProviders(search.searchText2)" md-item-text="item.lastname"
+                                    md-min-length="0" placeholder="Search Referred Doctor">
+                                    <md-item-template>
+                                        <span md-highlight-text="search.searchText2" md-highlight-flags="^i">{{item.lastname}}</span>
+                                    </md-item-template>
+                                    <md-not-found>
+                                        No matching for "{{search.searchText2}}".
+                                    </md-not-found>
+                                </md-autocomplete>
+                            </div>
+
+
+
+                            <div style="float: right;">
+                                <md-button ng-click="searchable(search)" class="md-raised">Apply</md-button>
+                                <md-button ng-click="searchable(''); search={}" class="md-raised">Reset</md-button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-body" style="padding-top: 45px;">
+                        <div class="table-responsive min-margin-15">
+                            <table ng-table="tableParams" class="table table-striped" show-filter="true">
+                                <tr ng-repeat="data in dataList">
+                                    <td title="'Patient First Name'" sortable="'insfirstname'">
+                                        {{data.firstName}}</td>
+                                    <td title="'Patient Last Name'" sortable="'inslastname'">
+                                        {{data.lastName}}</td>
+                                    <td title="'Referring Doctor'" sortable="'insreferredByUser'">
+                                        {{data.referredByUser}}</td>
+                                    <td title="'Referred Doctor'" sortable="'insreferredToUser'">
+                                        {{data.referredToUser}}</td>
+                                    <td title="'Status'" sortable="'status'">
+                                        {{statusArr[data.status]}}</td>
+                                    <td title="'Date'" sortable="'referredDate'">
+                                        {{data.referredDate | date:'H:m d MMM,yy'}}</td>
+                                    <td title="'Action'">
+                                        <span title="View Details" ng-click="showAdvanced($event)"><a style="cursor:pointer" ><i class="icon-2x fa fa-folder-open-o" style="font-size:2em"></i></a></span>
+                                    </td>
+                                </tr>
+                                <tr ng-if="tableLoader">
+                                    <td colspan="7" align="center">
+                                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    </td>
+                                </tr>
+                                <tr ng-if="dataList.length == 0 && !tableLoader">
+                                    <td colspan="7" align="center">No record Found</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+</div>

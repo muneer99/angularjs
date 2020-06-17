@@ -1,0 +1,318 @@
+.speclialityList {
+    padding: 7px;
+    height: 35px;
+    font-size: medium;
+    border-bottom: 1px #ebebeb solid;
+}
+
+.specialitySelect {
+    overflow: hidden;
+}
+
+.submitBtn {
+    width: 49.9%;
+    border-radius: 0px;
+    float: right;
+}
+
+.resetBtn {
+    width: 49.9%;
+    border-radius: 0px;
+    float: left;
+}
+
+.setActive {
+    background-color: #ffffff;
+    border: #3eb8d7 2px solid;
+    border-right: navajowhite;
+}
+
+.setActive a {
+    color: black !important;
+}
+
+.workinprog {
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    border-radius: 10px;
+    background: #ebebeb;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#loaderDiv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+}
+
+.preferenceRemove {
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    color: #ffffff;
+    background: #3eb8d7;
+    top: 0;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 18px;
+    right: 0;
+}
+
+.preferenceAdd {
+    margin-left: 15px;
+    margin-top: 15px;
+    font-size: inherit;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.form-group.required .control-label:after {
+    content: "*";
+    color: red;
+    position: absolute;
+    margin-top: 3px;
+}
+
+.tiptext {
+    background: #ccc;
+    border: 1px #333 solid;
+    padding: 5px;
+    width: 100px;
+}
+
+.description {
+    display: none;
+    position: absolute;
+    border: 1px solid #000;
+    width: 400px;
+    height: 400px;
+}
+
+.md-toolbar-tools {
+    background-color: #3eb8d7
+}
+
+md-switch.md-default-theme.md-checked.md-primary .md-ink-ripple,
+md-switch.md-checked.md-primary .md-ink-ripple {
+    color: rgb(62, 184, 215);
+}
+
+md-switch.md-default-theme.md-checked.md-primary .md-thumb,
+md-switch.md-checked.md-primary .md-thumb {
+    background-color: rgb(46, 191, 234);
+}
+
+md-switch.md-default-theme.md-checked.md-primary .md-bar,
+md-switch.md-checked.md-primary .md-bar {
+    background-color: rgb(136, 198, 214);
+}
+
+.userPrefAddAnc {
+   width: auto !important;
+    float: right;
+}
+
+.userPrefAddDoc {
+   
+    margin-right: 5px;
+    width: auto !important;
+    float: right;
+}
+
+.uiselect {
+    width: 640px;
+    padding-left: 0px !important;
+}
+
+.agreemen_section{float:left;width: 100%;margin-bottom: 15px;height: 400px; overflow-y: scroll; background-color: snow;}
+.agreemen_section h1{font-size:25px;font-weight: bold;color:#000;text-align: center;}
+.agreemen_section h2{font-size:20px;}
+.agreemen_section p{margin-bottom:15px;}
+.agreemen_section p span{float:left;width: 100%;margin-bottom:10px;}
+
+.faxbtn {
+        width: 100px !important;
+    float: left;
+}
+.fxinp {
+    width: 530px !important;
+
+}
+.sideBtn{
+        margin-top: 131px;
+}
+.sideBtnmail{
+        margin-top: 119px;
+}
+.faxInp2 {
+    width: 569px;
+}
+.faxInp3{
+    width: 589px;
+}
+
+.patientLookup{
+    border-right: 2px solid gainsboro;
+}
+.patientLookupList{
+    margin-top: 35px;
+    padding-top: 19px;
+}
+.patientLookupTop{
+    margin-top: 15px;
+}
+
+.lookupBtn{
+    background-color: #3eb8d7;
+}
+
+.reqspan .reqspantitle:before{
+    content: "*";
+    color: red;
+}
+/*.reqspantitle{
+    background: #d2cfcf;
+    padding: 6px;
+    border-radius: 7px;
+}*/
+
+.searchPanel {
+    margin-top: 15px;
+    margin-left: 13%;
+}
+
+.dctrSearch{
+    float: left; 
+    width: 364px;
+}
+
+.searchtxt{
+    width:63.4%;
+     float: left;
+}
+.spslsm6{
+    width: 49%;
+}
+.fleft{
+    float: left;
+}
+.fright {
+    float: right;
+}
+.spcHight{
+    height: 284px;
+}
+
+.inpPhone{
+    width: 423px;
+}
+.custSelect{
+    width: 80%;
+}
+.custInp{
+        width: 86.6%;
+}
+.editInp{
+width: 70.7%;
+}
+.selectStatus{
+    width: auto;
+}
+.faxInp3{
+    width: 330px;
+}
+.faxInp35{
+    width: 589px;
+}
+.info{
+    font-size: small;
+    color: gray;
+    background-color: beige;
+    border: 1px solid #2bb5d8;
+    border-radius: 5px;
+    padding: 2px;
+}
+.smiley{
+    color: orangered;
+    font-size: medium;
+}
+.custHome{
+        margin-top: 40px;
+    float: right;
+}
+.contactUsHome{
+        border: 2px solid #2d2d2d;
+    padding: 10px;
+    padding-bottom: 0px;
+}
+
+.md-tooltip {
+  height: auto;
+  line-height: 20px;
+}
+
+.mdInfoBtn:hover {
+      background-color: none !important;
+}
+.labelInp{
+    font-size: x-large;
+}
+.makerefTxtAlign{
+        text-align: right;
+    padding-right: 6%;
+}
+.mtrefpage{
+    margin-top: 35px;
+}
+.dashboardSelect{
+    width: 172px;
+}
+.addProvider{
+    float: right;
+}
+.refTooltip{
+    margin-top: -41px;
+    margin-right: 13px; 
+    background-color: white; 
+    float: right; 
+    min-width: auto; 
+    min-height: auto;
+}
+.refTooltip:hover{
+    background-color: white !important;
+}
+
+#preloader { 
+    position: fixed; 
+    left: 0; 
+    top: 0; 
+    z-index: 999; 
+    width: 100%; 
+    height: 100%; 
+    overflow: visible; 
+    background:#07080ca6 url(../images/loading.gif) no-repeat center center;
+    background-size: 70px 70px;
+}
+
+.i-am-centered { margin: auto; max-width: 70%;}
+.contFda{
+    float: right;
+}
+
+th.header {
+    font-weight: bold !important;
+}
+
+.newNotifi{
+ color: #15d015;
+}
+
+.referptsec {margin:10% auto;}
+

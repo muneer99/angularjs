@@ -1,0 +1,98 @@
+<div class="content-wrapper main-inner">
+    <div class="content-wrapper main-inner">
+        <section class="">
+            <div class="container">
+                <div class="box">
+                    <div class="box-body">
+                        <div style="width:90%;float: left;margin-left: 30px; color: #888888;">
+                            <h2>Add a provider for whom you will manage referrals</h2>
+                        </div>
+                        <span class="pull-right" title="Help" ng-click="showFaq('add_and_refer');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="col-sm-6">
+                                    <div class="arrow-row">
+                                        <h4 class="">Search Text:</h4>
+                                    </div>
+                                    <div class="form-group">
+                                        <div>
+                                            <input type="text" autocomplete="off" class="form-control" id="email" placeholder="Please enter search text to search by provider name / site name"
+                                                name="" ng-model="search.firstName">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group" style="margin-top: 15px;">
+                                        <button type="submit" class="btn btn-primary" ng-click="getDoctorList(true, true)" ng-disabled="!search.firstName">Search</button>
+                                    </div>                                    
+                                </div>                                
+                            </div>
+                            <div class="col-sm-12" ng-if="!addNew">
+                                <div class="arrow-row" ng-if="docsList">
+                                    <h2 class="box-title-main">Registered Providers </h2>
+                                </div>
+                                <div class="table-responsive" ng-if="docsList.length>0">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th class="colorBG" width="30%">Provider Name</th>
+                                            <th class="colorBG" width="10%">Site</th>
+                                            <th class="colorBG" width="30%">Address</th>
+                                            <th class="colorBG" width="10%">Email </th>
+                                            <th class="colorBG" width="10%">Phone No. </th>
+                                            <th class="colorBG" width="10%">Action </th>
+
+                                        </tr>
+                                        <tr ng-repeat="docs in docsList">
+                                            <td ng-if="docs.degree">{{docs.firstname}} {{docs.lastname}}, {{degree[docs.degree]}}</td>
+                                            <td ng-if="!docs.degree">{{docs.firstname}} {{docs.lastname}}</td>
+                                            <td>{{docs.centername}}</td>
+                                            <td>{{docs.location}}</td>
+                                            <td ng-if="docs.emailAvailable == 1">{{docs.email}}</td>
+                                            <td ng-if="docs.emailAvailable == 0">&nbsp;</td>
+                                            <td>{{docs.phone_number |phonenumber}}</td>
+                                            <td>
+                                                <button ng-click="sendInvite(docs)" type="submit" class="btn btn-primary">Select</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="box-body" style="background-color: white" ng-if="docsList.length === 0"> No providers found...</div>
+                            </div>
+                            <div class="col-sm-12" ng-if="!addNew">
+                                <div class="arrow-row" ng-if="nonRegDocsList">
+                                    <h2 class="box-title-main">Non-Registered Providers </h2>
+                                </div>
+                                <div class="table-responsive" ng-if="nonRegDocsList.length>0">
+                                    <table class="table table-striped">
+                                        <tr>
+                                            <th class="colorBG" width="30%">Provider Name</th>
+                                            <th class="colorBG" width="10%">Site</th>
+                                            <th class="colorBG" width="30%">Address</th>
+                                            <th class="colorBG" width="10%">Email </th>
+                                            <th class="colorBG" width="10%">Phone No. </th>
+                                            <th class="colorBG" width="10%">Action </th>
+                                        </tr>
+                                        <tr ng-repeat="docs in nonRegDocsList">
+                                            <td ng-if="docs.degree">{{docs.firstname}} {{docs.lastname}}, {{degree[docs.degree]}}</td>
+                                            <td ng-if="!docs.degree">{{docs.firstname}} {{docs.lastname}}</td>
+                                            <td>{{docs.centername}}</td>
+                                            <td>{{docs.location}}</td>
+                                            <td ng-if="docs.emailAvailable == 1">{{docs.email}}</td>
+                                            <td ng-if="docs.emailAvailable == 0">&nbsp;</td>
+                                            <td>{{docs.phone_number |phonenumber}}</td>
+                                            <td>
+                                                <button ng-if="!docs.isOutside" ng-click="sendInvite(docs)" type="submit" class="btn btn-primary">Select</button>
+                                                <button ng-if="docs.isOutside" ui-sref="view-invite-provider({id:docs._id})" type="submit" class="btn btn-primary">Select</button>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <div class="box-body" style="background-color: white" ng-if="nonRegDocsList.length === 0"> No providers found...</div>
+                            </div>                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+</div>
+</div>

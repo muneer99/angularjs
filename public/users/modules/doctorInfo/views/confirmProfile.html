@@ -1,0 +1,111 @@
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container">
+
+            <div class="row" ng-if="nexts == 'profile'">
+                <div class="col-xs-12 ">
+                    <div class="box-body">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class=" arrow-row " style="padding-left: 15px;">
+                                    <h2 class="box-title-main "><strong>{{pageTitle}}</strong></h2>
+                                    <h2 class="box-title-main ">Please confirm or edit the info for your profile </h2>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">First Name : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.firstname}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Last Name :</label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.lastname}}</label>
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Network : </label>
+                                    <div class="col-sm-10 ">
+                                        <label style="padding-left: 15px;">{{userProfile.network}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Specialty : </label>
+                                    <div class="col-sm-10 ">
+                                        <label style="padding-left: 15px;">{{userProfile.speciality}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Services : </label>
+                                    <div class="col-sm-10 ">
+                                        <label style="padding-left: 15px;">{{userProfile.services}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Address : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.location}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Suite : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.sute}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">City : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.city}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">State : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.state}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Zip Code : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.zipcode}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Email : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.email}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Office Phone : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.phone_number}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Office Fax Number : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.fax}}</label>
+                                    </div>
+                                </div>
+                                <div class="form-group clearfix">
+                                    <label class="col-sm-2 control-label ">Mobile Number : </label>
+                                    <div class="col-sm-10 ">
+                                        <label class="col-sm-2 control-label ">{{userProfile.cell_phone}}</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-sm-12 ">
+                                <button type="submit " class="btn btn-primary " ng-click="back( 'services') ">Go Back </button>
+                                <button type="submit " class="btn btn-primary " ng-click="nexttoDashboard() ">Next </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

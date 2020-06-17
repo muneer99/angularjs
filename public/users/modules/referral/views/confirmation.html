@@ -1,0 +1,114 @@
+<div class="content-wrapper main-inner" ng-init="checkStatus();getContent();">
+    <section class="">
+        <div class="container">
+            <div class="box">
+                <div class="box-body">
+                    <span class="pull-right" title="Help" ng-click="showFaq('referal_patient_contact');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                    <div class="col-sm-12">
+                        <div class="arrow-row">
+                            <h2 class="box-title-main">{{pageTitleNew}}</h2>
+                        </div>
+                        <!-- <div class="arrow-row">
+                            <h2 class="box-title-main">Patient Contact Info..</h2>
+                        </div> -->
+                        <form name="patientInfoForm" ng-submit="referPatient(patientInfo);done= true">
+                            <div class="col-sm-8">
+                                <!-- <div class="form-group required">
+                                    <label class="control-label" for="email">Patient First Name :</label>
+                                    <div>
+                                        <input type="hidden" class="form-control" ng-model="patientInfo._id">
+                                        <input tabindex="1" type="text" class="form-control" id="email" placeholder="Enter first name" name="firstName" ng-model="patientInfo.firstName" ng-pattern="/^[a-zA-Z '-\s]*$/" required>
+                                        <span ng-if="patientInfoForm.firstName.$touched && patientInfoForm.firstName.$dirty && patientInfoForm.firstName.$error.required" class="help-block" style="color:maroon">First name required</span>
+                                        <span class="" ng-show="patientInfoForm.firstName.$error.pattern" style="color:maroon">First name should not contain digit.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group required">
+                                    <label class="control-label" for="pwd">Patient Last Name :</label>
+                                    <div>
+                                        <input type="text" tabindex="2" class="form-control" id="pwd" placeholder="Enter last name" name="lastName" ng-model="patientInfo.lastName" ng-pattern="/^[a-zA-Z '-\s]*$/" required>
+                                        <span ng-if="patientInfoForm.lastName.$touched && patientInfoForm.lastName.$dirty && patientInfoForm.lastName.$error.required" class="help-block" style="color:maroon">Last name required</span>
+                                        <span class="" ng-show="patientInfoForm.lastName.$error.pattern" style="color:maroon">Last name should not contain digit.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group ">
+                                    <label class="control-label" for="pwd">Email :</label>
+                                    <div>
+                                        <input type="text" tabindex="3" class="form-control" id="pwd" placeholder="Email ID" name="email" ng-model="patientInfo.email" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/">
+                                        <span ng-show="patientInfoForm.email.$touched && patientInfoForm.email.$error.required && patientInfoForm.email.$dirty" class="help-block" style="color:maroon" required>Email address required.</span>
+                                        <span ng-if="patientInfoForm.email.$error.pattern" style="color:maroon">Invalid email address</span>
+                                    </div>
+                                </div> -->
+
+                                <div class="form-group required">
+                                    <!-- <label class="control-label" for="pwd">Chief Complaint :</label>
+                                    <div>
+                                        <input type="text" tabindex="4" class="form-control" id="pwd" placeholder="Chief Complaint" name="maincomplain" ng-model="patientInfo.complaint" ng-pattern="/^[a-zA-Z '-\s]*$/" required>
+                                        <span ng-if="patientInfoForm.chiefComplain.$touched && patientInfoForm.chiefComplain.$dirty && patientInfoForm.chiefComplain.$error.required" class="help-block" style="color:maroon">Chief Complaint is required</span>
+                                        <span class="" ng-show="patientInfoForm.chiefComplain.$error.pattern" style="color:maroon">Chief Complaint should not contain digit.</span>
+                                    </div> -->
+                                        <label class="control-label" for="spec"> Which Specialty?</label>
+                                        <div >
+                                            <ui-select class="form-control " style="padding: 0%;" ng-model="referral.specialities" id="specialities" name="specialities"  theme="select2" style="padding-left: 0px;" class="form-control height-auto" title="Choose a specialty" required>
+                                                <ui-select-match placeholder="Search a specialty">{{$select.selected.specialityName }}</ui-select-match>
+                                                <ui-select-choices repeat="item._id as item in specialityData | filter: $select.search">
+                                                    <div ng-bind-html="item.specialityName | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                        </div>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="control-label" for="pwd">Chief Complaint :</label>
+                                    <div>
+                                        <input type="text" tabindex="4" class="form-control" id="pwd" placeholder="Chief Complaint" name="maincomplain" ng-model="patientInfo.complaint" ng-pattern="/^[a-zA-Z0-9_() '-\s]*$/" required>
+                                        <span ng-if="patientInfoForm.chiefComplain.$touched && patientInfoForm.chiefComplain.$dirty && patientInfoForm.chiefComplain.$error.required" class="help-block" style="color:maroon">Chief Complaint is required</span>
+                                        <span class="" ng-show="patientInfoForm.chiefComplain.$error.pattern" style="color:maroon">Chief Complaint should not contain digit.</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group required">
+                                    <label class="control-label" for="serviceName">Service Requested :</label>
+                                    <div>
+                                        <input type="text" tabindex="4" class="form-control" id="serviceName" placeholder="Enter Service" name="serviceName" ng-model="patientInfo.serviceName" ng-pattern="/^[a-zA-Z0-9_() '-\s]*$/" required>
+                                        <span ng-if="patientInfoForm.serviceName.$touched && patientInfoForm.serviceName.$dirty && patientInfoForm.serviceName.$error.required" class="help-block" style="color:maroon">Service Requested is required</span>
+                                        <span class="" ng-show="patientInfoForm.serviceName.$error.pattern" style="color:maroon">Service Requested should not contain digit.</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div>    
+                                <div class="col-sm-5">
+                                    <div class="form-group" ng-class="!takeReferral? 'required':''">
+                                        <label class="control-label" for="pwd">Phone # :</label>
+                                        <div>
+                                            <select class="form-control faxbtn" id="ccode" placeholder="ccode" name="ccode" ng-model="patientInfo.ccode" tabindex="5">
+                                                    <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == patientInfo.ccode">{{item}}</option>
+                                                </select>
+                                            <input type="text" tabindex="6" class="form-control faxInp3" id="pwd" name="contact_no_tmp" ng-model="patientInfo.contact_no_tmp" ui-mask="999-999-9999">
+                                            <span ng-if="patientInfoForm.contact_no_tmp.$touched && patientInfoForm.contact_no_tmp.$dirty && patientInfoForm.contact_no_tmp.$error.required" class="help-block" style="color:maroon">Contact Number Required</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="form-group ">
+                                        <label class="control-label" for="pwd">Select Attachments :</label>
+                                        <div>
+                                            <input multiple type="file" tabindex="7" class="form-control" name="file" onchange="angular.element(this).scope().uploadFile(this.files)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <div class="col-sm-12">
+                                <div class="form-group" style="margin-top: 15px;">
+                                    <button type="submit" tabindex="8" class="btn btn-primary" ng-disabled="patientInfoForm.$invalid" >Refer Patient</button>
+                                    <!-- <button type="submit" tabindex="8" class="btn btn-primary" >{{btnTitle}}</button> -->
+                                </div>
+                            </div>
+                        </form>
+                        
+                    </div>
+                    <span class="reqspan col-sm-12"><p class="reqspantitle"> indicates a required field.</p></span>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

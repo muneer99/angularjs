@@ -1,0 +1,109 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- getCounts(); getContactDetailsSuperAdmin() -->
+    <section class="content" ng-init='getCounts(); getContactDetailsInsuranceAdmin'>
+        <!-- Your Page Content Here -->
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box white-box">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                            <!--<img src="../assets/images/customer_icon.png" alt="" />-->
+                        </div>
+                        <h3>{{counts.totalCount}}</h3>
+                        <p>Total Associated Providers</p>
+                    </div>
+                    <a ui-sref="viewInsProviderAll({id:contactDetail.network_id})" class="small-box-footer">More info <i class="fa"><img src="../assets/images/circle_arrow.png" alt=""/> </i></a>
+                </div>
+            </div>
+
+            <!-- <div class="col-lg-4 col-xs-6"> -->
+                <!-- small box -->
+                <!-- <div class="small-box white-box">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i> -->
+                            <!--<img src="../assets/images/customer_icon.png" alt="" />-->
+                        <!-- </div>
+                        <h3>{{counts.frontDeskCount}}</h3>
+                        <p>Front Desk User</p>
+                    </div>
+                    <a ui-sref='officeAdmin-list' class="small-box-footer">More info <i class="fa"><img src="../assets/images/circle_arrow.png" alt=""/> </i></a>
+                </div>
+            </div> -->
+
+            <!-- <div class="col-lg-4 col-xs-6"> -->
+                <!-- small box -->
+                <!-- <div class="small-box white-box">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion-person-stalker"></i>
+                        </div>
+                        <h3>{{counts.referralCount}}</h3>
+                        <p>Referrals</p>
+                    </div>
+                    <a ui-sref='referral-list' class="small-box-footer">More info <i class="fa"><img src="../assets/images/circle_arrow.png" alt=""/> </i></a>
+                </div>
+            </div> -->
+
+
+            <!-- ./col -->
+            <!-- <div class="col-lg-4 col-xs-6">
+                <div class="small-box white-box">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <h3>{{counts.serviceCount}}</h3>
+                        <p>Services</p>
+                    </div>
+                    <a ui-sref='services' class="small-box-footer">More info <i class="fa"><img src="../assets/images/circle_arrow.png" alt=""/> </i>
+            </a>
+                </div>
+            </div> -->
+            <!-- ./col -->
+            <!-- <div class="col-lg-4 col-xs-6"> -->
+                <!-- small box -->
+                <!-- <div class="small-box white-box">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion ion-bag"></i>
+                        </div>
+                        <h3>{{counts.specialityCount}}</h3>
+                        <p>Specialty</p>
+                    </div>
+                    <a ui-sref='speciality' class="small-box-footer">More info <i class="fa"><img src="../assets/images/circle_arrow.png" alt=""/> </i></a>
+                </div>
+            </div> -->
+            <!-- <div class="col-lg-4 col-xs-6"> -->
+                <!-- small box -->
+                <!-- <div class="small-box white-box">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion-ios-medkit"></i>
+                        </div>
+                        <h3>{{counts.networkCount}}</h3>
+                        <p>Insurances</p>
+                    </div>
+                    <a ui-sref='insurance' class="small-box-footer">More info <i class="fa"><img src="../assets/images/circle_arrow.png" alt=""/> </i></a>
+                </div>
+            </div> -->
+            <!-- <div class="col-lg-4 col-xs-6"> -->
+                <!-- small box -->
+                <!-- <div class="small-box white-box">
+                    <div class="inner">
+                        <div class="icon">
+                            <i class="ion-ios-people"></i>
+                        </div>
+                        <h3>{{counts.patientCount}}</h3>
+                        <p>Patients</p>
+                    </div>
+                    <a ui-sref='patient-list' class="small-box-footer">More info <i class="fa"><img src="../assets/images/circle_arrow.png" alt=""/> </i></a>
+                </div>
+            </div> -->
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

@@ -1,0 +1,160 @@
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container" ng-init="getAvailableSpecialty()">
+            <div class="box-body">
+                <span class="pull-right" title="Help" ng-click="showFaq('add_provider');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                <div class="row">
+                    <div class="col-sm-12 ancillary-add-form">
+                        <h3>Invite A Colleague</h3>
+                        <form name="addForm" class="form_doctor" ng-submit="addToNetwork(doctor); done = true">
+                            <div class="col-sm-6">
+                                <div class="form-group" ng-class="!doctor.centername? 'required':''">
+                                    <label class="control-label" for="pwd">First Name :</label>
+                                    <div class="" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control" id="" placeholder="Enter first name" name="firstname" tabindex="1" ng-pattern="/^[a-zA-Z '-\s]*$/" ng-model="doctor.firstname" ng-required="!doctor.centername" style="width: 500px;">
+                                        <span ng-if="!doctor.centername && addForm.firstname.$touched && addForm.firstname.$dirty && addForm.firstname.$error.required" class="help-block" style="color:maroon">Either first name, last name & tltle or site is required</span>
+                                        <span class="" ng-show="addForm.firstname.$error.pattern" style="color:maroon">First name should not contain digit.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="!doctor.centername? 'required':''">
+                                    <label for="degree" class="control-label">Title:</label>
+                                    <div class="" style="margin-bottom: 5px;">
+                                        <select class="form-control" id="degree" placeholder="Degree" name="degree" ng-model="doctor.degree" ng-required="!doctor.centername" style="width: 500px;">
+                                            <option ng-repeat="(key,item) in degree" value="{{key}}" ng-selected="key == doctor.degree">{{item}}</option>
+                                        </select>
+                                        <span ng-if="!doctor.centername && addForm.degree.$touched && addForm.degree.$dirty && addForm.degree.$error.required" class="help-block" style="color:maroon">Either first name, last name & tltle or site is required</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group" ng-class="!doctor.centername? 'required':''">
+                                    <label class="control-label" for="pwd">Last Name :</label>
+                                    <div class="" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control" id="" placeholder="Enter last name" name="lastname" tabindex="2" ng-pattern="/^[a-zA-Z '-\s]*$/" ng-model="doctor.lastname" ng-required="!doctor.centername" style="width: 500px;">
+                                        <span ng-show="!doctor.centername && addForm.lastname.$touched && addForm.lastname.$error.required && addForm.lastname.$dirty" class="help-block" style="color:maroon" required>Either first name, last name & tltle or site is required</span>
+                                        <span class="" ng-show="addForm.lastname.$error.pattern" style="color:maroon">Last name should not contain digit.</span>
+                                    </div>
+                                </div>
+                                <div class="form-group" ng-class="(!doctor.firstname) ? 'required':''">
+                                    <label class="control-label" for="pwd">Site :</label>
+                                    <div class="" style="margin-bottom: 5px;">
+                                        <input type="text" class="form-control" id="" placeholder="Enter practice or center name" name="centername" tabindex="2" ng-pattern="/^[a-zA-Z ,'-\s]*$/" ng-model="doctor.centername" ng-required="!doctor.firstname" style="width: 500px;">
+                                        <span ng-show="!doctor.firstname  && !doctor.lastname && addForm.centername.$touched && addForm.centername.$error.required && addForm.centername.$dirty" class="help-block" style="color:maroon" required>Either first name, last name & tltle or site is required</span>
+                                        <span class="" ng-show="addForm.centername.$error.pattern" style="color:maroon">Site name should not contain digit.</span>
+                                    </div>
+                                </div>
+                            </div>        
+                            <div class="clearfix"></div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="">Select Specialty :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <ui-select close-on-select="false" multiple sortable="true" name="speciality" id="speciality" ng-model="doctor.specialty" class="height-auto selectpicker form-control uiselect" tabindex="3" theme="select2" title="Choose a specialty">
+                                        <ui-select-match placeholder="Search a specialty">{{$item.specialityName}}</ui-select-match>
+                                        <ui-select-choices repeat="item._id as item in specialtyData | filter: $select.search">
+                                            <div ng-bind-html="item.specialityName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <span ng-show="addForm.speciality.$touched && addForm.speciality.$error.required && addForm.speciality.$dirty" class="help-block" style="color:maroon" required>Select at least one specialty</span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2" for="phone_number">Office Phone :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <input type="text" class="form-control" id="phone_number" name="phone_number" ng-model="doctor.phone_number" tabindex="4" ui-mask="999-999-9999">
+                                    <span ng-show="addForm.phone_number.$touched && addForm.phone_number.$error.required && addForm.phone_number.$dirty" class="help-block" style="color:maroon" required>Phone number required.</span>
+                                </div>
+                            </div>
+                            <div class="form-group"  ng-class="!doctor.fax_temp? 'required':''">
+                                <label class="control-label col-sm-2" for="pwd">Email :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <input type="text" class="form-control" id="" placeholder="Enter email address" name="email" tabindex="5" ng-model="doctor.email" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9]{1})[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"  ng-required="!doctor.fax_temp">
+                                    <span ng-show="addForm.email.$touched && addForm.email.$error.required && addForm.email.$dirty" class="help-block" style="color:maroon" required>Either email or fax number is required.</span>
+                                    <span ng-if="addForm.email.$error.pattern" style="color:maroon">Invalid email address</span>
+                                </div>
+                            </div>
+                            <div class="form-group " ng-class="!doctor.email? 'required':''">
+                                <label class="control-label col-sm-2" for="phone_number">Office Fax Number :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <select class="form-control faxbtn" id="ccodeFax" placeholder="ccodeFax" name="ccodeFax" ng-model="doctor.ccodeFax" tabindex="6">
+                                        <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == doctor.ccodeFax">{{item}}</option>
+                                    </select>
+                                    <input type="text" class="form-control fxinp" id="fax_temp" name="fax_temp" ng-model="doctor.fax_temp" tabindex="7" ui-mask="999-999-9999" ng-required="!doctor.email">
+                                    <span ng-show="addForm.fax_temp.$touched && addForm.fax_temp.$error.required && addForm.fax_temp.$dirty" class="help-block" style="color:maroon" >Either email or fax number is required.</span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-2" for="cell_phone_temp">Mobile Number :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <select class="form-control faxbtn" id="ccode" placeholder="ccode" name="ccode" ng-model="doctor.ccode" tabindex="6">
+                                        <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == doctor.ccode">{{item}}</option>
+                                    </select>
+                                    <input type="text" class="form-control fxinp" id="cell_phone_temp" name="cell_phone_temp" ng-model="doctor.cell_phone_temp" tabindex="7" ui-mask="999-999-9999">
+                                    <span ng-show="addForm.cell_phone_temp.$touched && addForm.cell_phone_temp.$error.required && addForm.cell_phone_temp.$dirty" class="help-block" style="color:maroon" >Mobile number is required.</span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-2" for="pwd">Address Line 1 :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <input type="text" class="form-control" id="location" placeholder="Address Line 1" name="location" ng-model="doctor.location" autocomplete="off" gm-places-autocomplete>
+                                    <span ng-show="addForm.location.$touched && addForm.location.$error.required && addForm.location.$dirty" class="help-block" style="color:maroon" required>Address Line 1 is required</span>
+                                    <span class="" ng-show="addForm.location.$error.pattern" style="color:maroon">Address Line 1 does not contain special character.</span>
+                                    <span class="" ng-show="addForm.location.$error.maxlength" style="color:maroon">Too long. Use 100 characters or less.</span>
+                                </div>
+                            </div>
+                              <!-- <div class="form-group" >
+                                <label class="control-label col-sm-2" for="pwd">Address Line 1 :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <input gm-places-autocomplete type="text" class="form-control" id="location" placeholder="Address Line 1" name="location" tabindex="5" ng-model="doctor.location" >
+                                    <span ng-show="addForm.location.$touched && addForm.location.$error.required && addForm.location.$dirty" class="help-block" style="color:maroon" required>location is required.</span>
+                                    <span ng-if="addForm.location.$error.pattern" style="color:maroon">Invalid email address</span>
+                                </div>
+                            </div> -->
+                            <div class="form-group ">
+                                <label class="control-label col-sm-2" for="pwd">Address Line 2 :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <input type="text" class="form-control" id="" placeholder="Address Line 2" tabindex="9" name="sute" ng-maxlength="30" maxlength="31" ng-model="doctor.sute">
+                                    <span class="" ng-show="addForm.sute.$error.maxlength" style="color:maroon">Too long. Use 30 characters or less.</span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-2" for="pwd">City :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <input type="text" class="form-control" id="" placeholder="City" tabindex="10" name="city" ng-pattern="/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/" ng-maxlength="30" maxlength="31" ng-model="doctor.city">
+                                    <span ng-show="addForm.city.$touched && addForm.city.$error.required && addForm.city.$dirty" class="help-block" style="color:maroon" required>City is required</span>
+                                    <span class="" ng-show="addForm.city.$error.pattern" style="color:maroon">Please enter valid city name.</span>
+                                    <span class="" ng-show="addForm.city.$error.maxlength" style="color:maroon">Too long. Use 30 characters or less.</span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-2" for="pwd">State :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <select class="form-control" id="" placeholder="State" name="state" tabindex="11" ng-model="doctor.state" ng-options="items.abbreviation as items.abbreviation for items in usStates"></select>
+                                    <span ng-show="addForm.state.$touched && addForm.state.$error.required && addForm.state.$dirty" class="help-block" style="color:maroon" required>State is required</span>
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-2" for="pwd">Zip Code :</label>
+                                <div class="col-sm-10" style="margin-bottom: 5px;">
+                                    <input type="text" maxlength="5" class="form-control" id="" tabindex="12" placeholder="Zip code" name="zipcode" ng-pattern="/^[0-9]*$/" ng-model="doctor.zipcode">
+                                    <span ng-show="addForm.zipcode.$touched && addForm.zipcode.$error.required && addForm.zipcode.$dirty" class="help-block" style="color:maroon" required>Zip code is required</span>
+                                    <span class="" ng-show="addForm.zipcode.$error.pattern" style="color:maroon">Zip code contain only digit.</span>
+                                    <span class="" ng-show="addForm.zipcode.$error.maxlength" style="color:maroon">Allowed 5 digit for zip code.</span>
+                                    <span class="" ng-show="addForm.zipcode.$error.minlength" style="color:maroon">Allowed only 5 digit for zip code.</span>
+                                </div>
+                            </div>
+                            <div class="form-group clearfix">
+                                <label class="control-label col-sm-2" for=""></label>
+                                <div class="col-sm-10">
+                                    <a href="#/dashboard"><button type="button" tabindex="14" class="btn btn-primary" >Back to dashboard</button></a>
+                                    <button type="submit" class="btn btn-primary" tabindex="13" ng-disabled="addForm.$invalid || done">Invite to WhichDocs</button>
+                                </div>
+                            </div>
+                            <input type="hidden" ng-model="doctor.user_loc">
+                        </form>
+                        <span class="reqspan"><p class="reqspantitle"> indicates a required field.</p></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,72 @@
+<style type="text/css">
+  .owl-carousel {
+position: relative;
+}
+.owl-prev,
+.owl-next {
+position: absolute;
+top: 40%;
+}
+.owl-theme .owl-controls .owl-buttons div{
+  background: transparent; color: #000; font-size: 40px; opacity: 1;
+}
+.owl-prev {
+left: -40px;
+}
+.owl-next {
+right: -40px;
+}
+.owl-item .item {
+  margin-left: 0;
+  margin-right: 0;
+}
+.owl-carousel .owl-wrapper, .owl-carousel .owl-item {
+  margin-right: 14px;
+ }
+</style>
+
+<!-- Intro Section -->
+<div class="top-height"></div>
+
+<!-- Our Services Section -->
+
+<section class="our-services pos-rel" ng-init="getDashboardItem()">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12">
+        <h2 class="main-title" data-scroll-reveal="enter from the top after 0.2s"> <span>Service </span> Detail</h2>
+      </div>
+      <div class="clearfix"></div>
+      <div class="serviceSlider clearfix col-sm-12">
+        <div class="view-slider">
+           <div id="owl-demo">
+            <data-owl-carousel class="owl-carousel" data-options="owlOptions">
+              <div owl-carousel-item="" ng-repeat="item in service.media.image" class="item">
+                <div class="test-content clearfix" ng-class-odd="'pinkbdr'" ng-class-even="'greenbdr'" >
+                    <div class="test-pic-box">
+                        <div class="test-pic"><img ng-src="../{{item.name}}" alt="image"/></div>
+                    </div>
+                </div>
+              </div>
+            </data-owl-carousel>
+          </div>    
+        </div>
+      </div>
+      <div class="col-sm-12" ng-show="service.media.image.length < 2">
+      </div>
+
+      <div class="serviceVideo clearfix">
+        <div class="col-sm-12" ng-if="service.serviceUrl">
+          <div class="embed-responsive embed-responsive-16by9 youtube-video">
+            <!-- <iframe class="embed-responsive-item" allowfullscreen="" src="http://www.youtube.com/embed/tMWkeBIohBs" frameborder="0"></iframe> -->
+            <iframe class="embed-responsive-item" src="{{service.serviceUrl | trustAsResourceUrl}}" frameborder="0" allowfullscreen></iframe>
+          </div>               
+        </div>
+        <div class="col-sm-12">                
+            <p>{{service.description}}</p>              
+        </div>
+      </div>
+  
+    </div>
+  </div>
+</section>

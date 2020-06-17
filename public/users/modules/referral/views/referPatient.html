@@ -1,0 +1,25 @@
+<div class="content-wrapper main-inner" ng-init="getContent()">
+    <section class="">
+        <div class="container container-table">
+            <div class="box-body">
+                <span class="pull-right" title="Help" ng-click="showFaq('refer_patient');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                <div class="row referptsec">
+                    <div class="col-sm-12 text-center">
+                        <h1>Refer a Patient</h1>
+                    </div>
+                    <div ng-show="notFrontDesk">
+                        <div class="col-sm-offset-2 col-sm-4 text-right">
+                            <button type="button" class="btn btn-primary btn-block" ng-click="searchProvider()">I Already Know Which Doc</button> 
+                        </div>                        
+                        <div class="col-sm-4">
+                            <button type="button" class="btn btn-primary btn-block" ng-click="selectProvider()">Find Which Docs</button> 
+                        </div>
+                    </div>                    
+                </div>
+            </div>
+            <!--</div>
+            </div>-->
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

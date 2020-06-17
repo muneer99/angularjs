@@ -1,0 +1,154 @@
+<style>
+    .preferance-menu {
+        height: 30em;
+        margin-bottom: 30px;
+    }
+</style>
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container">
+            <div class="box-body">
+                <span class="pull-right" title="Help" ng-click="showFaq('rank_provider');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="arrow-row" style="float: left;" ng-init="refreshPreference()">
+                            <h2 class="box-title-main">Rank Providers by Specialty</h2>
+                        </div>
+
+                        <button class="btn btn-success sup-add-doc userPrefAddAnc" ui-sref='addDoctor'><i class=" fa fa-plus" aria-hidden="true"></i>Add Provider</button>
+                       <!-- Added by saurabh for adding distance slider on rank providers page commented code-->
+                        <!-- <div class="col-xs-12">
+                            <div class="col-xs-6">
+                                <span>Search Range (Miles)</span>
+                                <md-slider-container>
+                                    <span>0</span>
+                                    <md-slider min="0" max="50" ng-mouseup="getDoctorBySpeciality('')" ng-model="accRange" aria-label="red" id="red-slider" flex
+                                        class="md-warn" md-discrete></md-slider>
+                                    <span>50</span>
+                                </md-slider-container>
+                            </div>
+                            <div  class="col-xs-4 ">
+                                <ui-select ng-if="toggleCheckVal" ng-model="item.selected" id="referralChoice" name="referralChoice" theme="select2" style="padding-left: 0px;"
+                                    class="form-control height-auto" title="Choose referral ranking based on.." required>
+                                    <ui-select-match placeholder="Choose referral ranking based on..">{{$select.selected.title}}</ui-select-match>
+                                    <ui-select-choices repeat="item.id as item in arrayOfRefferedRankingTitle | filter: $select.search">
+                                        <div ng-bind-html="item.title | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select>
+                                <span ng-show="makeReferral.specialities.$touched && makeReferral.specialities.$error.required && makeReferral.specialities.$dirty"
+                                    class="help-block" style="color:maroon" required>Select at least one specialty</span>
+                            </div>
+                            <div class="col-xs-2 checkbox checbox-switch switch-primary">
+                                    <label >
+                                        <input type="checkbox" name="" ng-click="onStatusChange($event);" />
+                                        <span ></span> 
+                                    </label>
+                                    <span title="Help" ng-click="showFaq('rank_provider_toggle_help');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:1.2em"></i></a></span>
+                            </div>
+                        </div> -->
+                       
+                        <div class="box box-default" style="float: left;background: white;">
+
+                            <div class="tabContent custom-mobile-responsive" ng-if="tab==2">
+                                <div class="input-group pad-30-top-admin" style="padding:10px 0 0; min-width:290px;">
+                                    <input type="text" placeholder=" Search..." ng-change="searchable(searchTextField)" ng-model="searchTextField" class="super-doc-search-txt form-control">
+                                </div>
+                                <div class="navbar-custom-menu">
+                                    <ul class="nav navbar-nav preferance-menu custom-float-left">
+                                        <li class="custom-display-visible" ng-class="(speciality.id == selectedTab) ? 'setActive':'' " style="float: none; margin: 0px;"
+                                            ng-repeat="speciality in specList" ng-click="getDoctorBySpeciality(speciality.id);"><a href="javascript:void(0)" style="padding: 5px 5px 5px;">{{speciality.name}}</a></li>
+                                    </ul>
+                                </div>
+                                <div ng-repeat="speciality in specList" ng-if="speciality.id == selectedTab">
+                                    <!-- <div class="loader-overlay" ng-if="loading">
+                                        <div id="loaderDiv">
+                                            <i class='fa fa-refresh fa-spin fa-3x' style="color: #3eb8d7;"></i>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="row whichStateInfo">
+                                        <div class="col-sm-1">
+                                            <div class="arrow-row">
+                                                <h2 class="box-title-main">State: </h2>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-sm-3 ">
+                                            <!-- <select class="form-control" id="state" placeholder="State" name="state" ng-model="contactDetail.state" ng-options="item.abbreviation as item.abbreviation for item in usStates">
+                                            <option value="">All State</option>
+                                            </select>
+                                            <span ng-if="contactDetails.state.$error.required" class="help-block" style="color:maroon">State Required</span> -->
+                                            <!-- ng-change="getDoctorBySpeciality(speciality.id);" -->
+                                            <select class="form-control" id="state" placeholder="State" name="state" ng-model="user.state" ng-change="getDoctorBySpeciality(speciality.id);"
+                                                ng-required="!user.state">
+                                        <option value="ALL" > All State  </option>
+                                        <option ng-selected="item == {{user.state}}"  ng-repeat="(key,item) in stateList" value="{{item}}" >{{item}}</option>
+                                        </select>
+                                            <span ng-if="!user.state && makeReferral.state.$touched && makeReferral.state.$dirty && makeReferral.state.$error.required"
+                                                class="help-block" style="color:maroon">Select at least one state</span>
+                                        </div>
+
+
+                                        <div class="col-sm-3 ">
+                                            <button type="button" class="btn btn-primary" tabindex="12" ng-click="updatePreference()">Save Preference</button>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="form-group ">
+                                        <label class="col-sm-1 control-label" style="margin-top: 15px; ">Preference:</label>
+                                        <div class="col-sm-6 col-xs-10 custom-selectrank">
+                                            <!-- //ng-disabled="!docs.length" -->
+                                            <ui-select ng-required="true" close-on-select="false" multiple sortable="true" name="choiceSet[speciality.id]" ng-model="choiceSet[speciality.id]"
+                                                class="height-auto selectpicker form-control" theme="select2" title="Choose a provider">
+                                                <ui-select-match placeholder="Search or Choose a Provider"><b>{{$index+1}}{{getName($index)}} Preference:</b> {{$item.name}}</ui-select-match>
+                                                <ui-select-choices ui-disable-choice="item.id == 0" repeat="item.id as item in docs | filter: $select.search">
+                                                    <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                                <!-- <ui-select-no-choice>
+                                                    couldn't find any provider...
+                                                </ui-select-no-choice> -->
+                                            </ui-select>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label" style="margin-top: 15px; "><b>Note: </b></label>
+                                            <div class="col-sm-6 col-xs-10" style="margin-top: 15px; width: 80%;  ">Please click on above "Preference" box to get list of providers. Providers list
+                                                will populate as per speciality and within range of 50 miles from your postcode,
+                                                if available. <br><span style="padding-top: 20px; "> Provider boxes can be dragged or re-arranged to change the rankings. You can delete the providers name by clicking on the cross icon on left side of a provider's name box, changes will be reflected only after clicking the "Save Preference" button. <br><br></span></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!--<div class="form-group">
+                                        <fieldset data-ng-repeat="field in choiceSet[speciality.id] track by $index" style="margin-top: 15px;">
+
+                                            <label class="col-sm-2 control-label" style="margin-top: 15px; ">{{$index+1}}{{getName($index)}} Preference:</label>
+                                            <div class="col-sm-6 col-xs-10">
+                                                <select ng-model="choiceSet[speciality.id][$index]" ng-options="option.id as option.name for option in docs" class="selectpicker form-control" tabindex="1" required>
+                                                </select>
+                                                <span ng-if="doc.$touched && doc.$dirty && doc.$error.required" class="help-block" style="color:maroon">Please select your preference. </span>
+                                            </div>
+                                            <button ng-show="$last && !$first" title="Remove" class="preferenceRemove" style="border: none;" ng-click="removeChoice(speciality.id)"><i class=' fa fa-remove' aria-hidden="true"></i></button>
+                                            
+                                        </fieldset>
+
+                                        <fieldset style="margin-top: 15px;">
+                                            <label class="col-sm-2 control-label" style="margin-top: 15px; "></label>
+                                            <div class="col-sm-6">
+                                                <button ng-click="addNewChoice(speciality.id)" title="Add" class="btn btn-primary preferenceAdd" style=" margin-left: 15px; margin-top: 15px; float: right;" ng-disabled="disabl" ng-if="allowAdd">Add More</button>
+                                            </div>
+                                        </fieldset>
+                                    </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+</section>
+</div>

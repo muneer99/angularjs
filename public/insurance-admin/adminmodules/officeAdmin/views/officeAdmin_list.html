@@ -1,0 +1,71 @@
+<div class="content-wrapper">
+    <section class="content">
+        <div class="row" ng-init="getOfficeAdminList(); getAvailableServices()">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="box">
+                    <div class="box-header with-border super-patient-header">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-12 col-sm-12 col-xs-12">
+                                <h3 class="box-title"><span class="latest-c-icon"><img src="../assets/images/latest_order_icon.png" alt=""/></span> Front Desk User List</h3>
+                            </div>
+                            <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                                <div class="row form-control-margin-top">
+                                    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 text-right">
+                                        <div class="input-group pad-30-top-admin margin-bottom-10">
+                                            <input type="text" placeholder=" Search..." ng-model="doctor.searchTextField" ng-change="searchable(doctor, false)" class="super-doc-search-txt form-control">
+                                            <span class="input-group-btn">
+                                                <button class="btn btn-primary sup-doc-search-icon"  ng-click="searchable(doctor, false)"><i class="fa fa-search"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class=" col-md-6 col-sm-5 text-right">
+                                        <button class="btn btn-success sup-add-officeAdmin pull-right" ui-sref="add-officeAdmin"> <i class="icon-1x fa fa-plus" aria-hidden="true"></i>Add Front Desk User</button>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-5 text-right">
+                                        <div excel-export export-data="exportData" file-name="{{fileName}}" style="float: right;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-body" style="margin-top: auto;">
+                        <div style="position: absolute;top: 50%;left: 50%; z-index: 1000;" ng-if="loading">
+                            <i class='fa fa-refresh fa-spin fa-3x' style="color: #3eb8d7;"></i>
+                        </div>
+                        <div class="table-responsive min-margin-15">
+                            <table ng-table="tableParams" class="table table-striped" show-filter="true">
+                                <tr ng-repeat="user in doctorList">
+                                    <td title="'First Name'" sortable="'insfirstname'">
+                                        {{user.firstname}}</td>
+                                    <td title="'Last Name'" sortable="'inslastname'">
+                                        {{user.lastname}}</td>
+                                    <td title="'Email'" sortable="'email'">
+                                        {{user.email}}</td>
+                                    <td title="'Office Phone'" sortable="'phone_number'">
+                                        {{user.phone_number |phonenumber}}</td>
+                                    <td title="'Action'">
+                                        <span title="Edit"><a ui-sref="editofficeAdmin({id:user._id})" style="cursor:pointer"><i class="icon-2x fa fa-pencil" style="font-size:2em"></i></a></span>
+                                        <span title="Delete"><a href="javascript:void(0)" ng-click="isDelete($index,user.email)"><i class="fa fa-trash-o" aria-hidden="true" style="font-size:2em"></i></a></span>
+                                        <span title="{{ user.status ==='1' ? 'In-active' : 'Active'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeStatus(user._id, user.status)"><i ng-class="user.status ==='1'? 'icon-1x fa fa-remove': 'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span>
+                                        <span title="Reset Password"><a href="javascript:void(0)" ng-click="resetPass(user._id)"><i class="fa fa-refresh" aria-hidden="true" style="font-size:1.8em"></i></a></span>
+                                        <span ><a title="To be verified" href="javascript:void(0)" ng-if="!user.isVerified" ng-click="updateOfficeAdmin({_id:user._id, isVerified: true})"><i class="fa fa-check-square-o" aria-hidden="true" style="font-size:2em"></i></a><i title="Verified" ng-if="user.isVerified" class="fa fa-thumbs-o-up" aria-hidden="true" style="font-size:2em; color: green"></i></span>
+                                        <span><a ng-href="{{baseUrl}}#/loginAs/{{user._id}}/{{officeId}}" target="_blank"><i title="Login as {{user.lastname}}" style="font-size:2.4em" class="fa fa-sign-in" aria-hidden="true"></i></a></span>
+                                    </td>
+                                </tr>
+                                <tr ng-if="tableLoader">
+                                    <td colspan="7" align="center">
+                                        <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                    </td>
+                                </tr>
+                                <tr ng-if="doctorList.length == 0 && !tableLoader">
+                                    <td colspan="7" align="center">No record Found</td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,70 @@
+ <div>
+ <header class="main-header header-bg" > 
+    
+    <!-- Logo --> 
+    <a href="index2.html" class="logo"> 
+    <!-- mini logo for sidebar mini 50x50 pixels --> 
+    <span class="logo-mini"><img src="./../../assets/images/small_logo.png" alt=""/></span> 
+    <!-- logo for regular state and mobile devices --> 
+    <span class="logo-lg"><img src="./../../assets/images/logo_new.png" alt=""/></span></a> 
+    
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation"> 
+      <!-- Sidebar toggle button--> 
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button"> <span class="sr-only">Toggle navigation</span> </a> 
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu" ng-controller="dashboardController" >
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+          <li><a ui-sref="chooseSpeciality">MAKE A REFERRAL</a></li>
+          <li><a ui-sref="accountPreference">ACCOUNT PREFERENCES</a></li>
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu"> 
+            <!-- Menu Toggle Button --> 
+            <a class="dropdown-toggle" data-toggle="dropdown"> 
+            <!-- The user image in the navbar--> 
+            <img src="./../../assets/images/user-profile.png" class="user-image" alt="User Image"> 
+            <span class=" user-status green-circle" aria-hidden="true"></span>
+            <!-- hidden-xs hides the username on small devices so only the image appears. --> 
+            <span class="hidden-xs">Rachel Weisz </span></a>
+            <ul class="dropdown-menu" data-dropdown-in="flipInX" data-dropdown-out="flipOutX">
+              <!-- The user image in the menu -->
+              <li class="user-body">
+                <a href="#" class="grayHR">
+                  User Profile
+                    <i class="right-icon fa fa-user-circle-o" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="user-body">
+                <a href="#">Notifications
+                <i class="right-icon fa fa-envelope" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="user-body ">
+                <a href="#" class="dark-greenBg whiteHR" ng-click="setstatus('available')">Available to see patients
+                <i class="right-icon red-circle" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="user-body ">
+                <a href="#" class="gray-BG whiteHR" ng-click="setstatus('waiting')">Taking patients for waitlist
+                <i class="right-icon green-circle" aria-hidden="true"></i>
+                </a>
+              </li>
+               <li class="user-body ">
+                <a href="#" class="gray-BG" ng-click="setstatus('notavailable')">Taking patients for waitlist
+                <i class="right-icon yellow-circle" aria-hidden="true"></i>
+                </a>
+              </li>
+              <li class="user-body">
+                <a class="grayHR" ng-click="logout()">
+                  Log Out
+                    <i class="right-icon fa fa-sign-out" aria-hidden="true"></i>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+</div>

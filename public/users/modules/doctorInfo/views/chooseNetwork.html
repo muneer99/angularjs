@@ -1,0 +1,64 @@
+<div class="content-wrapper main-inner" ng-controller="preferranceController">
+    <!-- Main content -->
+    <section class="">
+        <div class="container">
+            <div ng-if="nexts == 'speciality'" ng-include="'/modules/doctorInfo/views/chooseSpeciality.html'"></div>
+            <div ng-if="nexts == 'contactDetails'" ng-include="'/modules/doctorInfo/views/confirmContactDetails.html'"></div>
+            <div ng-if="nexts == 'services'" ng-include="'/modules/doctorInfo/views/chooseService.html'"></div>
+            <div ng-if="nexts == 'profile'" ng-include="'/modules/doctorInfo/views/confirmProfile.html'"></div>
+            <!-- Your Page Content Here -->
+            <div class="row" ng-if="nexts == 'network' && !updateEmailReq">
+                <div class="col-xs-12">
+                    <div class="box-body" ng-init="getAvailableNetworks()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main"><strong>{{pageTitle}} </strong></h2>
+                                    <h2 class="box-title-main">Click or type to choose options in the box to add insurances you accept. You can click Next to skip and add more later.</h2>
+                                </div>
+                                <div class="form-group">
+                                    <ui-select close-on-select="false" multiple sortable="true" name="network" id="network" ng-model="selected.networkSelected" style="padding-left: 0px;" class="height-auto selectpicker form-control" tabindex="1" theme="select2" title="Choose a network">
+                                        <ui-select-match placeholder="Search Insurance">{{$item.name}}</ui-select-match>
+                                        <ui-select-choices repeat="item._id as item in networkData | filter: $select.search">
+                                            <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 sideBtn">
+                                <button type="submit" class="btn btn-primary" ng-click="backToWelcome()">Prev </button>
+                                <button type="submit" class="btn btn-primary" ng-click="nexttoSpeciality()" ng-disabled="!selected.networkSelected.length>0">Next </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" ng-if="nexts == 'network' && updateEmailReq">
+                <div class="col-xs-12">
+                    <div class="box-body">
+                        <div class="row">
+                        <form name='addmail' id='loginform' ng-submit="UpdateEmailID(useremail)" novalidate>
+                            <div class="col-sm-6">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main"><strong>Add your email address.</strong></h2>
+                                    <h2 class="box-title-main">Your email address will become your new User ID</h2>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="form-control" id="" placeholder="Enter email address" name="useremail" id="useremail" tabindex="1" ng-model="useremail" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" required>
+                                    <span ng-show="addmail.useremail.$touched && addmail.useremail.$error.required && addmail.useremail.$dirty" class="help-block" style="color:maroon">Please Enter Your Email</span>
+                                    <span ng-if="addmail.useremail.$error.pattern" style="color:maroon">Invalid email address</span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 sideBtnmail">
+                                <button type="submit" tabindex="2" class="btn btn-primary" ng-click="backToWelcome()">Prev </button>
+                                <button type="submit" tabindex="3" class="btn btn-primary" ng-disabled="addmail.$invalid">Add Email</button>
+                            </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

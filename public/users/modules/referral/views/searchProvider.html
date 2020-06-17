@@ -1,0 +1,294 @@
+<div class="content-wrapper main-inner">
+    <div class="content-wrapper main-inner">
+        <section class="">
+            <div class="container">
+                <div class="box">
+                    <div class="box-body">
+                        <span ng-if="!addNew" class="pull-right" title="Help" ng-click="showFaq('search_provider');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                        <span ng-if="addNew" class="pull-right" title="Help" ng-click="showFaq('add_and_refer');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                        <div class="row">
+
+                            <div ng-if="!addNew">
+                                <div class="col-sm-12">
+                                    <div class="arrow-row">
+                                        <h2 class="">Look-up or Add Provider or Site.</h2>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <div>
+                                            <input type="text" autocomplete="off" class="form-control" id="email" placeholder="Enter the Provider's First Name, Last Name, or the Site Name to search"
+                                                name="" ng-model="search.firstName">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-12">
+                                    <div class="arrow-row">
+                                        <h2 class="">State </h2>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <!-- <select class="form-control" id="state" placeholder="State" name="state" ng-model="contactDetail.state" ng-options="item.abbreviation as item.abbreviation for item in usStates">
+                                            <option value="">All State</option>
+                                            </select>
+                                    <span ng-if="contactDetails.state.$error.required" class="help-block" style="color:maroon">State Required</span> -->
+
+                                    <!-- ng-change="getDoctors()" -->
+                                     <select class="form-control" id="state" placeholder="State" name="state" ng-model="user.state" 
+                                ng-required="!user.state">
+                                        <option value="ALL"> All State  </option>
+                                        <option ng-selected="item == {{user.state}}"  ng-repeat="(key,item) in stateList" value="{{item}}" >{{item}}</option>
+                                        </select>
+                            <span ng-if="!user.state && makeReferral.state.$touched && makeReferral.state.$dirty && makeReferral.state.$error.required"
+                                class="help-block" style="color:maroon">Select at least one state</span> 
+                                </div>
+
+
+
+
+
+                                <!-- <div class="form-group">
+                                        <label for="pwd">Provider Last Name:</label>
+                                        <div>
+                                            <input type="text" autocomplete="off" class="form-control" id="pwd" placeholder="Please enter last name of provider" name="pwd" ng-model="search.lastName">
+                                        </div>
+                                    </div> -->
+                                <div class="col-sm-12">
+                                    <div class="form-group" style="margin-top: 15px;">
+                                        <button type="submit" class="btn btn-primary" ng-click="selfRefer = 0; getDoctorList(true, true)" ng-disabled="!search.firstName">Search</button>
+                                    </div>
+                                </div>
+                                <div class="col-sm-12">
+                                    <div class="form-group">
+                                        <label>Or,</label>
+                                        <button type="submit" class="btn btn-primary " ng-click="updateform();" ng-if="!addNew">
+                                            <span>Add Unlisted Provider</span> 
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary addProvider" ng-click="updateform();" ng-if="addNew">
+                                    <span>Back</span>                                    
+                                </button>
+
+                            <div class="col-sm-12" ng-show="!addNew && docsList.length && search.firstName">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main">Registered Providers </h2>
+                                </div>
+                                <div class="table-responsive">
+                                    <table ng-table="tableParams" class="table table-striped">
+                                        <tr ng-repeat="docs in docsList">
+                                            <td title="'Provider Name'" sortable="'firstname'" ng-if="docs.degree">{{docs.firstname}} {{docs.lastname}}, {{degree[docs.degree]}}</td>
+                                            <td title="'Provider Name'" sortable="'firstname'" ng-if="!docs.degree">{{docs.firstname}} {{docs.lastname}}</td>
+                                            <td title="'Site'" sortable="'centername'">{{docs.centername}}</td>
+                                            <td title="'Address'" sortable="'location'">{{docs.location}}</td>
+                                            <td title="'Email'" sortable="'email'" ng-if="docs.email">{{docs.email}}</td>
+                                            <td title="'Email'" sortable="'email'" ng-if="!docs.email">&nbsp;</td>
+                                            <td title="'Phone No.'" sortable="'phone_number'">{{docs.phone_number |phonenumber}}</td>
+                                            <td title="'Action'">
+                                                <button ng-click="startRefer('lookup',docs)" type="submit" class="btn btn-primary">Select</button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="tableLoader">
+                                            <td colspan="10" align="center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></td>
+                                        </tr>
+                                        <tr ng-if="docsList.length == 0 && !tableLoader">
+                                            <td colspan="10" align="center">No record found</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--<div class="box-body" align="center" ng-if="tableLoader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                                <div class="box-body" style="background-color: white" ng-if="docsList.length === 0 && !tableLoader"> No providers found...</div>-->
+                            </div>
+                            <div class="col-sm-12" ng-show="!addNew && nonRegDocsList.length && search.firstName">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main">Non-Registered Providers </h2>
+                                </div>
+                                <div class="table-responsive">
+                                    <table ng-table="tableOutsideDoctorParams" class="table table-striped">
+                                        <tr ng-repeat="docs in nonRegDocsList">
+                                            <td title="'Provider Name'" ng-if="docs.degree" sortable="'firstname'">{{docs.firstname}} {{docs.lastname}}, {{degree[docs.degree]}}</td>
+                                            <td title="'Provider Name'" ng-if="!docs.degree" sortable="'firstname'">{{docs.firstname}} {{docs.lastname}}</td>
+                                            <td title="'Site'" sortable="'centername'">{{docs.centername}}</td>
+                                            <td title="'Address'" sortable="'location'">{{docs.location}}</td>
+                                            <td title="'Email'" sortable="'email'" ng-if="docs.emailAvailable">{{docs.email}}</td>
+                                            <td title="'Email'" sortable="'email'" ng-if="!docs.emailAvailable">&nbsp;</td>
+                                            <td title="'Phone No.'" sortable="'phone_number'">{{docs.phone_number |phonenumber}}</td>
+                                            <td title="'Action'">
+                                                <button ng-if="!docs.isOutside" ng-click="startRefer('lookup',docs)" type="submit" class="btn btn-primary">Select</button>
+                                                <button ng-if="docs.isOutside" ui-sref="view-provider({id:docs._id})" ng-click="viewProvider()" type="submit" class="btn btn-primary">Select</button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="tableNonRegDocLoader">
+                                            <td colspan="10" align="center"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></td>
+                                        </tr>
+                                        <tr ng-if="nonRegDocsList.length == 0 && !tableNonRegDocLoader">
+                                            <td colspan="10" align="center">No record found</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--<div class="box-body" align="center" ng-if="tableNonRegDocLoader"><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i></div>
+                                <div class="box-body" style="background-color: white" ng-if="nonRegDocsList.length === 0 && !tableNonRegDocLoader"> No providers found...</div>-->
+                            </div>
+                            <div class="col-sm-12 " ng-if="addNew">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main">Add and Refer</h2>
+                                </div>
+                                <div class="col-sm-12" style="background: white;">
+                                    <form name="contactDetails" ng-submit="startRefer('addAndRefer',{}); done= true">
+                                        <div class="col-sm-6">
+                                            <div class="form-group" ng-class="!contactDetail.centername? 'required':''">
+                                                <label for="firstName" class="control-label" style="margin-top: 15px; text-align: left ">First Name:</label>
+                                                <div class="" style="margin-bottom:5px;">
+                                                    <input type="text" class="form-control" id="firstName" placeholder="Enter first name" name="firstName" ng-model="contactDetail.firstname"
+                                                        tabindex="1" ng-pattern="/^[a-zA-Z '-\s]*$/" ng-required="!contactDetail.centername">
+                                                    <span ng-if="!contactDetail.centername && contactDetails.firstName.$touched && contactDetails.firstName.$dirty && contactDetails.firstName.$error.required"
+                                                        class="help-block" style="color:maroon">Either first name, last name & tltle or site is required</span>
+                                                    <span class="" ng-show="contactDetails.firstName.$error.pattern" style="color:maroon">First name should not contain digit or special character.</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-class="!contactDetail.centername? 'required':''">
+                                                <label for="degree" class="control-label" style=" margin-top: 15px; text-align: left ">Title:</label>
+                                                <div class="" style="margin-bottom:5px;">
+                                                    <select class="form-control" tabindex="3" id="degree" placeholder="Title" name="degree" ng-model="contactDetail.degree" ng-required="!contactDetail.centername">
+                                                            <option ng-repeat="(key, item) in degree" value="{{key}}" ng-selected="key == contactDetail.degree">{{item}}</option>
+                                                        </select>
+                                                    <span ng-if="!contactDetail.centername && contactDetails.degree.$touched && contactDetails.degree.$dirty && contactDetails.degree.$error.required"
+                                                        class="help-block" style="color:maroon">Either first name, last name & tltle or site is required</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="form-group" ng-class="!contactDetail.centername? 'required':''">
+                                                <label for="lastName" class="control-label" style=" margin-top: 15px; text-align: left ">Last Name:</label>
+                                                <div class="" style="margin-bottom:5px;">
+                                                    <input type="text" class="form-control" id="lastName" placeholder="Enter last name" name="lastName" ng-model="contactDetail.lastname"
+                                                        tabindex="2" ng-pattern="/^[a-zA-Z '-\s]*$/" ng-required="!contactDetail.centername">
+                                                    <span ng-if="!contactDetail.centername && contactDetails.lastName.$touched && contactDetails.lastName.$dirty && contactDetails.lastName.$error.required"
+                                                        class="help-block" style="color:maroon">Either first name, last name & tltle or site is required</span>
+                                                    <span class="" ng-show="contactDetails.lastName.$error.pattern" style="color:maroon">Last name should not contain digit or special character.</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" ng-class="(!contactDetail.firstname) ? 'required':''">
+                                                <label for="centerName" class="control-label" style=" margin-top: 15px; text-align: left ">Site:</label>
+                                                <div class="" style="margin-bottom:5px;">
+                                                    <input type="text" class="form-control" id="centerName" placeholder="Enter practice or center name" name="centerName" ng-model="contactDetail.centername"
+                                                        tabindex="4" ng-pattern="/^[a-zA-Z ,'-\s]*$/" ng-required="!contactDetail.firstname">
+                                                    <span ng-if="!contactDetail.firstname && !contactDetail.lastname && contactDetails.centerName.$touched && contactDetails.centerName.$dirty && contactDetails.centerName.$error.required"
+                                                        class="help-block" style="color:maroon">Either first name, last name & tltle or site is required</span>
+                                                    <span class="" ng-show="contactDetails.centerName.$error.pattern" style="color:maroon">Site should not contain digit or special character.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="form-group " ng-class="!contactDetail.fax_temp? 'required':''">
+                                            <label for="email" class="control-label col-sm-3" style=" margin-top: 15px; text-align: left ">Email:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <input type="email" class="form-control" id="emailid" placeholder="Email Address" name="emailId" ng-model="contactDetail.email"
+                                                    ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9]{1})[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"
+                                                    tabindex="5" ng-required="!contactDetail.fax_temp">
+                                                <span ng-if="contactDetails.emailId.$touched && contactDetails.emailId.$dirty && contactDetails.emailId.$error.required"
+                                                    class="help-block" style="color:maroon">Either email or fax number is required</span>
+                                                <span ng-if="contactDetails.emailId.$error.pattern" style="color:maroon">Please enter a valid email address</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-class="!contactDetail.email? 'required':''">
+                                            <label for="phone_number" class="control-label col-sm-3" style=" margin-top: 15px; text-align: left ">Office Fax Number:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <select class="form-control faxbtn" id="ccodeFax" placeholder="ccodeFax" name="ccodeFax" ng-model="contactDetail.ccodeFax"
+                                                    tabindex="6">
+                                                        <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == contactDetail.ccodeFax">{{item}}</option>
+                                                    </select>
+                                                <input type="text" class="form-control faxInp2" id="fax_temp" name="fax_temp" ng-model="contactDetail.fax_temp" ui-mask="999-999-9999"
+                                                    tabindex="7" ng-required="!contactDetail.email">
+                                                <span ng-if="contactDetails.fax_temp.$touched && contactDetails.fax_temp.$dirty && contactDetails.fax_temp.$error.required"
+                                                    class="help-block" style="color:maroon">Either email or fax number is required</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone_number" class="control-label col-sm-3" style=" margin-top: 15px; text-align: left ">Office Phone:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <input type="text" class="form-control" id="phone_number" name="phone_number" ng-model="contactDetail.phone_number" ui-mask="999-999-9999"
+                                                    tabindex="8">
+                                                <span ng-if="contactDetails.phone_number.$touched && contactDetails.phone_number.$dirty && contactDetails.phone_number.$error.required"
+                                                    class="help-block" style="color:maroon">Office Phone Required</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="contactDetail.userTypes == 'Doctor'">
+                                            <label for="phone_number" class="control-label col-sm-3" style=" margin-top: 15px;">Mobile Number:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <select class="form-control faxbtn" id="ccode" placeholder="ccode" name="ccode" ng-model="contactDetail.ccode" tabindex="9">
+                                                        <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == contactDetail.ccode">{{item}}</option>
+                                                    </select>
+                                                <input type="text" class="form-control faxInp2" id="cell_phone_temp" name="cell_phone_temp" ng-model="contactDetail.cell_phone_temp"
+                                                    tabindex="10" ui-mask="999-999-9999">
+                                                <span ng-show="contactDetails.cell_phone_temp.$touched && contactDetails.cell_phone_temp.$error.required && contactDetails.cell_phone_temp.$dirty"
+                                                    class="help-block" style="color:maroon" required>Mobile number required.</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group required">
+                                            <label for="location" class="control-label col-sm-3" style=" margin-top: 15px; text-align: left ">Address Line 1:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <input type="text" class="form-control" id="location" placeholder="Address  Line 1" name="location" ng-model="contactDetail.location"
+                                                    autocomplete="off" tabindex="11" ng-required="true" gm-places-autocomplete>
+                                                <span ng-if="contactDetails.location.$touched && contactDetails.location.$dirty && contactDetails.location.$error.required"
+                                                    class="help-block" style="color:maroon">Address Line 1 Required</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group ">
+                                            <label class="control-label col-sm-3" for="sute">Address Line 2 :</label>
+                                            <div class="col-sm-8" style="margin-bottom: 5px;">
+                                                <input type="text" class="form-control" id="" placeholder="Address Line 2" tabindex="9" name="sute" ng-maxlength="30" ng-model="contactDetail.sute">
+                                                <span class="" ng-show="contactDetails.sute.$error.maxlength" style="color:maroon">Too long. Use 30 characters or less.</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="city" class="control-label col-sm-3" style=" margin-top: 15px; text-align: left ">City:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <input type="text" class="form-control" id="city" placeholder="City" name="city" ng-model="contactDetail.city" tabindex="12">
+                                                <span ng-if="contactDetails.city.$touched && contactDetails.city.$dirty && contactDetails.city.$error.required" class="help-block"
+                                                    style="color:maroon">City Required</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="state" class="control-label col-sm-3" style=" margin-top: 15px; text-align: left ">State:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <select class="form-control" id="state" placeholder="State" name="state" ng-model="contactDetail.state" ng-options="item.abbreviation as item.abbreviation for item in usStates"
+                                                    tabindex="13"></select>
+                                                <span ng-if="contactDetails.state.$touched && contactDetails.state.$dirty && contactDetails.state.$error.required" class="help-block"
+                                                    style="color:maroon">State Required</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="zipcode" class="control-label col-sm-3" style=" margin-top: 15px; text-align: left ">ZIP Code:</label>
+                                            <div class="col-sm-8" style="margin-bottom:5px;">
+                                                <input type="text" class="form-control" maxlength="5" id="zipcode" placeholder="ZIP code" name="zipcode" ng-model="contactDetail.zipcode"
+                                                    ng-pattern="/^[0-9]{1,6}$/" tabindex="14">
+                                                <span ng-if="contactDetails.zipcode.$error.pattern" class="help-block" style="color:maroon">Please enter valid ZIP code.</span>
+                                                <span ng-if="contactDetails.zipcode.$touched && contactDetails.zipcode.$dirty && contactDetails.zipcode.$error.required"
+                                                    class="help-block" style="color:maroon">ZIP Code Required</span>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <label class="control-label col-sm-3" for=""></label>
+                                        <div class="col-sm-8" style="margin: 15px 0;">
+                                            <button type="button" class="btn btn-primary resetBtn" tabindex="16" ng-click="resetForm()">Reset</button>
+                                            <button type="submit" class="btn btn-primary submitBtn" tabindex="15" ng-disabled="contactDetails.$invalid || !contactDetail.location.length">Add and Refer</button>
+                                        </div>
+                                        <input type="hidden" ng-model="contactDetails.user_loc">
+                                    </form>
+                                </div>
+                                <span class="reqspan"><p class="reqspantitle"> indicates a required field.</p></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </section>
+</div>
+</div>

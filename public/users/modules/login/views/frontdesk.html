@@ -1,0 +1,32 @@
+<!--<div class="content-wrapper main-inner" ng-controller="preferranceController">-->
+<div class="content-wrapper main-inner">
+    <!-- Main content -->
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box-body">
+                        <div class="i-am-centered">
+                          <!-- <div class="row"> -->
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main"><strong>Which Docs can make sending, receiving and tracking referrals even easier when you authorize your office staff to do it for you.</strong></h2>
+                                    <h2 class="box-title-main">Enter the email addresses of your staff (separated by commas) in the box below. They will be invited to Which Docs and will then be able to complete your profile, update the insurances you accept, and start sending and receiving referrals for you.</h2>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="" placeholder="Enter email of new front desk user" name="fdemail" id="fdemail" tabindex="1" ng-model="fdemail" required>
+                                        <span ng-show="fdemail.$touched && fdemail.$error.required && fdemail.$dirty" class="help-block" style="color:maroon">Please enter email of new front desk user</span>
+                                        <span ng-if="fdemail.$error.pattern" style="color:maroon">Invalid email address</span>
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" ng-click="continue('profile'); clicked = true" ng-disabled="!fdemail || clicked">Continue</button>
+                                <button class="btn btn-success contFda" ng-click="continue('remindlater');">Remind Me Later</button>
+                            <!-- </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>

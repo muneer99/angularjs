@@ -1,0 +1,33 @@
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box-body" ng-init="getAvailableService()">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="arrow-row">
+                                    <h2 class="box-title-main"><strong>Services Offered </strong></h2>
+                                    <h2 class="box-title-main">Click in the box below to add services you offer. </h2>
+                                </div>
+                                <div class="form-group">
+                                    <ui-select close-on-select="false" multiple sortable="true" name="network" id="service" ng-model="selected.serviceSelected" style="padding-left: 0px;" class="height-auto selectpicker form-control" tabindex="1" theme="select2" title="Choose a service">
+                                        <ui-select-match placeholder="Search a service">{{$item.serviceName}}</ui-select-match>
+                                        <ui-select-choices repeat="item._id as item in serviceslist | filter: $select.search">
+                                            <div ng-bind-html="item.serviceName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 sideBtn">
+                                <button type="submit" class="btn btn-primary" ng-click="back('contactDetails')">Prev </button>
+                                <button type="submit" class="btn btn-primary" ng-click="nexttoProfile()" ng-disabled="!selected.serviceSelected.length>0">Next </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

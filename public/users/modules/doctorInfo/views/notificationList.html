@@ -1,0 +1,146 @@
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container">
+            <div class="box-body box-title-main " ng-init="getCount()">
+                <div class="arrow-row">
+                    <h2><i class="fa fa-bell"></i>Notification List</h2>
+                </div>
+                <div class="box box-primary">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" style="margin-top: 10px;">Notification</h3>
+
+                        <div class="box-tools pull-right " style="margin-top: 15px;">
+                            <div class="has-feedback">
+                                <input type="text" class="form-group-sm input-sm" ng-change="getCount(searchTextField)" ng-model="searchTextField"  placeholder="Search Notification">
+                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                            </div>
+                        </div>
+                        <!-- /.box-tools -->
+                    </div>
+                    <div class="table-responsive min-margin-15 ">
+                        <table ng-table="tableParams" class="table table-striped remove-header" show-filter="true">
+                            <tr ng-repeat="notification in notificationList | orderBy : created_at:reverse" ng-class="notification.status ? '' : 'unread'">
+                                <td>{{$index+1}}</td>
+                                <td ng-click="openModal(notification,$index);">
+                                    {{notification.subject}}</td>
+                                <td>
+                                    {{notification.created_at | date : "short"}}
+                                </td>
+                                <td>
+                                    <span ng-click="notificationDeletedByUser(notification._id)"><i class="fa fa-trash-o" style="color:red"></i></span>
+                                </td>
+                            </tr>
+                            <tr ng-if="tableLoader">
+                                <td colspan="3" align="center">
+                                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                </td>
+                            </tr>
+                            <tr ng-if="doctorList.length == 0 && !tableLoader">
+                                <td colspan="3" align="center">No Notifications.</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+<style>
+    .list-type1 {
+        width: 400px;
+        margin: 0 auto;
+    }
+
+    .list-type1 ol {
+        counter-reset: li;
+        list-style: none;
+        *list-style: decimal;
+        font-size: 15px;
+        font-weight: normal;
+        font-family: 'Raleway', sans-serif;
+        padding: 0;
+        margin-bottom: 4em;
+    }
+
+    .list-type1 ol ol {
+        margin: 0 0 0 2em;
+    }
+
+    .list-type1 a {
+        position: relative;
+        display: block;
+        padding: .4em .4em .4em 2em;
+        *padding: .4em;
+        margin: .5em 0;
+        width: 250px;
+        background: #56b9c5;
+        color: white;
+        text-decoration: none;
+        -moz-border-radius: .3em;
+        -webkit-border-radius: .3em;
+        border-radius: 10em;
+        transition: all .2s ease-in-out;
+    }
+
+    .list-type1 a:hover {
+        background: #56b9c5;
+        text-decoration: none;
+        transform: scale(1.1);
+    }
+
+    .list-type1 a:before {
+        content: counter(li);
+        counter-increment: li;
+        position: absolute;
+        left: -1.3em;
+        top: 50%;
+        margin-top: -1.3em;
+        background: #56b9c5;
+        height: 2em;
+        width: 2em;
+        line-height: 2em;
+        border: .3em solid #fff;
+        text-align: center;
+        font-weight: bold;
+        -moz-border-radius: 2em;
+        -webkit-border-radius: 2em;
+        border-radius: 2em;
+        color: #FFF;
+    }
+
+    .md-toolbar-tools {
+        background-color: #3eb8d7;
+    }
+
+    .md-toolbar-tools {
+        font-size: 20px;
+        letter-spacing: .005em;
+        box-sizing: border-box;
+        font-weight: 400;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-box-align: center;
+        -webkit-align-items: center;
+        align-items: center;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -webkit-flex-direction: row;
+        flex-direction: row;
+        width: 100%;
+        height: 64px;
+        max-height: 64px;
+        padding: 0 16px;
+        margin: 0;
+    }
+
+    .li {
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    .selected {
+        font-weight: bold;
+    }
+</style>

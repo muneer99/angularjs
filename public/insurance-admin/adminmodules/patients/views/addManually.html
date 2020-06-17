@@ -1,0 +1,103 @@
+<div class="content-wrapper">
+    <section class="">
+        <div class="container" ng-init="getAvailableNetworks()">
+            <h3>Add Patient</h3>
+            <form class="form-horizontal" name="addForm">
+                <div class="form-group required">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">First Name :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Enter first name" name="firstName" ng-pattern="/^[a-zA-Z '-\s]*$/" ng-model="patient.firstName" required>
+                        <span ng-if="addForm.firstName.$touched && addForm.firstName.$dirty && addForm.firstName.$error.required" class="help-block" style="color:maroon">First name required</span>
+                        <span class="" ng-show="addForm.firstName.$error.pattern" style="color:maroon">First name should not contain digit.</span>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Last Name :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Enter last name" name="lastName" ng-pattern="/^[a-zA-Z '-\s]*$/" ng-model="patient.lastName" required>
+                        <span ng-show="addForm.lastName.$touched && addForm.lastName.$error.required && addForm.lastName.$dirty" class="help-block" style="color:maroon" required>Last name required</span>
+                        <span class="" ng-show="addForm.lastName.$error.pattern" style="color:maroon">Last name should not contain digit.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Street Address :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Street address" name="location" ng-pattern="/^[a-zA-Z0-9\s,'-.]*$/" ng-maxlength="100" maxlength="101" ng-model="patient.location">
+                        <span ng-show="addForm.location.$touched && addForm.location.$error.required && addForm.location.$dirty" class="help-block" style="color:maroon" required>Street address is required</span>
+                        <span class="" ng-show="addForm.location.$error.pattern" style="color:maroon">Street address does not contain special character.</span>
+                        <span class="" ng-show="addForm.location.$error.maxlength" style="color:maroon">Too long. Use 100 characters or less.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Apartment :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Apartment" name="sute" ng-maxlength="30" maxlength="31" ng-model="patient.sute">
+                        <span class="" ng-show="addForm.sute.$error.maxlength" style="color:maroon">Too long. Use 30 characters or less.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">City :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="City" name="city" ng-pattern="/^[a-zA-Z]+(?:[\s-][a-zA-Z]+)*$/" ng-maxlength="30" maxlength="31" ng-model="patient.city">
+                        <span ng-show="addForm.city.$touched && addForm.city.$error.required && addForm.city.$dirty" class="help-block" style="color:maroon" required>City is required</span>
+                        <span class="" ng-show="addForm.city.$error.pattern" style="color:maroon">Please enter valid city name.</span>
+                        <span class="" ng-show="addForm.city.$error.maxlength" style="color:maroon">Too long. Use 30 characters or less.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">State :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="" placeholder="State" name="state" ng-model="patient.state" ng-options="item.abbreviation as item.abbreviation for item in usStates"></select>
+                        <span ng-show="addForm.state.$touched && addForm.state.$error.required && addForm.state.$dirty" class="help-block" style="color:maroon" required>State is required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Zip Code :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Zip code" name="zipcode" ng-pattern="/^[0-9]*$/" maxlength="5" ng-model="patient.zipcode">
+                        <span ng-show="addForm.zipcode.$touched && addForm.zipcode.$error.required && addForm.zipcode.$dirty" class="help-block" style="color:maroon" required>Zip code is required</span>
+                        <span class="" ng-show="addForm.zipcode.$error.pattern" style="color:maroon">Zip code contain only digit.</span>
+                        <span class="" ng-show="addForm.zipcode.$error.maxlength" style="color:maroon">Allowed 5 digit for zip code.</span>
+                        <span class="" ng-show="addForm.zipcode.$error.minlength" style="color:maroon">Allowed only 5 digit for zip code.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Email :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Enter email address" name="email" ng-model="patient.email" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/">
+                        <span ng-show="addForm.email.$touched && addForm.email.$error.required && addForm.email.$dirty" class="help-block" style="color:maroon" required>Email address required.</span>
+                        <span ng-if="addForm.email.$error.pattern" style="color:maroon">Invalid email address</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Phone # :</label>
+                    <div class="col-sm-8">
+                        <select class="form-control faxbtnInp" id="ccode" placeholder="Fax" name="fax" ng-model="patient.ccode" tabindex="7">
+                            <option ng-repeat="item in countryCodes" value="{{item}}" ng-selected="item == patient.ccode">{{item}}</option>
+                        </select>
+                        <input type="text" class="form-control faxBInp" id="" name="contact_no" ng-model="patient.contact_no" ui-mask="999-999-9999">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Select Insurance:</label>
+                    <div class="col-sm-8">
+                        <fieldset data-ng-repeat="field in patientNetwork track by $index">
+                            <label class="col-sm-1" style="margin-top: 12px; padding-left: 10px; margin-right: 10px; text-align: left; margin-left: -12px;">{{getName($index)}}:</label>
+                            <div class="col-sm-9" style="padding-bottom: 5px;">
+                                <select ng-model="patientNetwork[$index]" ng-options="option._id as option.name for option in networkData" class="form-control" tabindex="1"></select>
+                            </div>
+                            <i class=' fa fa-remove' title="Remove" ng-show="$last" ng-click="removeChoice($index)" aria-hidden="true" style="margin-top: 12px;margin-left: -10px; font-size: 25px;padding-right: 15px;" ng-if="patientNetwork.length>1"></i>
+                            <i class='fa fa-plus' title="Add" ng-click="addNewChoice()" ng-click="removeChoice()" aria-hidden="true" ng-if="!disabl && $index === patientNetwork.length-1" style="margin-top: 12px;margin-left: -10px; font-size: 25px;"></i>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="" style="text-align:left"></label>
+                    <div class="col-sm-8">
+                        <a href="#/admindashboard"><button type="button" class="btn btn-primary" >Back to dashboard</button></a>
+                        <button type="submit" class="btn btn-primary" ng-click="addPatient(patient); done =true;" ng-disabled="addForm.$invalid || done">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>

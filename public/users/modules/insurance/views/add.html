@@ -1,0 +1,31 @@
+<div class="content-wrapper">
+    <section class="">
+        <div class="container" ng-init="getNetwork()">
+            <h3>{{pageTitle}}</h3>
+            <form class="form-horizontal" name="form" ng-submit="addNetwork(network); done=true">
+                <div class="form-group required">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left"> Name :</label>
+                    <div class="col-sm-8">
+                        <input type="hidden" name='_id' ng-model="network._id">
+                        <input type="text" tabindex="1" class="form-control" id="" placeholder="Name" name="name" ng-pattern="/^[a-zA-Z0-9 '\s]*$/" ng-model="network.name" required>
+                        <span ng-if="form.name.$touched && form.name.$dirty && form.name.$error.required" class="help-block" style="color:maroon" required> Name required</span>
+                        <span class="" ng-show="form.name.$error.pattern" style="color:maroon">Name should not contain any special character.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Description :</label>
+                    <div class="col-sm-8">
+                        <input type="textarea" tabindex="2" class="form-control" id="" placeholder="Description" name="desc" ng-model="network.desc">
+                        <span ng-show="form.desc.$touched && form.desc.$error.required && form.desc.$dirty" class="help-block" style="color:maroon" required>Description is Required</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="" style="text-align:left"></label>
+                    <div class="col-sm-8">
+                        <a href="#/admindashboard"><button tabindex="4" type="button" class="btn btn-primary" >Back to dashboard</button></a>
+                        <button type="submit" tabindex="3" class="btn btn-primary" ng-disabled="form.$invalid || done">{{btnTitle}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>

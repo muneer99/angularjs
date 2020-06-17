@@ -1,0 +1,81 @@
+<md-dialog style='max-width: 65%; max-height: 66%;' aria-label='patient'>
+    <form ng-cloak>
+        <md-toolbar>
+            <div class='md-toolbar-tools'>
+                <h2>Referral Details</h2> <span flex></span>
+                <md-button class='md-icon-button' ng-click='cancel()'>
+                    <md-icon aria-label='Close dialog'><i class='fa fa-times' aria-hidden='true'></i></md-icon>
+                </md-button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div>
+                <div class='table-responsive-vertical shadow-z-1'>
+                    <table id='table' class='table table-hover table-mc-light-blue'>
+                        <thead>
+                            <tr>
+                                <th>User Type</th>
+                                <th>First Name</th>
+                                <th>last Name</th>
+                                <th>Email</th>
+                                <th>Phone No</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td data-title='type'>Patient</td>
+                                <td data-title='fname'>{{patient.fname}}</td>
+                                <td data-title='lname'>{{patient.lname}}</td>
+                                <td data-title='email'>{{patient.email}}</td>
+                                <td data-title='Phone'>{{patient.phno}}</td>
+                            </tr>
+                            <tr>
+                                <td data-title='fname'>Referred By</td>
+                                <td data-title='fname'>" + byUser.fname + "</td>
+                                <td data-title='lname'>" + byUser.lname + "</td>
+                                <td data-title='email'>" + byUser.email + "</td>
+                                <td data-title='Phone'>" + byUser.phno + "</td>
+                            </tr>
+                            <tr>
+                                <td data-title='fname'>Referred To</td>
+                                <td data-title='fname'>" + toUser.fname + "</td>
+                                <td data-title='lname'>" + toUser.lname + "</td>
+                                <td data-title='email'>" + toUser.email + "</td>
+                                <td data-title='Phone'>" + toUser.phno + "</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <div class='row'>
+                    <div class='col-sm-6' style='padding:10px;'>
+                        <h4><u>Additional Details</u></h4>
+                        <div style='margin-bottom: 10px;'>Chief Complaint: " + chifComp + "</div>
+                        <div style='margin-bottom: 10px;'>Services Required: " + services + "</div>
+                        <div style='margin-bottom: 10px;'>Other: " + other + "</div>
+                        <div style='margin-bottom: 10px;'>Attachments: " + attachment + "</div>
+                    </div>
+                    <div class='col-sm-6' style='padding:10px;'>
+                        <h4><u>Referral Log</u></h4>
+                        <div class='table-responsive-vertical shadow-z-1'>
+                            <table id='table' class='table table-hover table-mc-light-blue'>
+                                <thead>
+                                    <tr>
+                                        <th>Status</th>
+                                        <th>Time</th>
+                                        <th>By</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat='item in referralLogDetails'>
+                                        <td data-title='type'>item.status </td>
+                                        <td data-title='fname'>item.updateOn </td>
+                                        <td data-title='fname'> item.updatedBy.lastname </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

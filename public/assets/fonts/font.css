@@ -1,0 +1,12 @@
+@font-face {
+  font-family: 'Raleway-Bold';
+  src: url('Raleway-Bold.eot');
+  src: url('Raleway-Bold.woff2') format('woff2'),
+       url('Raleway-Bold.woff') format('woff'),
+       url('Raleway-Bold.ttf') format('truetype'),
+       url('Raleway-Bold.svg#Raleway-Bold') format('svg'),
+       url('Raleway-Bold.eot?#iefix') format('embedded-opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+

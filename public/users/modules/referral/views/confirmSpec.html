@@ -1,0 +1,56 @@
+<div class="content-wrapper main-inner" ng-init="getContent()">
+    <section class="">
+        <div class="container">
+            <div class="box-body">
+                <span class="pull-right" title="Help" ng-click="showFaq('confirm_speciality');"><a style="cursor:pointer" ><i class="fa fa-info-circle" style="font-size:3em"></i></a></span>
+                <div class="row">
+                    <div class="col-sm-11">
+                        <form name="makeReferral" ng-submit="referPatient(pdata); done = true">
+                            <!--<div class="arrow-row">
+                                <h2 class="box-title-main">Select specialty</h2>
+                            </div>-->
+                            <div class="arrow-row">
+                                <h2 class="box-title-main"></h2>
+                            </div>
+                            <div class="form-group ">
+                                <label class="control-label col-sm-5 labelInp mtrefpage" for="spec"> Which Specialty?</label>
+                                <div class="col-sm-6 mtrefpage">
+                                    <ui-select ng-model="referral.specialities" id="specialities" name="specialities"  theme="select2" style="padding-left: 0px;" class="form-control height-auto" title="Choose a specialty" required>
+                                        <ui-select-match placeholder="Search a specialty">{{$select.selected.specialityName }}</ui-select-match>
+                                        <ui-select-choices repeat="item._id as item in specialityData | filter: $select.search">
+                                            <div ng-bind-html="item.specialityName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                </div>
+                            </div>
+                            <!--<div class="form-group ">
+                                <label class="control-label col-sm-5 labelInp mtrefpage" for="service"> 2. Which Service?</label>
+                                <div class="col-sm-6 mtrefpage">
+                                    <input type="text" class="form-control makerefInp" id="serviceName" placeholder="Enter service" name="serviceName" ng-model="referral.serviceName">
+                                    <ui-select ng-model="referral.services" id="services" name="services" style="padding-left: 0px;" theme="select2" class="height-auto form-control" title="Choose a service" required>
+                                        <ui-select-match placeholder="Search a service">{{$select.selected.serviceName | capitalize}}</ui-select-match>
+                                        <ui-select-choices repeat="item._id as item in serviceslist | filter: $select.search">
+                                            <div ng-bind-html="item.serviceName | highlight: $select.search | capitalize"></div>
+                                        </ui-select-choices>
+                                    </ui-select> 
+                                </div>
+                            </div>
+                            <div class="form-group" ng-if="referral.services == 1">
+                                <label class="control-label col-sm-5 makerefTxtAlign" for="other"></label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control makerefInp" id="Other" placeholder="Other / Non-Listed Service" name="Other" ng-model="referral.other" ng-disabled = "referral.services!== 1">
+                                </div>
+                            </div>-->
+                            <div class="form-group clearfix">
+                                <label class="control-label col-sm-5" for=""></label>
+                                <div class="col-sm-6">
+                                    <button type="submit" class="btn btn-primary makerefBtn" >Next</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

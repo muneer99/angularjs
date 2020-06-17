@@ -1,0 +1,603 @@
+<style>
+    .setActive {
+        border: white;
+    }
+    .custom_checkbox {
+    width: auto;
+    float: left;
+    margin: 0 30px 0 0;
+}
+    .custom_checkbox .styled-checkbox {
+        position: absolute;
+        opacity: 0;
+    }
+
+    .custom_checkbox .styled-checkbox+label {
+        position: relative;
+        cursor: pointer;
+        padding: 0;
+    }
+
+    .custom_checkbox .styled-checkbox+label:before {
+        content: "";
+        margin-right: 10px;
+        display: inline-block;
+        vertical-align: text-top;
+        width: 20px;
+        height: 20px;
+        background: white;
+        border: solid 1px #3f58f3;
+    }
+
+    /* .custom_checkbox .styled-checkbox:hover+label:before {
+        background: #2958f3;
+    } */
+
+    .custom_checkbox .styled-checkbox:focus+label:before {
+        box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.12);
+    }
+
+    .custom_checkbox .styled-checkbox:checked+label:before {
+        background: #2958f3;
+    }
+
+    .custom_checkbox .styled-checkbox:disabled+label {
+        color: #b8b8b8;
+        cursor: auto;
+    }
+
+    .custom_checkbox .styled-checkbox:disabled+label:before {
+        box-shadow: none;
+        background: #ddd;
+    }
+
+    .custom_checkbox .styled-checkbox:checked+label:after {
+        content: "";
+        position: absolute;
+        left: 5px;
+        top: 9px;
+        background: white;
+        width: 2px;
+        height: 2px;
+        box-shadow: 2px 0 0 white, 4px 0 0 white, 4px -2px 0 white, 4px -4px 0 white, 4px -6px 0 white, 4px -8px 0 white;
+        -webkit-transform: rotate(45deg);
+        transform: rotate(45deg);
+    }
+    .nav.navbar-nav .custom_checkbox .styled-checkbox:checked+label:after{
+        top: 13px;
+    }
+    
+    .custom_radio_button [type="radio"]:checked,
+    .custom_radio_button [type="radio"]:not(:checked) {
+    position: absolute;
+    left: -9999px;
+}
+.custom_radio_button [type="radio"]:checked + label,
+.custom_radio_button [type="radio"]:not(:checked) + label
+{
+    position: relative;
+    padding-left: 28px;
+    cursor: pointer;
+    line-height: 20px;
+    display: inline-block;
+    color: #666;
+}
+.custom_radio_button [type="radio"]:checked + label:before,
+.custom_radio_button [type="radio"]:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 18px;
+    height: 18px;
+    border: 1px solid #2958f3;
+    border-radius: 100%;
+    background: #fff;
+}
+.custom_radio_button [type="radio"]:checked + label:after,
+.custom_radio_button [type="radio"]:not(:checked) + label:after {
+    content: '';
+    width: 10px;
+    height: 10px;
+    background: #2958f3;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    border-radius: 100%;
+    -webkit-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+.custom_radio_button [type="radio"]:not(:checked) + label:after {
+    opacity: 0;
+    -webkit-transform: scale(0);
+    transform: scale(0);
+}
+.custom_radio_button [type="radio"]:checked + label:after {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+}
+</style>
+
+
+<div class="content-wrapper main-inner">
+    <section class="">
+        <div class="container">
+            <div class="box-body">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="arrow-row" ng-init="getContactDetails()">
+                            <h2 class="box-title-main">User Profile</h2>
+                        </div>
+                        <div class="box box-default" style="float: left;background: white;">
+                            <div class="tabContent" ng-if="tab==1">
+                                <form name="contactDetails" ng-submit="updateContact()">
+                                    <div class="col-sm-6">
+                                        <div class="form-group" ng-class="!contactDetail.centername? 'required':''">
+                                            <label for="firstName" class="control-label"
+                                                style="margin-top: 15px; ">First Name:</label>
+                                            <input type="text" class="form-control" id="firstName"
+                                                placeholder="First name" name="firstName"
+                                                ng-model="contactDetail.firstname" ng-pattern="/^[a-zA-Z '-\s]*$/"
+                                                ng-required="!contactDetail.centername">
+                                            <input type="hidden" name='userId' ng-model="userId">
+                                            <span
+                                                ng-if="!contactDetail.centername && contactDetails.firstName.$error.required"
+                                                class="help-block" style="color:maroon">Either first name, last name &
+                                                tltle or site is required</span>
+                                            <span class="" ng-show="contactDetails.firstName.$error.pattern"
+                                                style="color:maroon">First name should not contain digit or special
+                                                character.</span>
+                                        </div>
+
+                                        <div class="form-group required">
+                                            <label for="email" class="control-label"
+                                                style=" margin-top: 15px;">Email:</label>
+                                            <span ng-if="emailAvailable">
+                                                <input type="email" class="form-control" id="emailid"
+                                                    placeholder="Email ID" name="emailId" ng-model="contactDetail.email"
+                                                    disabled>
+                                            </span>
+                                            <span ng-if="!emailAvailable"><input type="email" class="form-control"
+                                                    id="emailid" placeholder="Email ID" name="emailId"
+                                                    ng-model="contactDetail.email"> </span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" style="margin-top: 15px; ">Notification
+                                                Preference:</label>
+
+                                            <div class="custom_checkbox">
+                                                <input type="checkbox" id="email_id" class="styled-checkbox"
+                                                    name="emailnotificationPref" value="1"
+                                                    ng-checked="contactDetail.emailnotificationPref==true"
+                                                    ng-model="contactDetail.emailnotificationPref"
+                                                    ng-required="!contactDetail.txtnotificationPref">
+                                                <label for="email_id">Email</label>
+                                            </div>
+
+
+                                            <div class="custom_checkbox">
+                                                <input type="checkbox" id="text_id" class="styled-checkbox"
+                                                    name="txtnotificationPref" value="1"
+                                                    ng-checked="contactDetail.txtnotificationPref==true"
+                                                    ng-model="contactDetail.txtnotificationPref"
+                                                    ng-required="!contactDetail.emailnotificationPref">
+                                                    <label for="text_id" >Text</label>
+                                                    </div>
+
+
+
+                                            <br /><span class=""
+                                                ng-show="!contactDetail.emailnotificationPref && !contactDetail.txtnotificationPref"
+                                                style="color:maroon">Please select at least one notification
+                                                preference</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" style="margin-top: 15px; ">Mobile
+                                                Preferences:</label>
+
+                                            <div class="radio-inline custom_radio_button">
+                                                <input type="radio" id="mobile_no" name="showMobile"
+                                                    value="true" ng-checked="contactDetail.showMobile==true"
+                                                    ng-model="contactDetail.showMobile">
+                                                    <label for="mobile_no">Display Mobile Number</label>
+                                                </div>
+                                            <div class="radio-inline custom_radio_button">
+                                                <input type="radio" id="Notifications_Only" name="showMobile"
+                                                    value="false" ng-checked="contactDetail.showMobile==false"
+                                                    ng-model="contactDetail.showMobile">
+                                                <label for="Notifications_Only">Notifications Only</label>
+                                                </div>
+                                        </div>
+
+                                        <div class="form-group required">
+                                            <label for="location" class="control-label"
+                                                style=" margin-top: 15px;">Address Line 1:</label>
+                                            <input type="text" class="form-control" id="location" gm-places-autocomplete
+                                                placeholder="Address Line 1" name="location"
+                                                ng-model="contactDetail.location" autocomplete="off" required>
+                                            <span ng-if="contactDetails.location.$error.required" class="help-block"
+                                                style="color:maroon">Address Line 1 Required</span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="city" class="control-label"
+                                                style=" margin-top: 15px;">City:</label>
+                                            <input type="text" class="form-control" id="city" placeholder="City"
+                                                name="city" ng-model="contactDetail.city">
+                                            <span ng-if="contactDetails.city.$error.required" class="help-block"
+                                                style="color:maroon">City Required</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone_number" class="control-label"
+                                                style=" margin-top: 15px;">Office Phone:</label>
+                                            <input type="text" class="form-control" id="phone_number"
+                                                name="phone_number" ng-model="contactDetail.phone_number"
+                                                ui-mask="999-999-9999">
+                                            <span ng-if="contactDetails.phone_number.$error.required" class="help-block"
+                                                style="color:maroon">Office Phone Required</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="phone_number" class="control-label"
+                                                style=" margin-top: 15px;">Office Fax Number:</label>
+                                            <select class="form-control faxbtn" id="ccode" placeholder="Fax"
+                                                name="fax_temp" ng-model="contactDetail.ccodeFax">
+                                                <option ng-repeat="item in countryCodes" value="{{item}}"
+                                                    ng-selected="item == contactDetail.ccodeFax">{{item}}</option>
+                                            </select>
+                                            <input type="text" class="form-control custSelect" id="fax_temp"
+                                                name="fax_temp" ng-model="contactDetail.fax_temp"
+                                                ui-mask="999-999-9999">
+                                            <span ng-if="contactDetails.fax_temp.$error.required" class="help-block"
+                                                style="color:maroon">Office Fax Number Required</span>
+                                        </div>
+                                        <!-- <div class="form-group required" ng-if="frontDesk">
+                                            <label for="service" class="control-label" style="margin-top: 15px; ">Services:</label>
+                                            <ui-select ng-required="true" close-on-select="false" multiple sortable="true" name="service" id="service" ng-model="contactDetail.service" class="height-auto selectpicker form-control" theme="select2" title="Choose a service">
+                                                <ui-select-match placeholder="Search a service">{{$item.serviceName}}</ui-select-match>
+                                                <ui-select-choices repeat="item._id as item in serviceslist | filter: $select.search">
+                                                    <div ng-bind-html="item.serviceName | highlight: $select.search"></div>
+                                                </ui-select-choices>
+                                            </ui-select>
+
+                                            <span ng-if="contactDetails.service.$touched && contactDetails.service.$dirty && contactDetails.service.$error.required" class="help-block" style="color:maroon">Please select at least one service</span>
+                                        </div> -->
+                                        <div class="form-group required" ng-if="frontDesk">
+                                            <label for="speciality" class="control-label"
+                                                style="margin-top: 15px; ">Specialty:</label>
+                                            <ui-select ng-required="true" close-on-select="false" multiple
+                                                sortable="true" name="speciality" id="speciality"
+                                                ng-model="contactDetail.speciality"
+                                                class="height-auto selectpicker form-control" theme="select2"
+                                                title="Choose a specialty">
+                                                <ui-select-match placeholder="Search a specialty">
+                                                    {{$item.specialityName}}</ui-select-match>
+                                                <ui-select-choices
+                                                    repeat="item._id as item in specialityData | filter: $select.search">
+                                                    <div ng-bind-html="item.specialityName | highlight: $select.search">
+                                                    </div>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                            <span ng-show="contactDetails.speciality.$error.required" class="help-block"
+                                                style="color:maroon" required>Select at least one specialty</span>
+                                            </ui-select>
+
+                                            <!--<span ng-if="contactDetails.speciality.$error.required"
+                                                class="help-block" style="color:maroon">Please select at least one specialty</span>-->
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="pwd">Profile Picture :</label>
+                                            <div>
+                                                <input type="file" accept="image/png, image/jpeg" class="form-control"
+                                                    name="file"
+                                                    onchange="angular.element(this).scope().uploadFile(this.files)" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label" for="pwd">Range of Lookup ( In Miles)</label>
+                                            <md-button class="mdInfoBtn" aria-label="Menu with Tooltip Delay"
+                                                style=" margin-top: -35px;background-color: white; float: right; min-width: auto; min-height: auto;">
+                                                <md-tooltip md-delay="demo.delayTooltip">
+                                                    <b><u>HERE IS HOW IT WORKS:</u></b><br /> 1) Set distance from your
+                                                    address
+                                                    within which you want to refer a patient.<br /> 2) Based on this
+                                                    section,
+                                                    provider list will apprear during referral.<br />
+                                                </md-tooltip>
+                                                <i class="fa fa-info-circle tooltip-icon ng-scope"></i>
+                                            </md-button>
+                                            <md-slider-container>
+                                                <md-slider min="0" max="50" ng-model="contactDetail.range"
+                                                    aria-label="red" id="red-slider" flex class="md-warn" md-discrete>
+                                                </md-slider>
+                                                <md-input-container>
+                                                    <input type="number" ng-model="contactDetail.range" aria-label="red"
+                                                        aria-controls="blue-slider">
+                                                </md-input-container>
+                                            </md-slider-container>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label" for="pwd">Location on MAP :</label><span
+                                                style="color: red"
+                                                ng-show="contactDetail.user_loc && contactDetail.user_loc[0] == defaultLocation[0] && contactDetail.user_loc[1] == defaultLocation[1]">Unable
+                                                to fetch your location from address. Please select your loation on
+                                                map.</span>
+                                            <div>
+                                                <ng-map center="{{centerlatlng}}" zoom="{{depth}}"
+                                                    on-click="getpos($event)">
+                                                    <marker position="{{contactDetail.user_loc}}" title="Hello World!"
+                                                        on-dragend="getpos($event)" animation="DROP" draggable="true">
+                                                    </marker>
+                                                </ng-map>
+                                            </div>
+                                        </div>
+
+                                        <span class="reqspan">
+                                            <p class="reqspantitle"> indicates a required field.</p>
+                                        </span>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group" ng-class="!contactDetail.centername? 'required':''">
+                                            <label for="lastName" class="control-label" style=" margin-top: 15px;">Last
+                                                Name:</label>
+                                            <input type="text" class="form-control" id="lastName"
+                                                placeholder="Last name" name="lastName"
+                                                ng-model="contactDetail.lastname" ng-pattern="/^[a-zA-Z '-\s]*$/"
+                                                ng-required="!contactDetail.centername">
+                                            <span
+                                                ng-if="!contactDetail.centername && contactDetails.lastName.$error.required"
+                                                class="help-block" style="color:maroon">Either first name, last name &
+                                                tltle or site is required</span>
+                                            <span class="" ng-show="contactDetails.lastName.$error.pattern"
+                                                style="color:maroon">Last name should not contain digit or special
+                                                character.</span>
+                                        </div>
+
+                                        <!-- here we need to get the titles in sorting -->
+                                        <div class="form-group" ng-if="frontDesk">
+                                            <label for="degree" class="control-label"
+                                                style=" margin-top: 15px;">Title:</label>
+                                            <select class="form-control" id="degree" placeholder="Title" name="degree"
+                                                ng-model="contactDetail.degree">
+                                                <option ng-repeat="(key,item) in degree " value="{{key}}"
+                                                    ng-selected="key == contactDetail.degree">{{item}}</option>
+                                            </select>
+                                            <span
+                                                ng-if="!contactDetail.centername && contactDetails.degree.$error.required"
+                                                class="help-block" style="color:maroon">Either first name, last name &
+                                                tltle or site is required</span>
+                                        </div>
+
+
+                                        <div class="form-group" ng-class="!contactDetail.centername? 'required':''"
+                                            ng-if="!frontDesk">
+                                            <label for="officeadminTitle" class="control-label"
+                                                style=" margin-top: 15px;">Title:</label>
+                                            <select class="form-control" id="officeadminTitle" placeholder="Title"
+                                                name="officeadminTitle" sortable="true"
+                                                ng-model="contactDetail.officeadminTitle"
+                                                ng-required="!contactDetail.centername">
+                                                <option ng-repeat="(key,item) in officeadminTitleArr " value="{{key}}"
+                                                    ng-selected="key == contactDetail.officeadminTitle">{{item}}
+                                                </option>
+                                            </select>
+                                            <span ng-if="contactDetails.officeadminTitle.$error.required"
+                                                class="help-block" style="color:maroon">Either first name, last name &
+                                                tltle or site is required</span>
+                                        </div>
+                                        <div class="form-group" ng-class="(!contactDetail.firstname) ? 'required':''">
+                                            <label class="control-label" style=" margin-top: 15px;">Site :</label>
+
+                                            <input type="text" class="form-control" id="centername"
+                                                placeholder="Enter practice or center name" name="centername"
+                                                ng-pattern="/^[a-zA-Z ,'-\s]*$/" ng-model="contactDetail.centername"
+                                                ng-required="!contactDetail.firstname">
+                                            <span
+                                                ng-if="!contactDetail.firstname && !contactDetail.lastname && contactDetails.centername.$error.required "
+                                                class="help-block" style="color:maroon" required>Either first name, last
+                                                name & tltle or site is required</span>
+                                            <span class="" ng-show="contactDetails.centername.$error.pattern"
+                                                style="color:maroon">Site should not contain digit.</span>
+
+                                        </div>
+                                        <div class="form-group" style=" padding-top: 23px;">
+                                            <label for="sute" class="control-label" style=" margin-top: 15px;">Address
+                                                Line 2:</label>
+                                            <input type="text" class="form-control" id="sute"
+                                                placeholder="Address Line 2" name="sute" ng-model="contactDetail.sute">
+                                        </div>
+                                        <div class="form-group ">
+                                            <label for="state" class="control-label"
+                                                style=" margin-top: 15px;">State:</label>
+                                            <select class="form-control" id="state" placeholder="State" name="state"
+                                                ng-model="contactDetail.state"
+                                                ng-options="item.abbreviation as item.abbreviation for item in usStates"></select>
+                                            <span ng-if="contactDetails.state.$error.required" class="help-block"
+                                                style="color:maroon">State Required</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="zipcode" class="control-label" style=" margin-top: 15px;">ZIP
+                                                Code:</label>
+                                            <input type="text" maxlength="5" class="form-control" id="zipcode"
+                                                placeholder="ZIP code" name="zipcode" ng-model="contactDetail.zipcode"
+                                                ng-pattern="/^[0-9]{1,6}$/">
+                                            <span ng-if="contactDetails.zipcode.$error.pattern" class="help-block"
+                                                style="color:maroon">Please enter valid ZIP code.</span>
+                                            <span ng-if="contactDetails.zipcode.$error.required" class="help-block"
+                                                style="color:maroon">ZIP Code Required</span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="cell_phone_temp" class="control-label"
+                                                style=" margin-top: 15px;">Mobile Number:</label>
+                                            <select class="form-control faxbtn" id="ccode" placeholder="Fax" name="fax"
+                                                ng-model="contactDetail.ccode">
+                                                <option ng-repeat="item in countryCodes" value="{{item}}"
+                                                    ng-selected="item == contactDetail.ccode">{{item}}</option>
+                                            </select>
+                                            <input type="text" class="form-control custSelect" id="cell_phone_temp"
+                                                name="cell_phone_temp" ng-model="contactDetail.cell_phone_temp"
+                                                ui-mask="999-999-9999">
+                                            <span ng-if="contactDetails.cell_phone_temp.$error.required"
+                                                class="help-block" style="color:maroon">Cellphone Required</span>
+                                        </div>
+
+                                        <div class="form-group " style="position: relative;" ng-if="frontDesk">
+
+                                            <label for="network" class="control-label"
+                                                style="margin-top: 15px;">Insurances Accepted:</label>
+                                            <md-button class="mdInfoBtn" aria-label="Menu with Tooltip Delay"
+                                                style=" margin-top: -40px;background-color: white; float: right; min-width: auto; min-height: auto;">
+                                                <md-tooltip md-delay="demo.delayTooltip">
+                                                    <b><u>HERE IS HOW IT WORKS:</u></b><br /> 1) You can add
+                                                    insurance network here.<br /> 2) The approved insurance will
+                                                    appear in the search list.<br />3) You can add number of insurances.
+                                                </md-tooltip>
+                                                <i class="fa fa-info-circle tooltip-icon ng-scope"></i>
+                                            </md-button>
+
+                                            <!-- <i class="fa fa-search" style="position: absolute;
+                                            z-index: 1;
+                                            right: 15px;
+                                            cursor: pointer;
+                                            top: 30px;
+                                            font-size: 28px;"></i> -->
+
+                                           
+                                            <!-- <ul class="items-list">
+                                                <div style="border:1px solid #ccc;padding-bottom: 65px;"><li style="display:inline-block" ng-repeat="friend in friends | filter: getSelectedItems"><span class="badge" style="    background-color: #e4e4e4;
+                                                   
+                                                    color: #333;
+                                                    border: 1px solid black;
+                                                    border-radius: 3px;">{{friend.name}}</span>&nbsp;</li></div>
+                                            </ul> -->
+
+
+                                            <!-- duplicated -->
+                                            <!-- <ul class="items-list">
+                                                    <div ng-required="true"
+                                                        style="border:1px solid #ccc;padding-bottom: 65px;">
+                                                       
+                                                        <li style="display:inline-block;padding:2px 0px 0px 4px;" ng-repeat="test in contactDetailNetworkData track by $index">
+                                                            <span class="badge"
+                                                                style="background-color: #e4e4e4;color: #333;border: 1px solid #aaaaaa;border-radius: 3px;font-weight: normal;">{{test.name}}</span>&nbsp;
+                                                        </li>
+                                                    </div>
+                                                </ul>-->
+                                                <div class="input-group pad-30-top-admin" style="padding:10px 0 0; min-width: 567px;">
+                                                    <input type="text" placeholder=" Search..." ng-change="getAvailableNetworks(searchTextField)" ng-model="searchTextField" class="super-doc-search-txt form-control">
+                                                </div> 
+                                                <!-- <ui-select ng-required="true" close-on-select="false" multiple sortable="true" name="network" id="network" ng-model="contactDetail.network"
+                                                class="height-auto selectpicker form-control" theme="select2" title="Choose a network">
+                                                <ui-select-match placeholder="Search a Insurance">{{$item.name}}</ui-select-match>
+                                                <ui-select-choices repeat="item._id as item in networkData | filter: $select.search">
+                                                        <div ng-bind-html="item.name | highlight: $select.search"> </div>
+                                                </ui-select-choices>
+                                            </ui-select> -->
+
+
+                                            <div class="navbar-custom-menu clearfix" ng-if="selectedNetwork">
+                                                <ul class="nav navbar-nav preferance-menu custom-float-left" style="width: 567px;background-color: white;
+                                                        color: black;">
+                                                    <li class="custom-display-visible custom_checkbox"
+                                                        style="float: none; margin: 0px;padding: 3px;" id="network"
+                                                        ng-model="contactDetail.network" ng-repeat="item in networkData"
+                                                        value="{{item._id}}">
+                                                        <input type="checkbox" id="{{item._id}}" class="styled-checkbox"
+                                                            data-ng-checked="CheckSelectedValue2(item._id)"
+                                                            ng-model="item.selected" value="{{item._id}}"
+                                                            ng-click="GetValue(item,item.selected )">
+                                                            <label for="{{item._id}}">{{item.name}}</label>
+                                                            
+                                                    </li>
+
+                                                </ul>
+                                                <!-- <span ng-if="contactDetails.network.$error.required" class="help-block ng-scope" style="color:maroon">Please select at least one network</span> -->
+                                            </div>
+                                        </div>
+                                        <div class="form-group" ng-if="frontDesk">
+                                            <label for="newInsurance" class="control-label"
+                                                style=" margin-top: 15px;">Add New / Unlisted Insurance:</label>
+                                            <md-button class="mdInfoBtn" aria-label="Menu with Tooltip Delay"
+                                                style=" margin-top: -35px;background-color: white; float: right; min-width: auto; min-height: auto;">
+                                                <md-tooltip md-delay="demo.delayTooltip">
+                                                    <b><u>HERE IS HOW IT WORKS:</u></b><br /> 1) You can add new /
+                                                    nonlisted
+                                                    insurance network here.<br /> 2) Once approved, the new
+                                                    insurance will
+                                                    appear in the search list.<br />3) Network value can be in comma
+                                                    separated
+                                                    for more than one Insurance network.
+                                                </md-tooltip>
+                                                <i class="fa fa-info-circle tooltip-icon ng-scope"></i>
+                                            </md-button>
+                                            <input type="text" class="form-control" id="newInsurance"
+                                                placeholder="Add New Insurance Networks-value can be in comma separated for more than one"
+                                                name="newInsurance" ng-model="contactDetail.newInsurance">
+                                            <span ng-if="contactDetails.newInsurance.$error.pattern"
+                                                style="color:maroon">Invalid email address</span>
+                                        </div>
+
+                                        <div class="form-group" ng-if="frontDesk">
+                                            <label for="network" class="control-label"
+                                                style="margin-top: 15px; ">Authorized Front Desk Users:</label>
+                                            <ui-select close-on-select="false" multiple sortable="true" name="frontdesk"
+                                                id="frontdesk" ng-model="contactDetail.frontdesk"
+                                                class="height-auto selectpicker form-control" theme="select2"
+                                                title="Choose a front desk admin.">
+                                                <ui-select-match placeholder="Search a front desk user">
+                                                    {{$item.name}}</ui-select-match>
+                                                <ui-select-choices
+                                                    repeat="item._id as item in selectedOfficeAdminArr | filter: $select.search ">
+                                                    <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                                    <small
+                                                        ng-bind-html="item.email | highlight: $select.search"></small>
+                                                </ui-select-choices>
+                                            </ui-select>
+                                            <span ng-if="contactDetails.frontdesk.$error.required" class="help-block"
+                                                style="color:maroon">Please select front desk
+                                                admin.</span>
+                                        </div>
+                                        <div class="form-group" ng-if="frontDesk">
+                                            <label for="newAdmin" class="control-label" style=" margin-top: 15px;">Add
+                                                Front Desk User:</label>
+                                            <md-button class="mdInfoBtn" aria-label="Menu with Tooltip Delay"
+                                                style=" margin-top: -35px;background-color: white; float: right; min-width: auto; min-height: auto;">
+                                                <md-tooltip md-delay="demo.delayTooltip">
+                                                    <!-- <b><u>HERE IS HOW IT WORKS:</u></b><br/> -->
+                                                    1) Type in the e-mail of the new front desk user.<br /> 2) If an
+                                                    account
+                                                    already exists, you will now be able to select your new user
+                                                    from within
+                                                    the Authorized Front Desk User field.<br /> 3) If not, the New
+                                                    User will
+                                                    receive an e-mail to set up an account to become visible in the
+                                                    Authorized
+                                                    Front Desk User field.<br />
+                                                </md-tooltip>
+                                                <i class="fa fa-info-circle tooltip-icon ng-scope"></i>
+                                            </md-button>
+                                            <input type="text" class="form-control" id="newAdmin"
+                                                placeholder="Enter e-mail of New Front Desk User" name="newAdmin"
+                                                ng-model="contactDetail.newAdmin"
+                                                ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9]{1})[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/">
+                                            <span ng-if="contactDetails.newAdmin.$error.pattern"
+                                                style="color:maroon">Invalid email address</span>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <button type="submit" class="btn btn-primary submitBtn"
+                                        style="float: left; width: 100%"
+                                        ng-disabled="contactDetails.$invalid || (contactDetail.user_loc[0] == defaultLocation[0] && contactDetail.user_loc[1] == defaultLocation[1])">Submit</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

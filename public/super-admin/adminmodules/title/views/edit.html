@@ -1,0 +1,39 @@
+<div class="content-wrapper">
+    <section class="">
+        <div class="container">
+            <h3>Edit Service</h3>
+            <form class="form-horizontal" name="form">
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd" style="text-align:center">CPT Code :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="CPT Code" name="serviceCode" ng-pattern="/^[A-Z0-9\s]*$/" ng-model="editService.serviceCode" style="width:630px;" ng-maxlength="5" maxlength="6" required>
+                        <span ng-if="form.serviceCode.$touched && form.serviceCode.$dirty && form.serviceCode.$error.required" class="help-block" style="color:maroon">CPT code required</span>
+                        <span class="" ng-show="form.serviceCode.$error.pattern" style="color:maroon">CPT code contain digit or capital letter.</span>
+                        <span class="" ng-show="form.serviceCode.$error.maxlength" style="color:maroon">Maximum length of CPT code is 5.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd" style="text-align:center">Service Name :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Service name" name="serviceName" ng-pattern="/^[a-zA-Z '\s]*$/" ng-model="editService.serviceName" style="width:630px;">
+                        <span ng-if="form.serviceName.$touched && form.serviceName.$dirty && form.serviceName.$error.required" class="help-block" style="color:maroon" required>Service name required</span>
+                        <span class="" ng-show="form.serviceName.$error.pattern" style="color:maroon">Service name does not contain digit.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd" style="text-align:center">Description :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Description" name="serviceDescription" ng-pattern="/^[a-zA-Z0-9\s,'-.]*$/" ng-model="editService.serviceDescrip" style="width:630px;">
+                        <span ng-show="form.serviceDescription.$touched && form.serviceDescription.$error.required && form.serviceDescription.$dirty" class="help-block" style="color:maroon" required>Description is Required</span>
+                        <span ng-if="form.serviceDescription.$error.pattern" style="color:maroon">Description does not contain special character</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-4">
+                        <a href="#/admindashboard"><button type="button" class="btn btn-primary" >Back to dashboard</button></a>
+                        <button type="submit" class="btn btn-primary" ng-click="updateService(editService); done = true;" ng-disabled="form.$invalid || done">Click to update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>

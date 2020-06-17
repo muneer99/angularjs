@@ -1,0 +1,45 @@
+<style>
+    .pdf_table table td {
+        border: none !important;
+    }
+    
+    .pdf_table .from-input {
+        float: none !important;
+        width: 100% !important;
+    }
+    
+    .pdf_table .form-group .from-label {
+        text-align: left !important;
+        width: auto !important;
+    }
+</style>
+<div class="login-box" ng-controller="homeController">
+    <div class="login-logo">
+        <a href="/#"><img src="./../../assets/images/logo_new.png" alt="logo" /></a>
+    </div>
+
+
+    <div class="login-box-body">
+        <h2 class="login-box-msg">Existing Member</h2>
+        <form name='loginForm' id='loginform' novalidate ng-submit="existMember(id);" autocomplete="off" >
+            <div>That email is already on file. To send a password to that email, click 'Send Password'</div>
+            <div class="form-group has-feedback">
+                <!-- <input type="email" tabindex="1" class="form-control" placeholder="Email@example.com" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@([a-zA-Z0-9]{1})[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" ng-model="user.email" name="email" required> -->
+                <!-- <span class="glyphicon glyphicon-envelope form-control-feedback"></span> -->
+                <!-- <span ng-show="loginForm.email.$touched && loginForm.email.$error.required && loginForm.email.$dirty" class="help-block" style="color:maroon">Please Enter Your Email</span> -->
+                <!-- <span ng-if="loginForm.email.$error.pattern" style="color:maroon">Invalid email address</span> -->
+            </div>
+
+            <div class="row">
+
+            </div>
+            <div class="">
+                <button type="submit" tabindex="2" class="btn btn-primary btn-block btn-flat" >Send Password<i class="fa fa-spinner fa-spin" ng-if="loader"></i></button>
+            </div>
+    </div>
+    </form>
+
+    <br>
+</div>
+
+</div>

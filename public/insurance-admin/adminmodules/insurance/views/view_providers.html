@@ -1,0 +1,30 @@
+<div class="content-wrapper">
+    <section class="">
+        <div class="container" ng-init="getAvailableProviders();getInsProviders()">
+            <h3>{{pageTitle}}</h3>
+            <form class="form-horizontal" name="form">
+               <div class="form-group">
+                    <label class="control-label col-sm-3" for="" style="text-align:left">Select Provider :</label>
+                    <div class="col-sm-8" style="padding-left: 14px; padding-right: 14px;">
+                       <ui-select close-on-select="false" multiple sortable="true" name="insprovider" id="insprovider" ng-model="network.insprovider"
+                            class="formSelect2 height-auto selectpicker form-control" tabindex="1" theme="select2" title="Choose a provider">
+                            <ui-select-match placeholder="Search a provider"> ({{$item.firstname}}) {{$item.email}}</ui-select-match>
+                            <ui-select-choices repeat="item._id as item in providerData | filter: $select.search">
+                                <div ng-bind-html="item.email | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span ng-show="network.insprovider.$touched && network.insprovider.$error.required && network.insprovider.$dirty" class="help-block"
+                            style="color:maroon" required>Select at least one specialty</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="" style="text-align:left"></label>
+                    <div class="col-sm-8">
+                        <a href="#/admindashboard"><button type="button" class="btn btn-primary" >Back to dashboard</button></a>
+                        <button type="submit" class="btn btn-primary" ng-click="updateProviders(network); done=true" ng-disabled="form.$invalid || done">{{btnTitle}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>

@@ -1,0 +1,24 @@
+<md-dialog aria-label='patient' style='width: 60%; height:75%' >
+  <md-toolbar>
+    <div class='md-toolbar-tools'>
+      <h2 class='ng-binding'>{{helpTitle | capitalize}}</h2>
+      <span flex></span>
+      <md-button class='md-icon-button' ng-click='cancel()'> 
+        <md-icon aria-label='Close dialog'><i class='fa fa-times' aria-hidden='true'></i></md-icon>
+      </md-button>
+    </div> 
+  </md-toolbar>
+  <md-dialog-content layout-padding >
+    <div class='ng-binding' style='font-family: serif;padding: 15px;font-size: larger;' ng-bind-html="helpDescription"></div>
+    <div ngIf="youtubeLink">
+      <ng-youtube-embed 
+          video="youtubeLink" 
+          autoplay="false"
+          color="white"
+          disablekb="true"
+          width="100%">
+      </ng-youtube-embed>
+    </div>
+  </md-dialog-content>
+  <md-dialog-actions></md-dialog-actions>
+</md-dialog>

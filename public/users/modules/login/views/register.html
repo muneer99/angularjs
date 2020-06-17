@@ -1,0 +1,69 @@
+<style>
+.pdf_table table td {
+    border: none !important;
+}
+
+.pdf_table .from-input {
+    float: none !important;
+    width: 100% !important;
+}
+
+.pdf_table .form-group .from-label {
+    text-align: left !important;
+    width: auto !important;
+}
+</style>
+
+<body class="hold-transition skin-blue sidebar-mini">
+    <div class="register-box">
+        <div class="register-logo">
+            <a href="/#"><img src="./../../assets/images/logo_new.png" alt="logo"></a>
+        </div>
+        <div class="register-box-body">
+            <h2 class="login-box-msg">Sign Up</h2>
+            <p style="color:#3EB8D7; font-size: 12px;"> <strong>Note: </strong> You will receive a temporary password on your registered email after successfull registration. Use that password to login and system will ask you to update password after your first login.</p>
+            <form name="registerForm" id='registerForm' ng-submit="register(user)" autocomplete="off">
+                <div class="form-group required">
+                    <input type="text" tabindex="2" class="form-control" id="firstName" placeholder="First Name" name="firstName" ng-model="user.firstname" ng-pattern="/^[a-zA-Z '-\s]*$/" required>
+                    <span ng-if="registerForm.firstName.$touched && registerForm.firstName.$dirty && registerForm.firstName.$error.required" class="help-block" style="color:maroon">First Name Required</span>
+                    <span class="" ng-show="registerForm.firstName.$error.pattern" style="color:maroon">First name should not contain digit or special character.</span>
+                </div>
+                <div class="form-group required">
+                     
+                    <input type="text" tabindex="3" class="form-control" id="lastName" placeholder="Last Name" name="lastName" ng-model="user.lastname" ng-pattern="/^[a-zA-Z '-\s]*$/" required>
+                    <span ng-if="registerForm.lastName.$touched && registerForm.lastName.$dirty && registerForm.lastName.$error.required" class="help-block" style="color:maroon">Last Name Required</span>
+                    <span class="" ng-show="registerForm.lastName.$error.pattern" style="color:maroon">Last name should not contain digit or special character.</span>
+                    
+                </div>                
+                <div class="form-group">
+                    <input type="email" tabindex="4" class="form-control" name="emails" placeholder="Email@example.com" ng-model="user.email" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/" required>
+                    <span ng-if="registerForm.emails.$touched && registerForm.emails.$error.required && registerForm.emails.$dirty" class="help-block">Please Enter Your Email</span>
+                    <span ng-if="registerForm.email.$error.required">The email address is required</span>
+                    <span ng-if="registerForm.emails.$error.pattern" style="color:maroon">Pattern does not matched</span>
+                </div>
+                <div class="row">
+                    <!--<div class="col-xs-7">
+                        <div class="login-checkbox icheck">
+                            <label>
+                                <input type="checkbox" tabindex="5" ng-model="isChecks"> I agree to the <a href="#">terms</a>
+                            </label>
+                        </div>
+                    </div>-->
+                    <!-- /.col -->
+                    <div class="col-xs-12">
+                        <button type="submit" tabindex="6" class="btn btn-primary btn-block btn-flat" ng-disabled="registerForm.$invalid || user.password != user.repassword">Register</button>
+                    </div>
+                    <!-- /.col -->
+                </div>
+            </form>
+            <p><a ui-sref="home" class="text-center col-sm-12">I already have a membership</a></p>
+        </div>
+        <!-- /.form-box -->
+    </div>
+    <!-- Main Footer -->
+    <footer class="main-footer text-center">Which Docs Copyrights ©{{currentYear}} . All Rights Reserved. </footer>
+    </div>
+</body>
+
+</html>
+

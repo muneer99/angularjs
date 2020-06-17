@@ -1,0 +1,224 @@
+<style>
+    #preloader {
+        z-index: 11111;
+    }
+</style>
+
+<div class="content-wrapper">
+    <section class="">
+        <!-- getInsProviders() -->
+        <div class="container" ng-init="getAvailableProvidersUnAssociatedInsurance();">
+            <h3>{{pageTitle}}</h3>
+            <form class="form-horizontal" name="form">
+
+                <!-- minimum-input-length = "2" -->
+
+                <div class="form-group">
+                    <label class="control-label  col-sm-3" for="" style="text-align:left">Select Unassociated Provider :</label>
+                    <div class="col-sm-8">
+                        <ui-select close-on-select="false" multiple sortable="true" name="provider" id="provider" ng-model="networkTe.selectesList"
+                            class="formSelect2 height-auto selectpicker form-control" tabindex="1" theme="select2" title="Choose a provider">
+                            <ui-select-match placeholder="Search a provider">{{$item.fullname}}</ui-select-match>
+                            <ui-select-choices refresh="getAvailableProvidersUnAssociatedInsuranceRepeat($select.search, network.selectesList)" refresh-delay="0"
+                                minimum-input-length="3" repeat="item._id as item in providerData | filter: { fullname: $select.search} | limitTo: 20">
+                                <div ng-bind-html="item.fullname | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                        <span ng-show="networkTe.selectesList.$touched && networkTe.selectesList.$error.required && networkTe.selectesList.$dirty"
+                            class="help-block" style="color:maroon" required>Select at least one network</span>
+                    </div>
+                </div>
+                <!-- <span>test:</span> <p>{{$select}} -- {{network.insproviderr}} -- {{$item}}</p> 
+                ng-disabled="enableSave(networkTe.selectesList)"
+                -->
+
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="" style="text-align:left"></label>
+                    <div class="col-sm-8">
+                        <a href="#/insurance"><button type="button" class="btn btn-primary" >Back to Insurance List</button></a>
+                        <button type="submit" class="btn btn-primary" ng-click="updateProvidersUnlisted(networkTe); " ng-disabled="form.$invalid">{{btnTitle}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- </div> -->
+
+        <!-- Content Wrapper. Contains page content -->
+        <!-- <div class="content-wrapper"> -->
+        <section class="content">
+            <!-- Your Page Content Here getDoctorsList() 
+        getAvailableAllProviders; getInsProviders(); getAvailableServices(); getAvailableNetwork()
+        -->
+            <div class="row" ng-init="getAssociatedAllProviders(); getAvailableServices();">
+                <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="box">
+                        <div class="box-header with-border super-patient-header">
+                            <div class="row">
+                                <div class="col-lg-2 col-md-12 col-sm-12 col-xs-12">
+                                    <h3 class="box-title"><span class="latest-c-icon"><img src="../assets/images/latest_order_icon.png" alt=""/></span>Associated
+                                    Provider's List  
+                                    </h3>
+                                </div>
+                                <div class="col-lg-10 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row form-control-margin-top">
+                                        <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 text-right">
+                                            <!-- <button class="btn btn-success sup-add-doc" ui-sref="add-doctor"> <i class="icon-1x fa fa-plus" aria-hidden="true"></i>Add Provider</button> -->
+                                        </div>
+
+                                        <div class="col-lg-4 col-md-4 col-sm-7 col-xs-12 text-right margin-top-5">
+                                            <input type="file" accept=".xls, .xlsx" style="display:none" id="docList" name="docList" fileread="" opts="data" multiple="false"
+                                                required/>
+                                            <!-- <button class="btn btn-success sup-import-doc" onclick="document.getElementById('docList').click();"><i class="icon-1x fa fa-plus" aria-hidden="true"></i> Import provider list</button> -->
+                                            <!-- <p class="help-block" style="display:block;"><a ng-href="../images/provider-sample.xlsx" target="_blank">Click to download sample file. </a></p> -->
+                                        </div>
+                                        <!-- <div class="col-lg-4 col-md-4 col-sm-5 col-xs-12 text-right" ng-if="exportBtn">
+                                        <div excel-export export-data="exportData" file-name="{{fileName}}" style="float: right;"></div>
+                                    </div> -->
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <!-- <ui-select close-on-select="false" multiple sortable="true" name="network" id="network" ng-model="doctor.network" class="height-auto selectpicker form-control"
+                                    tabindex="1" theme="select2" style="float: left; width: 360px">
+                                    <ui-select-match placeholder="Select network">{{$item.name}}</ui-select-match>
+                                    <ui-select-choices repeat="item._id as item in networkData | filter: $select.search">
+                                        <div ng-bind-html="item.name | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select> -->
+                                    <ui-select close-on-select="false" multiple sortable="true" name="specialty" id="specialty" ng-model="doctor.specialty" class="height-auto selectpicker form-control"
+                                        tabindex="2" theme="select2" style="float: left; width: 360px">
+                                        <ui-select-match placeholder="Select specialty">{{$item.specialityName}}</ui-select-match>
+                                        <ui-select-choices repeat="item._id as item in specialityData | filter: $select.search">
+                                            <div ng-bind-html="item.specialityName | highlight: $select.search"></div>
+                                        </ui-select-choices>
+                                    </ui-select>
+                                    <!-- <ui-select close-on-select="false" multiple sortable="true" name="service" id="service" ng-model="doctor.service" class="height-auto selectpicker form-control"
+                                    tabindex="3" theme="select2" style="float: left; width: 300px">
+                                    <ui-select-match placeholder="Select service">{{$item.serviceName}}</ui-select-match>
+                                    <ui-select-choices repeat="item._id as item in serviceData | filter: $select.search">
+                                        <div ng-bind-html="item.serviceName | highlight: $select.search"></div>
+                                    </ui-select-choices>
+                                </ui-select> -->
+                                    <div class="clearfix"></div>
+                                    <div class="input-group pad-30-top-admin" style="max-width: 882px; margin-left: 10px;">
+                                        <input style="width:60%;" type="text" placeholder=" Search..." ng-model="doctor.searchTextField" class="super-doc-search-txt form-control">
+                                        <select style="width:37%; margin-left:10px;" ng-model="doctor.emailtype" class="super-doc-search-txt form-control">
+                                        <option value="all" selected="selected" >All</option>
+                                        <option value="with_mail">Providers with email</option>
+                                        <option value="without_mail">Providers with out email</option>
+                                    </select>
+                                        <span class="input-group-btn">
+                                        <button class="btn btn-primary sup-doc-search-icon" style="margin-left: 5px;" ng-click="searchableInsurance(doctor)">Search</button>
+                                        <button class="btn btn-primary sup-doc-search-icon" style="margin-left: 5px;" ng-click="resetSearch()">reset</button>
+                                        
+                                    </span>
+                                    </div>
+                                    <div class="input-group pad-30-top-admin" style=" margin: 10px;display: block;">
+                                        <form class="form-horizontal" name="sendForm">
+                                            <!-- <div class="clearfix"></div> -->
+                                            <!-- <div class="input-group pad-30-top-admin" style="max-width: 882px; margin-left: 10px;"> -->
+                                            <input style="width:20%; display: inline-block; margin-right: 5px;" type="text" placeholder=" Sender's Name..." ng-model="user.fromName"
+                                                class="super-doc-search-txt form-control">
+                                            <!-- <input style="width:20%; display: inline-block" type="text" placeholder="Sender's Email..." ng-model="user.fromEmail" class="super-doc-search-txt form-control"> -->
+
+                                            <input style="width:20%; display: inline-block" type="text" class="form-control" id="" placeholder="Sender's Email..." ng-model="user.fromEmail"
+                                                name="fromEmail" ng-pattern="/^[_a-zA-Z0-9-]+(\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,4})$/"
+                                                ng-model="user.fromEmail" ng-required>
+                                            <span ng-show="sendForm.fromEmail.$touched && sendForm.fromEmail.$error.required && sendForm.fromEmail.$dirty" class="help-block"
+                                                style="color:maroon" required>Either email or fax number is required.</span>
+                                            <span ng-if="sendForm.fromEmail.$error.pattern" style="color:maroon">Invalid email address</span>
+
+
+
+                                            <button class="btn btn-primary sup-doc-search-icon display: inline-block" style="margin-left: 5px;font-size: 14px;padding: 6px;"
+                                                ng-click="sendEmail(user)">Send Email</button>
+                                            <!-- <button class="btn btn-primary sup-doc-search-icon display: inline-block" style="margin-left: 5px;font-size: 14px;padding: 6px;"
+                                                ng-click="sendEmail(user)">verified</button> -->
+
+                                            <div style="float:right; margin-top: 10px;"> <input type="checkbox" ng-click="selectAll()" ng-model="isAllSelected"> De/Select
+                                                All
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body" style="margin-top: auto;">
+                            <div style="position: absolute;top: 50%;left: 50%; z-index: 1000;" ng-if="loading">
+                                <i class='fa fa-refresh fa-spin fa-3x' style="color: #3eb8d7;"></i>
+                            </div>
+
+
+                            <div class="table-responsive min-margin-15">
+
+                                <table ng-table="tableParams" class="table table-striped" show-filter="true">
+                                    <tr>
+                                            <td title="'Provider First Name'" sortable="'insfirstname'"></td>
+                                            <td title="'Provider Last Name'" sortable="'inslastname'"></td>
+                                            <td title="'Provider Npi'" sortable="'doctorsNPI'"></td>
+                                            <td title="'Site'" sortable="'centername'"></td>
+                                            <td title="'Email'" sortable="'email'"></td>
+                                            <td title="'Office Phone'" sortable="'phone_number'"></td>
+                                            <td title="'Invited By'" sortable="'created_by'"></td>
+                                            <td title="'Select Providers'" sortable="'firstLogin'"></td>
+                                            <td title="'Actions'"></td>
+                                    </tr>
+                                    <tr ng-repeat="user in doctorList">
+                                        <!-- {{user}} -->
+                                        <td title="'Provider First Name'" sortable="'insfirstname'">
+                                            {{user.firstname}}</td>
+                                        <td title="'Provider Last Name'" sortable="'inslastname'">
+                                            {{user.lastname}}</td>
+                                        <td title="'Provider Npi'" sortable="'doctorsNPI'">
+                                            {{user.doctorsNPI}}</td>
+                                        <td title="'Site'" sortable="'centername'">
+                                            {{user.centername}}</td>
+                                        <td title="'Email'" sortable="'email'">
+                                            {{user.email}}</td>
+                                        <td title="'Office Phone'" sortable="'phone_number'">
+                                            {{user.phone_number |phonenumber}}</td>
+                                        <td title="'Invited By'" sortable="'created_by'">
+                                            {{user.created_by}}</td>
+                                        <td title="'Select Providers'" sortable="'firstLogin'">
+                                            <input type="checkbox" ng-model="user.selected" value="{{user._id}}" ng-change="optionToggled()">
+                                        </td>
+                                        <!-- <td title="'Actions'">
+                                            <span title="{{ user.status ==='1' ? 'Un-verified' : 'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, user.status)"><i ng-class="user.status ==='1'? 'icon-1x fa fa-remove': 'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span>
+                                       </td>  -->
+                                        <td title="'Actions'" >
+                                            <span title="{{ user.user_network[0].userNetworkInfo.status ==='1' ? 'Un-verified' : 'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, user.user_network[0].userNetworkInfo.status)"><i ng-class="user.user_network[0].userNetworkInfo.status ==='1'? 'icon-1x fa fa-remove': 'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span>
+                                       </td> 
+                                       <!-- 'Total Data'{{user.user_network[0]}} -->
+                                        <!-- <td title="'Actions'" ng-repeat="item in user.user_network[0].userNetworkInfo"> -->
+                                               <!-- Total Item{{item}}  -->
+                                               <!-- <span ng-if=' item.network == paramUrl.network[0]' title="{{ item.status == '1' ? 'Un-verified' : 'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, item.status)"><i ng-class="item.status == 1 ? 'icon-1x fa fa-remove': 'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a> </span> -->
+                                                <!-- <span ng-if='item.network != paramUrl.network[0]' title="{{ 'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, '1')"><i ng-class="'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span> -->
+                                                <!-- <span title="{{ 'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, '1')"><i ng-class="'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span> -->
+
+                                               <!-- {{user._id}} {{item}} ,{{item.length}}, {{item[0].status}},{{item[0].network}},{{paramUrl.network[0]}} -->
+                                                <!-- <span ng-if=' item.length > 0 && (item[0].network == paramUrl.network[0])' title="{{ item[0].status == '1' ? 'Un-verified' : 'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, item[0].status)"><i ng-class="item[0].status == 1 ? 'icon-1x fa fa-remove': 'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span> -->
+                                                <!-- <span ng-if=' item.length > 0 && (item[0].network != paramUrl.network[0])' title="{{ 'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, '1')"><i ng-class="'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span> -->
+                                               <!-- <span ng-if='item.length == 0' title="{{'Verified'}}" title="Change Status"><a href="javascript:void(0)" ng-click="changeNetworkProviderStatus(user._id, '1')"><i ng-class="'icon-1x fa fa-check'" aria-hidden="true" style="font-size:2em"></i></a></span> -->
+                                       <!-- </td>   -->
+                                    </tr>
+                                    <tr ng-if="tableLoader">
+                                        <td colspan="9" align="center">
+                                            <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
+                                        </td>
+                                    </tr>
+                                    <tr ng-if="doctorList.length == 0 && !tableLoader">
+                                        <td colspan="9" align="center">No record Found</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+</div>

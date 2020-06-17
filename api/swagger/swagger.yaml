@@ -1,0 +1,5507 @@
+swagger: "2.0"
+info:
+  version: "0.0.1"
+  title: Which Docs
+# during dev, should point to your local machine
+host: localhost:5068
+# host: 52.39.212.226:5068
+# host: 52.39.212.226:5068
+# host: 172.10.89.18:8003
+# host: 52.39.212.226:5068 
+# host: localhost:8003
+# basePath prefixes all resource paths 
+basePath: /
+# 
+schemes:
+  # tip: remove http to make production-grade
+  - http
+  - https
+# format of bodies a client can send (Content-Type)
+consumes:
+  - application/json
+# format of the responses to the client (Accepts)
+produces:
+  - application/json
+paths:
+  /api/userRegister:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User Sign Up
+      summary:  User Sign Up
+      # used as the method name of the controller
+      operationId: userRegister
+      parameters:
+        - name: body
+          in: body
+          description:  User Sign Up
+          schema:
+           $ref: '#/definitions/userRegister'
+          required: false        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"     
+  /api/userLogin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User Sign In
+      summary: User Sign In
+      # used as the method name of the controller
+      operationId: userLogin
+      parameters:
+        - name: body
+          in: body
+          description: User Sign In
+          schema:
+           $ref: '#/definitions/userLogin'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/validateFrontDeskAccess:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Auth Module']
+      description: loginas 
+      summary: User Sign In
+      # used as the method name of the controller
+      operationId: validateFrontDeskAccess
+      parameters:
+        - name: body
+          in: body
+          description: User Sign In
+          schema:
+           $ref: '#/definitions/validateFrontDeskAccess'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/validateTokenAccess:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Auth Module']
+      description: loginasuser 
+      summary: User Sign In
+      # used as the method name of the controller
+      operationId: validateTokenAccess
+      parameters:
+        - name: body
+          in: body
+          description: User Sign In
+          schema:
+           $ref: '#/definitions/validateTokenAccess'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/updatePassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User change pass
+      summary: User change pass
+      # used as the method name of the controller
+      operationId: updatePassword
+      parameters:
+        - name: body
+          in: body
+          description: User change pass
+          schema:
+           $ref: '#/definitions/updatePassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/resetPassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User change pass
+      summary: User change pass
+      # used as the method name of the controller
+      operationId: resetPassword
+      parameters:
+        - name: body
+          in: body
+          description: User change pass
+          schema:
+           $ref: '#/definitions/resetPassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/forgotPassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: Forgot Password
+      summary: Forgot Password
+      # used as the method name of the controller
+      operationId: forgotPassword
+      parameters:
+        - name: body
+          in: body
+          description: Forgot Password
+          schema:
+           $ref: '#/definitions/forgotPassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                
+  /api/adminLogin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['User Module']
+      description: Admin Sign In
+      summary:  Admin Sign In
+      # used as the method name of the controller
+      operationId: adminLogin
+      parameters:
+        - name: body
+          in: body
+          description:  Admin Sign In
+          schema:
+           $ref: '#/definitions/adminLogin'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"    
+  /api/insuranceLogin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Insurance Module']
+      description: Insurance Admin Sign In
+      summary:  Admin Sign In
+      # used as the method name of the controller
+      operationId: insuranceLogin
+      parameters:
+        - name: body
+          in: body
+          description:  Admin Sign In
+          schema:
+           $ref: '#/definitions/insuranceLogin'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                
+  /api/existMember:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: User existMember
+      summary: User existMember
+      # used as the method name of the controller
+      operationId: existMember
+      parameters:
+        - name: body
+          in: body
+          description:  Admin Sign In
+          schema:
+           $ref: '#/definitions/existMember'
+          required: true       
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                             
+  /api/userLogOut:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['Auth Module']
+      description: User Log Out
+      summary: User Log Out
+      # used as the method name of the controller
+      operationId: userLogOut
+      parameters:
+        - name: body
+          in: body
+          description:  User Log Out
+          schema:
+           $ref: '#/definitions/userLogOut'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"      
+  /api/loggedin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    get:
+      tags: ['Admin Module']
+      description: To check admin loggedin or not
+      summary: To check admin loggedin or not
+      # used as the method name of the controller
+      operationId: loggedin   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"    
+  /api/loggedinInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    get:
+      tags: ['Admin Module']
+      description: To check insurance admin loggedin or not
+      summary: To check insurnce admin loggedin or not
+      # used as the method name of the controller
+      operationId: loggedinInsurance   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"               
+  /userActivation/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: auth_ctrl
+    get:
+      tags: ['Auth Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: userActivation
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Add New User
+      summary:  Add New User
+      # used as the method name of the controller
+      operationId: addUser
+      parameters:
+        - name: body
+          in: body
+          description:  Add New User
+          schema:
+           $ref: '#/definitions/addUser'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/migrateData:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Add New User
+      summary:  Add New User
+      # used as the method name of the controller
+      operationId: migrateData
+      parameters:
+        - name: body
+          in: body
+          description:  Add New User
+          schema:
+           $ref: '#/definitions/migrateData'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/registerUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Register Outside provider as User
+      summary:  Register Outside provider as User
+      # used as the method name of the controller
+      operationId: registerUser
+      parameters:
+        - name: body
+          in: body
+          description:  Register Outside provider as User
+          schema:
+           $ref: '#/definitions/registerUser'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                         
+  /api/getUserDetails:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User Details By Id
+      summary: Get User Details By Id
+      # used as the method name of the controller
+      operationId: getUserDetails
+      parameters:
+        - name: body
+          in: body
+          description: Get User Details By Id
+          schema:
+           $ref: '#/definitions/getUserDetails'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getUserRegStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User Profile Details By Id
+      summary: Get User profile Details By Id
+      # used as the method name of the controller
+      operationId: getUserRegStatus
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getUserProfile:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User Profile Details By Id
+      summary: Get User profile Details By Id
+      # used as the method name of the controller
+      operationId: getUserProfile
+      parameters:
+        - name: body
+          in: body
+          description: Get User Details By Id
+          schema:
+           $ref: '#/definitions/getUserProfile'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+  /api/updateProfile:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Update User Profile Info
+      summary: Update User Profile Info
+      # used as the method name of the controller
+      operationId: updateProfile
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/updateProfile'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/changePass:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Update User Profile Info
+      summary: Update User Profile Info
+      # used as the method name of the controller
+      operationId: changePass
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/changePass'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/changePassAdmin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Update User Profile Info
+      summary: Update User Profile Info
+      # used as the method name of the controller
+      operationId: changePassAdmin
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/changePassAdmin'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/sendMail:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['User Module']
+      description: send mail
+      summary: Update User Profile Info
+      # used as the method name of the controller
+      operationId: sendMail      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/sendSms:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['User Module']
+      description: send mail
+      summary: Update User Profile Info
+      # used as the method name of the controller
+      operationId: sendSms      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteAttachment:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['User Module']
+      description: send mail
+      summary: Update User Profile Info
+      # used as the method name of the controller
+      operationId: deleteAttachment      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Sets User Profile deleted to true
+      summary: Performs soft delete
+      # used as the method name of the controller
+      operationId: deleteUser
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/deleteUser'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/delDetails:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['User Module']
+      description: Sets User Profile deleted to true
+      summary: Performs soft delete
+      # used as the method name of the controller
+      operationId: delDetails
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Sets User Profile
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateUser
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/updateUser'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateUserEmail:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Sets User Profile
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateUserEmail
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/updateUserEmail'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Sets User Profile
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/updateStatus'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateNetworkProviderStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Sets User Profile
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateNetworkProviderStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/updateNetworkProviderStatus'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/updateProviderNetwork:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Update provider with in network
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateProviderNetwork
+      parameters:
+        - name: body
+          in: body
+          description: Update provider with in network
+          schema:
+           $ref: '#/definitions/updateProviderNetwork'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateProviderNetworkUnlisted:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Update provider with in network
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateProviderNetworkUnlisted
+      parameters:
+        - name: body
+          in: body
+          description: Update provider with in network
+          schema:
+           $ref: '#/definitions/updateProviderNetworkUnlisted'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/updatePatientStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: Sets Patient Profile acitvated/deactivated
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updatePatientStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update Patient Profile Info
+          schema:
+           $ref: '#/definitions/updatePatientStatus'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateUserLocation:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Update User Location
+      summary: Update User Location
+      # used as the method name of the controller
+      operationId: updateUserLocation
+      parameters:
+        - name: body
+          in: body
+          description: Update User Location
+          schema:
+           $ref: '#/definitions/updateUserLocation'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/updateUserPic:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Update User Profile Pic
+      summary: Update User Profile Pic
+      # used as the method name of the controller
+      operationId: updateUserPic
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+        - binary
+      parameters:
+        - in: formData
+          name: id
+          description: User id
+          type: string
+          required: true                
+        - in: formData
+          name: file
+          description: Update User Profile Pic
+          type: file
+          required: true                      
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/changePassword:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Change User Password
+      summary: Change User Password
+      # used as the method name of the controller
+      operationId: changePassword
+      parameters:
+        - name: body
+          in: body
+          description: Change User Password
+          schema:
+           $ref: '#/definitions/changePassword'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+  /api/getUserList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    get:
+      tags: ['User Module']
+      description: Get Users List
+      summary: Get Users List
+      # used as the method name of the controller
+      operationId: getUserList
+      parameters:
+        - name: page
+          in: query
+          description: Get Users List
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getFrontDeskAdmin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    get:
+      tags: ['User Module']
+      description: Get Users List
+      summary: Get Users List
+      # used as the method name of the controller
+      operationId: getFrontDeskAdmin
+      parameters:
+        - name: page
+          in: query
+          description: Get Users List
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/providerList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    get:
+      tags: ['User Module']
+      description: Get Users List
+      summary: Get Users List
+      # used as the method name of the controller
+      operationId: providerList
+      parameters:
+        - name: page
+          in: query
+          description: Get Providers list both doctors and anclillary providers
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                    
+  /api/getDashboardList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: dashboard_ctrl
+    get:
+      tags: ['Dashboard Module']
+      description: To show services list at PR pages
+      summary: To show all services at PR pages
+      # used as the method name of the controller
+      operationId: getDashboardList   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getCounts:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    get:
+      tags: ['Dashboard Module']
+      description: To show services list at PR pages
+      summary: To show all services at PR pages
+      # used as the method name of the controller
+      operationId: getCounts   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getDashboardItem:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: dashboard_ctrl
+    post:
+      tags: ['Dashboard Module']
+      description: To show service at PR pages
+      summary: To show service at PR pages
+      # used as the method name of the controller
+      operationId: getDashboardItem
+      parameters:
+        - name: itemData
+          in: body
+          description: Success
+          schema:
+            $ref: '#/definitions/getDashboardItem'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getCmsPageList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: cms_ctrl
+    get:
+      tags: ['CMS Module']
+      description: Get CMS Page List
+      summary: Get CMS Page List
+      # used as the method name of the controller
+      operationId: getCmsPageList
+      parameters:
+        - name: page
+          in: query
+          description: Get CMS Page List
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getemailPageList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: email_ctrl
+    get:
+      tags: ['Email Templates Module']
+      description: Get Email Template Page List
+      summary: Get Email Template Page List
+      # used as the method name of the controller
+      operationId: getemailPageList
+      parameters:
+        - name: page
+          in: query
+          description: Get CMS Page List
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/UpdateContactDetails:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Service Module']
+      description: updates contact detail of doctor
+      summary: deals with Services
+      # used as the method name of the controller
+      operationId: UpdateContactDetails
+      parameters:
+        - name: body
+          in: body
+          description: udpates service of Doctor
+          schema:
+           $ref: '#/definitions/UpdateContactDetails'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/insertOrUpdateUsernetworks:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Service Module']
+      description: updates contact detail of doctor
+      summary: deals with Services
+      # used as the method name of the controller
+      operationId: insertOrUpdateUsernetworks
+      parameters:
+        - name: body
+          in: body
+          description: udpates service of Doctor
+          schema:
+           $ref: '#/definitions/insertOrUpdateUsernetworks'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/setStatus:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Update doctors Status within the network
+      summary: Update network doctors Status
+      # used as the method name of the controller
+      operationId: setStatus
+      parameters:
+        - name: name
+          in: body
+          description: Update Docotors Status
+          schema:
+            $ref: '#/definitions/setStatus'
+          required: true
+          # type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/setReferralStatus:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Update referral Status 
+      summary: Update referral Status 
+      # used as the method name of the controller
+      operationId: setReferralStatus
+      parameters:
+        - name: name
+          in: body
+          description: Update referral Status
+          schema:
+            $ref: '#/definitions/setReferralStatus'
+          required: true
+          # type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/sendAck:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Update referral Status 
+      summary: Update referral Status 
+      # used as the method name of the controller
+      operationId: sendAck
+      parameters:
+        - name: name
+          in: body
+          description: Update referral Status
+          schema:
+            $ref: '#/definitions/sendAck'
+          required: true
+          # type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addDoctorInNetwork:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Adds a new doctor within the network
+      summary: New Doctor is added.
+      # used as the method name of the controller
+      operationId: addDoctorInNetwork
+      parameters:
+        - name: name
+          in: body
+          description: Add Docotor in List
+          schema:
+            $ref: '#/definitions/addDoctorInNetwork'
+          required: true
+          # type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addNonRegDoc:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Adds a new doctor within the network
+      summary: New Doctor is added.
+      # used as the method name of the controller
+      operationId: addNonRegDoc  
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addNonRegDocInsurance:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Adds OR Update a new doctor within an Insurance
+      summary: New Doctor is added.
+      # used as the method name of the controller
+      operationId: addNonRegDocInsurance  
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/updateNonRegDoc:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Adds a new doctor within the network
+      summary: New Doctor is added.
+      # used as the method name of the controller
+      operationId: updateNonRegDoc  
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getAvailableDoctors:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    get:
+      tags: ['Doctor Module']
+      description: Retrieve all available Doctors in the network
+      summary: available
+      # used as the method name of the controller
+      operationId: getAvailableDoctors
+      parameters:
+        - name: status
+          in: query
+          description: Add Docotor in List
+          # schema:
+          #   $ref: '#/definitions/getAvailableDoctors'
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getPreference:
+    # Doctors APIs
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Retrieve all preference of a user
+      summary: available
+      # used as the method name of the controller
+      operationId: getPreference
+      parameters:
+        - name: body
+          in: body
+          description: user id 
+          schema:
+           $ref: '#/definitions/getPreference'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getPreferenceBySpecialty:
+    # Doctors APIs
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Retrieve all preference of a user
+      summary: available
+      # used as the method name of the controller
+      operationId: getPreferenceBySpecialty
+      parameters:
+        - name: body
+          in: body
+          description: user id 
+          schema:
+           $ref: '#/definitions/getPreferenceBySpecialty'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/setAvailability:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    get:
+      tags: ['Doctor Module']
+      description: Set's Doctors status i.e available||not_available||waiting
+      summary: available
+      # used as the method name of the controller
+      operationId: setAvailability
+      parameters:
+        - name: status
+          in: query
+          description: set Doctor's status
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getLocationId:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Finds user location id google api
+      summary: Finds user location id google api.
+      # used as the method name of the controller
+      operationId: getLocationId  
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addSpeciality:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['speciality Module']
+      description: contains all specility doctors are specialised in
+      summary: deals with speciality
+      # used as the method name of the controller
+      operationId: addSpeciality
+      parameters:
+        - name: body
+          in: body
+          description: sets speciality name
+          schema:
+           $ref: '#/definitions/addSpeciality'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addSpecialityService:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['speciality Module']
+      description: contains all specility doctors are specialised in
+      summary: deals with speciality
+      # used as the method name of the controller
+      operationId: addSpecialityService
+      parameters:
+        - name: body
+          in: body
+          description: sets speciality name
+          schema:
+           $ref: '#/definitions/addSpecialityService'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getSpeciality:
+    # Doctors APIs
+    x-swagger-router-controller: speciality_Ctrl
+    get:
+      tags: ['speciality Module']
+      description: Get all the specialities
+      summary: available
+      # used as the method name of the controller
+      operationId: getSpeciality
+      parameters:
+        - name: id
+          in: query
+          description: get all specialities
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateSpeciality:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['speciality Module']
+      description: updates service of doctor
+      summary: deals with Services
+      # used as the method name of the controller
+      operationId: updateSpeciality
+      parameters:
+        - name: body
+          in: body
+          description: udpates service of Doctor
+          schema:
+           $ref: '#/definitions/updateSpeciality'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updatePatientNotificationStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['speciality Module']
+      description: Sets patient notification acitvated/deactivated for Speciality
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updatePatientNotificationStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update Speciality notification Info
+          schema:
+           $ref: '#/definitions/updatePatientNotificationStatus'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /api/updateService:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Service Module']
+      description: updates service of doctor
+      summary: deals with Services
+      # used as the method name of the controller
+      operationId: updateService
+      parameters:
+        - name: body
+          in: body
+          description: udpates service of Doctor
+          schema:
+           $ref: '#/definitions/updateService'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateNetwork:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Network Module']
+      description: updates network of doctor
+      summary: deals with network
+      # used as the method name of the controller
+      operationId: updateNetwork
+      parameters:
+        - name: body
+          in: body
+          description: udpates network of Doctor
+          schema:
+           $ref: '#/definitions/updateNetwork'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addService:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: service_ctrl
+    post:
+      tags: ['Service Module']
+      description: save all services doctor by Admin
+      summary: deals with Services
+      # used as the method name of the controller
+      operationId: addService
+      parameters:
+        - name: body
+          in: body
+          description: sets service name
+          schema:
+           $ref: '#/definitions/addService'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addNetwork:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: network_ctrl
+    post:
+      tags: ['network Module']
+      description: save insurance netork
+      summary: Add new insurance network
+      # used as the method name of the controller
+      operationId: addNetwork
+      parameters:
+        - name: body
+          in: body
+          description: sets service name
+          schema:
+           $ref: '#/definitions/addNetwork'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getNetworkList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: network_ctrl
+    post:
+      tags: ['Ntework Module']
+      description: Get Network List
+      summary: Get network List
+      # used as the method name of the controller
+      operationId: getNetworkList
+      parameters:
+        - name: body
+          in: body
+          description: Get network List
+          schema:
+           $ref: '#/definitions/getNetworkList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getNetwork/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: network_ctrl
+    get:
+      tags: ['network Module']
+      description: Get network By Id
+      summary: Get network By Id
+      # used as the method name of the controller
+      operationId: getNetwork
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  # /api/getNetwork:
+  #   # binds a127 app logic to a route
+  #   x-swagger-router-controller: network_ctrl
+  #   post:
+  #     tags: ['network Module']
+  #     description: Get network By Id
+  #     summary: Get network By Id
+  #     # used as the method name of the controller
+  #     operationId: getNetwork
+  #     parameters:
+  #       - name: body
+  #         in: body
+  #         schema:
+  #          $ref: '#/definitions/getNetwork'
+  #         description: Get network List
+  #         required: true        
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           # a pointer to a definition
+  #           $ref: "#/definitions/appResponse"
+  #       # responses may fall through to errors
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
+  /api/deleteNetwork:
+    # Doctors APIs
+    x-swagger-router-controller: network_ctrl
+    post:
+      tags: ['netwokr Module']
+      description: delete network
+      summary: delete network
+      # used as the method name of the controller
+      operationId: deleteNetwork
+      parameters:
+        - name: name
+          in: body
+          description: delete network
+          schema:
+            $ref: '#/definitions/deleteNetwork'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getUserNetwork/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: network_ctrl
+    get:
+      tags: ['network Module']
+      description: Get user network By Id
+      summary: Get user network By Id
+      # used as the method name of the controller
+      operationId: getUserNetwork
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getUserSpecificNetworkData/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: network_ctrl
+    get:
+      tags: ['network Module']
+      description: Get user network By Id
+      summary: Get user network By Id
+      # used as the method name of the controller
+      operationId: getUserSpecificNetworkData
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getSelectedNetwork/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: network_ctrl
+    get:
+      tags: ['network Module']
+      description: Get user network By Id
+      summary: Get user network By Id
+      # used as the method name of the controller
+      operationId: getSelectedNetwork
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/addTitle:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: title_ctrl
+    post:
+      tags: ['Title Module']
+      description: save Title
+      summary: Add new Title
+      # used as the method name of the controller
+      operationId: addTitle
+      parameters:
+        - name: body
+          in: body
+          description: sets service name
+          schema:
+           $ref: '#/definitions/addTitle'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /api/getTitleList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: title_ctrl
+    post:
+      tags: ['Title Module']
+      description: Get Title List
+      summary: Get Title List
+      # used as the method name of the controller
+      operationId: getTitleList
+      parameters:
+        - name: body
+          in: body
+          description: Get Title List
+          schema:
+           $ref: '#/definitions/getTitleList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getFrontdeskTitles:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: frontdesktitle_ctrl
+    post:
+      tags: ['Title Module']
+      description: Get Title List
+      summary: Get Title List
+      # used as the method name of the controller
+      operationId: getFrontdeskTitles
+      parameters:
+        - name: body
+          in: body
+          description: Get Title List
+          schema:
+           $ref: '#/definitions/getFrontdeskTitles'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/getStates:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: state_ctrl
+    get:
+      tags: ['State Module']
+      description: Get State List
+      summary: Get State List
+      # used as the method name of the controller
+      operationId: getStates     
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"               
+  /api/getTitles:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: title_ctrl
+    get:
+      tags: ['Title Module']
+      description: Get Title List
+      summary: Get Title List
+      # used as the method name of the controller
+      operationId: getTitles     
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                     
+  /api/getTitle/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: title_ctrl
+    get:
+      tags: ['Title Module']
+      description: Get Title By Id
+      summary: Get Title By Id
+      # used as the method name of the controller
+      operationId: getTitle
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteTitle:
+    # Doctors APIs
+    x-swagger-router-controller: title_ctrl
+    post:
+      tags: ['Title Module']
+      description: delete Title
+      summary: delete Title
+      # used as the method name of the controller
+      operationId: deleteTitle
+      parameters:
+        - name: name
+          in: body
+          description: delete Title
+          schema:
+            $ref: '#/definitions/deleteTitle'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addFrontdeskTitle:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: frontdesktitle_ctrl
+    post:
+      tags: ['Frontdesk Title Module']
+      description: save Title
+      summary: Add new Title
+      # used as the method name of the controller
+      operationId: addFrontdeskTitle
+      parameters:
+        - name: body
+          in: body
+          description: sets Frontdesk title name
+          schema:
+           $ref: '#/definitions/addFrontdeskTitle'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /api/getFrontdeskTitleList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: frontdesktitle_ctrl
+    post:
+      tags: ['Frontdesk Title Module']
+      description: Get Frontdesk Title List
+      summary: Get Frontdesk Title List
+      # used as the method name of the controller
+      operationId: getFrontdeskTitleList
+      parameters:
+        - name: body
+          in: body
+          description: Get Frontdesk Title List
+          schema:
+           $ref: '#/definitions/getFrontdeskTitleList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getFrontdeskTitle/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: frontdesktitle_ctrl
+    get:
+      tags: ['Frontdesk Title Module']
+      description: Get Title By Id
+      summary: Get Title By Id
+      # used as the method name of the controller
+      operationId: getFrontdeskTitleById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteFrontdeskTitle:
+    # Doctors APIs
+    x-swagger-router-controller: frontdesktitle_ctrl
+    post:
+      tags: ['Frontdesk Title Module']
+      description: delete Title
+      summary: delete Title
+      # used as the method name of the controller
+      operationId: deleteFrontdeskTitle
+      parameters:
+        - name: name
+          in: body
+          description: delete Title
+          schema:
+            $ref: '#/definitions/deleteFrontdeskTitle'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                     
+  /api/addServices:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: service_ctrl
+    post:
+      tags: ['Service Module']
+      description: save all services doctor by Admin
+      summary: deals with Services
+      # used as the method name of the controller
+      operationId: addServices
+      parameters:
+        - name: body
+          in: body
+          description: sets service
+          schema:
+           $ref: '#/definitions/addServices'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getServices:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: service_ctrl
+    post:
+      tags: ['Service Module']
+      description: get all services doctor by Admin
+      summary: deals with Services
+      # used as the method name of the controller
+      operationId: getServices
+      parameters:
+        - name: id
+          in: query
+          description: sets speciality name
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getPatientList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: Get Patient List
+      summary: Get Patient List
+      # used as the method name of the controller
+      operationId: getPatientList
+      parameters:
+        - name: body
+          in: body
+          description: Get Patient List
+          schema:
+           $ref: '#/definitions/getPatientList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addPatient:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: add Patient by Admin
+      summary: deals with Patients
+      # used as the method name of the controller
+      operationId: addPatient
+      parameters:
+        - name: body
+          in: body
+          description: sets Patient Information
+          schema:
+           $ref: '#/definitions/addPatient'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponseWithId"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/referPatients:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: add referral
+      summary: deals with Patients
+      # used as the method name of the controller
+      operationId: referPatients
+      parameters:
+        - name: body
+          in: body
+          description: sets refer info
+          schema:
+           $ref: '#/definitions/referPatients'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponseWithId"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+  /api/getReferredCounts:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: count referral
+      summary: deals with referral count
+      # used as the method name of the controller
+      operationId: getReferredCounts
+      parameters:
+        - name: body
+          in: body
+          description: get count refer info
+          schema:
+           $ref: '#/definitions/getReferredCounts'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponseWithId"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                    
+  /api/addPreference:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['Patient Module']
+      description: add referral
+      summary: deals with Patients
+      # used as the method name of the controller
+      operationId: addPreference
+      parameters:
+        - name: body
+          in: body
+          description: sets refer info
+          schema:
+           $ref: '#/definitions/addPreference'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateReferral:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['User Module']
+      description: update referral
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateReferral
+      parameters:
+        - name: body
+          in: body
+          description: Update referral Info
+          schema:
+           $ref: '#/definitions/updateReferral'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getPatient:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: get Patient Details for referral
+      summary: deals with Patients
+      # used as the method name of the controller
+      operationId: getPatient
+      parameters:
+        - name: body
+          in: body
+          description: gets Patient Information
+          schema:
+           $ref: '#/definitions/getPatient'
+          required: false        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updatedaudit:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: audit_ctrl
+    post:
+      tags: ['Log Module']
+      description: Update logs Info
+      summary: Update Log for audit Info
+      # used as the method name of the controller
+      operationId: updatedAudits
+      parameters:
+        - name: body
+          in: body
+          description: Update Log Information
+          schema:
+           $ref: '#/definitions/updatedAudits'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getNonDocById/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    get:
+      tags: ['User Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: getNonDocById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
+  /api/getInvitationListById/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: log_ctrl
+    get:
+      tags: ['User Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: getInvitationListById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"   
+  /api/getSuperAdminId/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: log_ctrl
+    get:
+      tags: ['User Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: getSuperAdminId
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                               
+  /api/getMyRatingList/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    get:
+      tags: ['User Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: getMyRatingList
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"    
+  /api/getInvitationList/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: log_ctrl
+    post:
+      tags: ['User Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: getInvitationList
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true     
+        # - name: body
+        #   in: body
+        #   description: sets service
+        #   schema:
+        #    $ref: '#/definitions/viewlogs'
+        #   required: true             
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                        
+  /api/getById/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    get:
+      tags: ['User Module']
+      description: User Activation By Id
+      summary: User Activation By Id
+      # used as the method name of the controller
+      operationId: getById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getDoctors:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Get's all doctors within the network
+      summary: All network doctors List
+      # used as the method name of the controller
+      operationId: getdoctors
+      parameters:
+        - name: page
+          in: query
+          description: Retrieve Docotors List
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getDoctorsReg:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Get's all doctors within the network
+      summary: All network doctors List
+      # used as the method name of the controller
+      operationId: getdoctorsreg
+      parameters:
+        - name: page
+          in: query
+          description: Retrieve Docotors List
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getDoctorsNonReg:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Get's all doctors within the network
+      summary: All network doctors List
+      # used as the method name of the controller
+      operationId: getdoctorsnonreg
+      parameters:
+        - name: page
+          in: query
+          description: Retrieve Docotors List
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                        
+  /api/getNonRegDocs:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Get's all doctors within the network
+      summary: All network doctors List
+      # used as the method name of the controller
+      operationId: getNonRegDocs
+      parameters:
+        - name: page
+          in: query
+          description: Retrieve Docotors List
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getDoctorBySpeciality:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['Doctor Module']
+      description: Get all doctors By Speciality
+      summary: Get all doctors By Speciality
+      # used as the method name of the controller
+      operationId: getDoctorBySpeciality
+      parameters:
+        - name: page
+          in: query
+          description: Retrieve Docotors List
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getCount:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: notification_ctrl
+    get:
+      tags: ['Dashboard Module']
+      description: To show Notification list at Doctor's settings 
+      summary: To show  Notifiacation
+      # used as the method name of the controller
+      operationId: getCount   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+  /api/getCountSuperAdmin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: notification_ctrl
+    get:
+      tags: ['Dashboard Module']
+      description: To show Notification list at Doctor's settings 
+      summary: To show  Notifiacation
+      # used as the method name of the controller
+      operationId: getCountSuperAdmin   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"             
+  /api/notificationDeletedByUser:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: notification_ctrl
+    get:
+      tags: ['Dashboard Module']
+      description: To Delete Notifiaction from list 
+      summary: To Delete Notifiaction from list
+      # used as the method name of the controller
+      operationId: notificationDeletedByUser   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"     
+  /api/notificationDeletedBySuperAdmin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: notification_ctrl
+    get:
+      tags: ['Dashboard Module']
+      description: To Delete Notifiaction from list 
+      summary: To Delete Notifiaction from list
+      # used as the method name of the controller
+      operationId: notificationDeletedBySuperAdmin   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"      
+  /api/notificationReadBySuperAdmin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: notification_ctrl
+    get:
+      tags: ['Dashboard Module']
+      description: To Delete Notifiaction from list 
+      summary: To Delete Notifiaction from list
+      # used as the method name of the controller
+      operationId: notificationReadBySuperAdmin   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                                      
+  /api/sendnotification:
+    # Notification APIs
+    x-swagger-router-controller: notification_ctrl
+    post:
+      tags: ['Notification Module']
+      description: Send notification to all users
+      summary: Send notification to all users
+      # used as the method name of the controller
+      operationId: sendNotification       
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/sendLoginDetailsInsurance:
+    # Notification APIs
+    x-swagger-router-controller: notification_ctrl
+    post:
+      tags: ['Insurance Module']
+      description: Send login details in email to all insurance admin
+      summary: Send email to all insurance admin
+      # used as the method name of the controller
+      operationId: sendLoginDetailsInsurance       
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                
+  /api/sendEmailInsurance:
+    # Notification APIs
+    x-swagger-router-controller: notification_ctrl
+    post:
+      tags: ['Insurance Module']
+      description: Send email to all insurance users
+      summary: Send email to all insurance users
+      # used as the method name of the controller
+      operationId: sendEmailInsurance       
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/sendnotificationSuperAdmin:
+    # Notification APIs
+    x-swagger-router-controller: notification_ctrl
+    post:
+      tags: ['Notification Module']
+      description: Send notification to super admin users
+      summary: Send notification to super admin
+      # used as the method name of the controller
+      operationId: sendNotificationSuperAdmin       
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                      
+  /api/uploadAttachments:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['User Module']
+      description: Upload attachments
+      summary: Upload attachments
+      # used as the method name of the controller
+      operationId: uploadAttachments
+      consumes:
+        - multipart/form-data
+        - application/x-www-form-urlencoded
+        - binary
+      parameters:
+        - in: formData
+          name: attachmentFile
+          description: attachment
+          type: file
+          required: true                                    
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"   
+  /api/getDoctorsList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getDoctorsList
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getDoctorsList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getDoctorsListUnAssociatedInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getDoctorsListUnAssociatedInsurance
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getDoctorsListUnAssociatedInsurance'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"         
+  /api/getDoctorsListAssociatedInsurance:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getDoctorsListAssociatedInsurance
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getDoctorsListAssociatedInsurance'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                   
+  /api/getDoctorsExportList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getDoctorsExportList
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getDoctorsExportList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"      
+  /api/getNonRegDoctorsExportList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: doctor_ctrl
+    post:
+      tags: ['User Module']
+      description: Get non reg User List
+      summary: Get non reg User List
+      # used as the method name of the controller
+      operationId: getNonRegDoctorsExportList
+      parameters:
+        - name: body
+          in: body
+          description: Get non reg User List
+          schema:
+           $ref: '#/definitions/getNonRegDoctorsExportList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                 
+  /api/getDoctorRatingList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getDoctorRatingList
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getDoctorRatingList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /api/getUnregisteredDoctorsList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getUnregisteredDoctorsList
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getUnregisteredDoctorsList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /api/getReferralList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: reports_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getReferralList
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getReferralList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getReferralDetail:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: reports_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getReferralDetail
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getReferralDetail'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+                 
+  /api/getOfficeAdminList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: addOfficeAdmin_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getOfficeAdminList
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getOfficeAdminList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteOfficeAdmin:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: addOfficeAdmin_ctrl
+    post:
+      tags: ['User Module']
+      description: Sets User Profile deleted to true
+      summary: Performs soft delete
+      # used as the method name of the controller
+      operationId: deleteOfficeAdmin
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/deleteOfficeAdmin'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getReferralLog:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: reports_ctrl
+    post:
+      tags: ['User Module']
+      description: Get User List
+      summary: Get User List
+      # used as the method name of the controller
+      operationId: getReferralLog
+      parameters:
+        - name: body
+          in: body
+          description: Get User List
+          schema:
+           $ref: '#/definitions/getReferralLog'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getPatientById/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    get:
+      tags: ['Patient Module']
+      description: Get Patient By Id
+      summary: Get Patient By Id
+      # used as the method name of the controller
+      operationId: getPatientById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updatePatient:
+    # Doctors APIs
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: Update Patient Information within the network
+      summary: Update Patient Information within the network
+      # used as the method name of the controller
+      operationId: updatePatient
+      parameters:
+        - name: name
+          in: body
+          description: Update Patient Information within the network
+          schema:
+            $ref: '#/definitions/updatePatient'
+          required: true
+          # type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/searchPatients:
+    # Doctors APIs
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: Update Patient Information within the network
+      summary: Update Patient Information within the network
+      # used as the method name of the controller
+      operationId: searchPatients
+      parameters:
+        - name: name
+          in: body
+          description: Update Patient Information within the network
+          schema:
+            $ref: '#/definitions/searchPatients'
+          required: true
+          # type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deletePatient:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Patient Module']
+      description: Sets User Profile deleted to true
+      summary: Performs soft delete
+      # used as the method name of the controller
+      operationId: deletePatient
+      parameters:
+        - name: body
+          in: body
+          description: Update User Profile Info
+          schema:
+           $ref: '#/definitions/deletePatient'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"    
+  /api/getSpecialityList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['specialities Module']
+      description: Get Specialty List
+      summary: Get Specialty List
+      # used as the method name of the controller
+      operationId: getSpecialityList
+      parameters:
+        - name: body
+          in: body
+          description: Get Speciality List
+          schema:
+           $ref: '#/definitions/getSpecialityList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  # /api/getReferredBy:
+  #   # binds a127 app logic to a route
+  #   x-swagger-router-controller: doctor_ctrl
+  #   post:
+  #     tags: ['specialities Module']
+  #     description: Get Specialty List
+  #     summary: Get Specialty List
+  #     # used as the method name of the controller
+  #     operationId: getReferredBy
+  #     parameters:
+  #       - name: name
+  #         in: body
+  #         description: Get getReferred By
+  #         schema:
+  #          $ref: '#/definitions/getReferredBy'
+  #         required: true
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           # a pointer to a definition
+  #           $ref: "#/definitions/appResponse"
+  #       # responses may fall through to errors
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
+  # /api/getReferredTo:
+  #   # binds a127 app logic to a route
+  #   x-swagger-router-controller: doctor_ctrl
+  #   post:
+  #     tags: ['specialities Module']
+  #     description: Get Specialty List
+  #     summary: Get Specialty List
+  #     # used as the method name of the controller
+  #     operationId: getReferredTo
+  #     parameters:
+  #       - name: name
+  #         in: body
+  #         description: Get getReferred To
+  #         schema:
+  #          $ref: '#/definitions/getReferredTo'
+  #         required: true
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           # a pointer to a definition
+  #           $ref: "#/definitions/appResponse"
+  #       # responses may fall through to errors
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
+  /api/getSpecialityById/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    get:
+      tags: ['Speciality Module']
+      description: Get Speciality By Id
+      summary: Get Speciality By Id
+      # used as the method name of the controller
+      operationId: getSpecialityById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /api/updateSpecialityByAdmin:
+    # Doctors APIs
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['Speciality Module']
+      description: Update Speciality Information within the network
+      summary: Update Speciality Information within the network
+      # used as the method name of the controller
+      operationId: updateSpecialityByAdmin
+      parameters:
+        - name: name
+          in: body
+          description: Update Speciality Information within the network
+          schema:
+            $ref: '#/definitions/updateSpecialityByAdmin'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteSpeciality:
+    # Doctors APIs
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['Speciality Module']
+      description: Update Speciality Information within the network
+      summary: Update Speciality Information within the network
+      # used as the method name of the controller
+      operationId: deleteSpeciality
+      parameters:
+        - name: name
+          in: body
+          description: Update Speciality Information within the network
+          schema:
+            $ref: '#/definitions/deleteSpeciality'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/specialityServiceDelete:
+    # Doctors APIs
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['Speciality Module']
+      description: Update Speciality Information within the network
+      summary: Update Speciality Information within the network
+      # used as the method name of the controller
+      operationId: specialityServiceDelete
+      parameters:
+        - name: name
+          in: body
+          description: Update Speciality Information within the network
+          schema:
+            $ref: '#/definitions/specialityServiceDelete'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateSpecialityStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['Speciality Module']
+      description: Sets Speciality Profile acitvated/deactivated
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateSpecialityStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update Speciality Profile Info
+          schema:
+           $ref: '#/definitions/updateSpecialityStatus'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/specialityServiceStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['Speciality Module']
+      description: Sets Speciality Profile acitvated/deactivated
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: specialityServiceStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update Speciality Profile Info
+          schema:
+           $ref: '#/definitions/specialityServiceStatus'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getServiceList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: service_ctrl
+    post:
+      tags: ['Services Module']
+      description: Get Services List
+      summary: Get Services List
+      # used as the method name of the controller
+      operationId: getServiceList
+      parameters:
+        - name: body
+          in: body
+          description: Get Speciality List
+          schema:
+           $ref: '#/definitions/getServiceList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getSpecialityServiceList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: speciality_Ctrl
+    post:
+      tags: ['Speciality Module']
+      description: Get Service to the Speciality
+      summary: Get Service to the Speciality
+      # used as the method name of the controller
+      operationId: getSpecialityServiceList
+      parameters:
+        - name: body
+          in: body
+          description: Get Service to the Speciality
+          schema:
+           $ref: '#/definitions/getSpecialityServiceList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getSpecialityNames:
+    # Doctors APIs
+    x-swagger-router-controller: service_ctrl
+    get:
+      tags: ['speciality Module']
+      description: Get all the specialities
+      summary: available
+      # used as the method name of the controller
+      operationId: getSpecialityNames
+      parameters:
+        - name: id
+          in: query
+          description: get all specialities
+          required: false
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteService:
+    # Doctors APIs
+    x-swagger-router-controller: service_ctrl
+    post:
+      tags: ['Speciality Module']
+      description: Update Speciality Information within the network
+      summary: Update Speciality Information within the network
+      # used as the method name of the controller
+      operationId: deleteService
+      parameters:
+        - name: name
+          in: body
+          description: Update Speciality Information within the network
+          schema:
+            $ref: '#/definitions/deleteService'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getServiceById/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: service_ctrl
+    get:
+      tags: ['Speciality Module']
+      description: Get Speciality By Id
+      summary: Get Speciality By Id
+      # used as the method name of the controller
+      operationId: getServiceById
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateServiceStatus:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: service_ctrl
+    post:
+      tags: ['Service Module']
+      description: Sets Service Profile acitvated/deactivated
+      summary: Performs updation
+      # used as the method name of the controller
+      operationId: updateServiceStatus
+      parameters:
+        - name: body
+          in: body
+          description: Update Service Profile Info
+          schema:
+           $ref: '#/definitions/updateServiceStatus'
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateServicesService:
+    # Doctors APIs
+    x-swagger-router-controller: service_ctrl
+    post:
+      tags: ['Service Module']
+      description: Update Speciality Information within the network
+      summary: Update Service Information within the network
+      # used as the method name of the controller
+      operationId: updateServicesService
+      parameters:
+        - name: name
+          in: body
+          description: Update Services Information within the network
+          schema:
+            $ref: '#/definitions/updateServicesService'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getTemplates:
+    # Doctors APIs
+    x-swagger-router-controller: faxtemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: getTemplates
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getEmailTemplateByKey:
+    # Doctors APIs
+    x-swagger-router-controller: emailtemplate_ctrl
+    post:
+      tags: ['emailtemplate Module']
+      description: Update Speciality Information within the network
+      summary: Update Service Information within the network
+      # used as the method name of the controller
+      operationId: getEmailTemplateByKey
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/getTemplateByKey:
+    # Doctors APIs
+    x-swagger-router-controller: faxtemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Update Speciality Information within the network
+      summary: Update Service Information within the network
+      # used as the method name of the controller
+      operationId: getTemplateByKey
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+  /api/updateTemplate:
+    # Doctors APIs
+    x-swagger-router-controller: faxtemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: updateTemplate
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/contactUs:
+    # Doctors APIs
+    x-swagger-router-controller: auth_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: contactUs
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getReferralHistory:
+    # Doctors APIs
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: getReferralHistory
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getMailTemplates:
+    # Doctors APIs
+    x-swagger-router-controller: emailtemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: getMailTemplates
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateMailTemplate:
+    # Doctors APIs
+    x-swagger-router-controller: emailtemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: updateMailTemplate
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/editMailTemplate:
+    # Doctors APIs
+    x-swagger-router-controller: emailtemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: editMailTemplate
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getSmsTemplates:
+    # Doctors APIs
+    x-swagger-router-controller: smstemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: getSmsTemplates
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateSmsTemplate:
+    # Doctors APIs
+    x-swagger-router-controller: smstemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: updateSmsTemplate
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/editSmsTemplate:
+    # Doctors APIs
+    x-swagger-router-controller: smstemplate_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all the fax template
+      summary: available
+      # used as the method name of the controller
+      operationId: getTemplateById
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+
+  /api/addPhiAccess:
+    # Doctors APIs
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all PHI access log
+      summary: available
+      # used as the method name of the controller
+      operationId: addPhiAccess
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addUserActivity:
+    # Doctors APIs
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all user interaction log
+      summary: available
+      # used as the method name of the controller
+      operationId: addUserActivity
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addInvitationLog:
+    # Doctors APIs
+    x-swagger-router-controller: users_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all user interaction log
+      summary: available
+      # used as the method name of the controller
+      operationId: addInvitationLog
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/getPhiLog:
+    # Doctors APIs
+    x-swagger-router-controller: log_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all user interaction log
+      summary: available
+      # used as the method name of the controller
+      operationId: getPhiLog
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getReferralsList:
+    # Doctors APIs
+    x-swagger-router-controller: log_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all user interaction log
+      summary: available
+      # used as the method name of the controller
+      operationId: getReferralsList
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/exportReferralsList:
+    # Doctors APIs
+    x-swagger-router-controller: log_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all user interaction log
+      summary: available
+      # used as the method name of the controller
+      operationId: exportReferralsList
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"                    
+  /api/getUserActvLog:
+    # Doctors APIs
+    x-swagger-router-controller: log_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all user interaction log
+      summary: available
+      # used as the method name of the controller
+      operationId: getUserActvLog
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getInvitationLog:
+    # Doctors APIs
+    x-swagger-router-controller: log_ctrl
+    post:
+      tags: ['faxtemplate Module']
+      description: Get all providers invitation log
+      summary: available
+      # used as the method name of the controller
+      operationId: getInvitationLog
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"            
+  /api/addHospital:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hospital_ctrl
+    post:
+      tags: ['Hospital Module']
+      description: Add New User
+      summary:  Add New User
+      # used as the method name of the controller
+      operationId: addHospital
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getHospitalList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hospital_ctrl
+    post:
+      tags: ['Ntework Module']
+      description: Get Network List
+      summary: Get network List
+      # used as the method name of the controller
+      operationId: getHospitalList
+      parameters:
+        - name: body
+          in: body
+          description: Get network List
+          schema:
+           $ref: '#/definitions/getHospitalList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getHospital/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hospital_ctrl
+    get:
+      tags: ['network Module']
+      description: Get network By Id
+      summary: Get network By Id
+      # used as the method name of the controller
+      operationId: getHospital
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteHospital:
+    # Doctors APIs
+    x-swagger-router-controller: hospital_ctrl
+    post:
+      tags: ['netwokr Module']
+      description: delete network
+      summary: delete network
+      # used as the method name of the controller
+      operationId: deleteHospital
+      parameters:
+        - name: name
+          in: body
+          description: delete network
+          schema:
+            $ref: '#/definitions/deleteHospital'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/addFaq:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: faq_ctrl
+    post:
+      tags: ['Faq Module']
+      description: Add New User
+      summary:  Add New User
+      # used as the method name of the controller
+      operationId: addFaq
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getFaqList:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: faq_ctrl
+    post:
+      tags: ['Faq Module']
+      description: Get Faq List
+      summary: Get Faq List
+      # used as the method name of the controller
+      operationId: getFaqList
+      parameters:
+        - name: body
+          in: body
+          description: Get faq List
+          schema:
+           $ref: '#/definitions/getFaqList'
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getFaq/{id}:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: faq_ctrl
+    get:
+      tags: ['Faq Module']
+      description: Get faq By Id
+      summary: Get faq By Id
+      # used as the method name of the controller
+      operationId: getFaq
+      parameters:
+        - name: id
+          type: string
+          in: path
+          required: true        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/deleteFaq:
+    # Doctors APIs
+    x-swagger-router-controller: faq_ctrl
+    post:
+      tags: ['Faq Module']
+      description: delete faq
+      summary: delete faq
+      # used as the method name of the controller
+      operationId: deleteFaq
+      parameters:
+        - name: name
+          in: body
+          description: delete faq
+          schema:
+            $ref: '#/definitions/deleteFaq'
+          required: true
+          # type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/getHelpContent:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: faq_ctrl
+    get:
+      tags: ['Faq Module']
+      description: to show help content 
+      summary: To show help content
+      # used as the method name of the controller
+      operationId: getHelpContent   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"     
+  /api/cronDelAttchment:
+    # Doctors APIs
+    x-swagger-router-controller: doctor_ctrl
+    get:
+      tags: ['Admin Module']
+      description: To check admin loggedin or not
+      summary: To check admin loggedin or not
+      # used as the method name of the controller
+      operationId: cronDelAttchment   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+  /api/getHospitals:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hospital_ctrl
+    post:
+      tags: ['Hospital Module']
+      description: Add New User
+      summary:  Add New User
+      # used as the method name of the controller
+      operationId: getHospitalByState
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /api/updateReferralDetail:
+  # Doctors APIs
+    x-swagger-router-controller: patient_ctrl
+    post:
+      tags: ['Admin Module']
+      description: To check admin loggedin or not
+      summary: To check admin loggedin or not
+      # used as the method name of the controller
+      operationId: updateReferralDetail   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/appResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+# complex objects have schema definitions
+definitions:
+  userRegister:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+  userLogin:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+  validateFrontDeskAccess:
+    type: object
+    properties: 
+      docId: 
+        type: string
+      reqUser:
+        type: string
+  validateTokenAccess:
+    type: object
+    properties: 
+      docId: 
+        type: string
+      reqUser:
+        type: string        
+  updatePassword:
+    type: object
+    properties:
+      email:
+        type: string
+      oldPass:
+        type: string
+      newPass:
+        type: string
+  changePass:
+    type: object
+    properties:
+      token:
+        type: string
+      pass:
+        type: string
+  changePassAdmin:
+    type: object
+    properties:
+      token:
+        type: string
+      pass:
+        type: string        
+  forgotPassword:
+    type: object
+    properties:
+      email:
+        type: string                
+  adminLogin:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string 
+  insuranceLogin:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string         
+  existMember:
+    type: object
+    properties:
+      id:
+        type: string
+  userLogOut:
+    type: object
+    properties:
+      userId:
+        type: string
+  addUser:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      speciality:
+        type: array
+        items:
+          type: string
+      network:
+        type: array
+        items:
+          type: string
+      location: 
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zipcode:
+        type: string
+      subject:
+        type: string
+      mailBody:
+        type: string
+  migrateData:
+    type: object
+    properties:
+      email:
+        type: string
+  registerUser:
+    type: object
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      speciality:
+        type: array
+        items:
+          type: string
+      network:
+        type: array
+        items:
+          type: string
+      location: 
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zipcode:
+        type: string
+      subject:
+        type: string
+      mailBody:
+        type: string              
+  getUserDetails:  
+    type: object
+    properties:
+      userId:
+        type: string
+  getUserProfile:  
+    type: object
+    properties:
+      userId:
+        type: string  
+  updateProfile:
+    type: object
+    properties:
+      userId:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string 
+  updateUserLocation:
+    type: object
+    properties:
+      userId:
+        type: string
+      phone_number:
+        type: string
+      address:
+        type: string 
+      city:
+        type: string
+      state:
+        type: string 
+      country:
+        type: string
+  deleteUser:
+    type: object
+    properties:
+      email:
+        type: string
+  updateProviderNetwork:
+    type: object
+    properties:
+      networkId:
+        type: string      
+      netProvs:
+        type: array
+        items:
+          type: string  
+  updateProviderNetworkUnlisted:
+    type: object
+    properties:
+      networkId:
+        type: string      
+      netProvs:
+        type: array
+        items:
+          type: string            
+  sendMail:
+    type: object
+    properties:
+      to:
+        type: string
+      subject:
+        type: string
+      content:
+        type: string 
+  deletePatient:
+    type: object
+    properties:
+      id:
+        type: string
+  deleteSpeciality:
+    type: object
+    properties:
+      id:
+        type: string
+  specialityServiceDelete:
+    type: object
+    properties:
+      id:
+        type: string
+  deleteService:
+    type: object
+    properties:
+      id:
+        type: string
+  updateUser:
+    type: object
+    properties:
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
+      speciality:
+        type: array
+        items:
+          type: string
+      location: 
+        type: string
+      city:
+        type: string
+      state:
+        type: string
+      zipcode:
+        type: string
+  updateUserEmail:
+    type: object
+    properties:
+      userId:
+        type: string
+      email:
+        type: string                
+  updateStatus:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+  updateNetworkProviderStatus:
+    type: object
+    properties:
+      userId:
+        type: string
+      network:
+        type: string        
+      status:
+        type: string        
+  updatePatientStatus:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: string  
+  searchPatients:
+    type: object
+    properties:
+      param:
+        type: string
+      val:
+        type: string  
+  resetPassword:
+    type: object
+    properties:
+      userId:
+        type: string                    
+  changePassword:
+    type: object
+    properties:
+      userId:
+        type: string
+      oldPassword:
+        type: string
+      newPassword:
+        type: string
+  addCategory:   
+    type: object
+    properties:
+      categoryName:
+        type: string
+  getCustomerServiceDetails:   
+    type: object
+    properties:
+      serviceId:
+        type: string                
+  addService:   
+    type: object
+    properties:
+      serviceName:
+        type: string
+  updateService:   
+    type: object
+    properties:
+      userId:
+        type: string
+  UpdateContactDetails:
+    type: object
+    properties:
+      userId:
+        type: string
+      phone_number:
+        type: string
+      location:
+        type: string 
+      lastname:
+        type: string
+      firstname:
+        type: string 
+      email:
+        type: string
+      state:
+        type: string
+      cell_phone:
+        type: string
+      city:
+        type: string                
+      zipcode:
+        type: string
+  insertOrUpdateUsernetworks:
+    type: object
+  updateSpeciality:   
+    type: object
+    properties:
+      userId:
+        type: string
+  updatePatientNotificationStatus:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: string        
+  updateNetwork:   
+    type: object
+    properties:
+      userId:
+        type: string 
+  changeServiceStatus:   
+    type: object
+    properties:
+      serviceId:
+        type: string    
+      status:
+        type: string
+  addUnit:   
+    type: object
+    properties:
+      fullName:
+        type: string
+      shortName:
+        type: string
+  updateUnit:   
+    type: object
+    properties:
+      unitId:
+        type: string    
+      fullName:
+        type: string
+  changeUnitStatus:   
+    type: object
+    properties:
+      unitId:
+        type: string    
+      status:
+        type: string
+  placeOrder: 
+    type: object
+    properties:
+      userId:
+        type: string
+  getDashboardItem: 
+    type: object
+    properties:
+      itemId:
+        type: string
+  updatedoctorlist: 
+    type: object
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+  setStatus: 
+    type: object
+    properties:
+      status:
+        type: string
+      id:
+        type: string
+  setReferralStatus: 
+    type: object
+    properties:
+      status:
+        type: number
+      id:
+        type: string
+  sendAck: 
+    type: object
+    properties:
+      id:
+        type: string
+  addDoctorInNetwork: 
+    type: object
+    properties:
+      doctorsNPI:
+        type: string
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      speciality:
+        type: string
+      services:
+        type: string
+      contact_No:
+        type: number
+      officePhone:
+        type: number
+  referPatients: 
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      specialities:
+        type: array
+        items:
+          type: string
+      services:
+        type: array
+        items: 
+          type: string
+      other:
+        type: string
+      referredBy:
+        type: string
+      referredTo:
+        type: string
+      patientInfo:
+        type: string
+      chiefComplain:
+        type: string
+      attachment:
+        type: string
+  getReferredCounts: 
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      specialities:
+        type: array
+        items:
+          type: string
+      services:
+        type: array
+        items: 
+          type: string
+      other:
+        type: string
+      referredBy:
+        type: string
+      referredTo:
+        type: string
+      patientInfo:
+        type: string
+      chiefComplain:
+        type: string
+      attachment:
+        type: string        
+  addPreference: 
+    type: object
+    properties:
+      userId:
+        type: string
+      speciality:
+        type: string
+      preference:
+        type: array
+        items:
+          type: string
+  addPatient: 
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      contact_no:
+        type: string
+      complaints:
+        type: string
+      location:
+        type: string
+      city: 
+        type: string
+      state: 
+        type: string
+      zipcode: 
+        type: string 
+      network:
+        type: array
+        items:
+          type: string          
+  getPatient: 
+    type: object
+    properties:
+      firstName:
+        type: string
+      lastName:
+        type: string
+  getPreference: 
+    type: object
+    properties:
+      userId:
+        type: string
+  getPreferenceBySpecialty: 
+    type: object
+    properties:
+      userId:
+        type: string
+      speciality:
+        type: array
+        items:
+          type: string
+  addSpeciality: 
+    type: object
+    properties:
+      specialityCode:
+        type: string
+      specialityName:
+        type: string
+      specialityDescp:
+        type: string
+  addServices: 
+    type: object
+    properties:
+      serviceCode:
+        type: string
+      serviceName:
+        type: string
+      serviceDescrip:
+        type: string
+  viewlogs: 
+    type: object
+    properties:
+      count:
+        type: number
+      limit:
+        type: number        
+  addSpecialityService: 
+    type: object
+    properties:
+      serviceCode:
+        type: string
+      serviceName:
+        type: string
+      serviceDescp:
+        type: string
+  updatedAudits: 
+    type: object
+    properties:
+      name:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      speciality:
+        type: string
+      services:
+        type: string
+      contact_No:
+        type: number
+      office_cell:
+        type: number  
+  # getReferredTo:
+  #   type: object
+  #   properties: 
+  #     id:
+  #       type: string
+  # getReferredBy:
+  #   type: object
+  #   properties: 
+  #     id:
+  #       type: string
+  getDoctorsList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  getDoctorsListUnAssociatedInsurance:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string       
+  getDoctorsListAssociatedInsurance:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string            
+  getDoctorsExportList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string    
+  getNonRegDoctorsExportList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string           
+  getDoctorRatingList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string      
+  getUnregisteredDoctorsList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string      
+  getReferralList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  getReferralDetail:
+    type: object
+    properties:
+      id:
+        type: string
+  getReferralLog:
+    type: object
+    properties:
+      id:
+        type: string
+  getSpecialityList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  getServiceList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  getPatientList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  updatePatient: 
+    type: object
+    properties:
+      firstname:
+        type: string
+      lastname:
+        type: string
+      email:
+        type: string
+      contact_no:
+        type: string
+  updateSpecialityByAdmin: 
+    type: object
+    properties:
+      specialityCode:
+        type: string
+      specialityName:
+        type: string
+  updateServicesService: 
+    type: object
+    properties:
+      serviceName:
+        type: string
+  updateSpecialityStatus:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+  specialityServiceStatus:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+  updateServiceStatus:
+    type: object
+    properties:
+      id:
+        type: string
+      status:
+        type: string
+  getSpecialityServiceList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string                                
+  appResponse:
+    required:
+      - code
+    properties:
+      code:
+        type: number
+      message:
+        type: string
+  appResponseWithId:
+    required:
+      - code
+    properties:
+      code:
+        type: number
+      message:
+        type: string
+      id:
+        type: string
+  updateReferral:
+    type: object
+    properties:
+      _id:
+        type: string
+      attachment:
+        type: string
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  addNetwork: 
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      desc:
+        type: string
+  deleteNetwork:
+    type: object
+    properties:
+      id:
+        type: string
+  getNetworkList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  getNetwork:
+    type: object
+    properties:
+      id:
+        type: string
+      searchText:
+        type: string
+  addTitle: 
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      desc:
+        type: string
+  deleteTitle:
+    type: object
+    properties:
+      id:
+        type: string
+  getTitleList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  getFrontdeskTitles:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string     
+  addFrontdeskTitle: 
+    type: object
+    properties:
+      id:
+        type: string
+      name:
+        type: string
+      desc:
+        type: string
+  deleteFrontdeskTitle:
+    type: object
+    properties:
+      id:
+        type: string
+  getFrontdeskTitleList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  getOfficeAdminList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  deleteOfficeAdmin:
+    type: object
+    properties:
+      email:
+        type: string
+  getHospitalList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string  
+  addHospital:
+    type: object   
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  deleteHospital:
+    type: object
+    properties:
+      id:
+        type: string
+  getFaqList:
+    type: object
+    properties:
+      page:
+        type: string
+      count:
+        type: string  
+  addFaq:
+    type: object   
+    properties:
+      page:
+        type: string
+      count:
+        type: string
+  deleteFaq:
+    type: object
+    properties:
+      id:
+        type: string  
+

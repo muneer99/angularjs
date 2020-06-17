@@ -1,0 +1,31 @@
+<div class="content-wrapper">
+    <section class="">
+        <div class="container" ng-init="getSpecialityById()">
+            <h3>Edit Specialty</h3>
+            <form class="form-horizontal" name="form">
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">CMS Code :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="CMS code" name="specialityCode" ng-pattern="/^[A-Z0-9\s]*$/" ng-model="editSpeciality.specialityCode" ng-maxlength="5" maxlength="6">
+                        <span class="" ng-show="form.specialityCode.$error.pattern" style="color:maroon">CMS code contain digit or capital letter.</span>
+                        <span class="" ng-show="form.specialityCode.$error.maxlength" style="color:maroon">Maximum length of CMS code is 5.</span>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Specialty Name :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Speciality name" name="specialityName" ng-pattern="/^[a-zA-Z '-\s]*$/" ng-model="editSpeciality.specialityName">
+                        <span ng-if="form.specialityName.$touched && form.specialityName.$dirty && form.specialityName.$error.required" class="help-block" style="color:maroon" required>Specialty name required</span>
+                        <span class="" ng-show="form.specialityName.$error.pattern" style="color:maroon">Specialty name does not contain digit.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="" style="text-align:left"></label>
+                    <div class="col-sm-8">
+                        <a href="#/admindashboard"><button type="button" class="btn btn-primary" >Back to dashboard</button></a>
+                        <button type="submit" class="btn btn-primary" ng-click="updateSpeciality(editSpeciality); done = true" ng-disabled="form.$invalid  || done">Click to update</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>

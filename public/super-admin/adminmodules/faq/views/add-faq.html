@@ -1,0 +1,47 @@
+
+<div class="content-wrapper">
+    <section class="">
+        <div class="container">
+            <h3>{{pageTitle}}</h3>
+            <form class="form-horizontal" name="form" ng-init="getFaq()">
+                <div class="form-group ">
+                    <label for="faqPages" class="control-label col-sm-3" style="text-align:left">Pages:</label>
+                    <div class="col-sm-8">
+                        <select class="form-control" id="pages" disabled="disabled" placeholder="Page" name="page" ng-model="faq.page">
+                            <option ng-repeat="(key, value) in faqPages " value="{{key}}" ng-selected="key == faq.page">{{value}}</option>
+                        </select>
+                        <span ng-if="form.page.$touched && form.page.$dirty && form.page.$error.required" class="help-block" style="color:maroon">Page Required</span>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left"> Title :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="" placeholder="Enter Title" name="name" ng-pattern="/^[a-z A-Z '\s]*$/" ng-model="faq.title" required>
+                        <span ng-if="form.name.$touched && form.name.$dirty && form.name.$error.required" class="help-block" style="color:maroon" required> title required</span>
+                        <span class="" ng-show="form.name.$error.pattern" style="color:maroon">title should not contain any special character and number.</span>
+                    </div>
+                </div>
+                <div class="form-group required">
+                    <label class="control-label col-sm-3" for="pwd" style="text-align:left">Description :</label>
+                    <div class="col-sm-8">
+                        <text-angular ng-model="faq.description" ta-toolbar="[['h1','h2','h3','h4','h5','h6', 'pre', 'quote'],['bold','italics','underline', 'ul', 'ol','fontName', 'fontSize', 'redo', 'undo', 'clear'],['justifyLeft','justifyCenter','justifyRight', 'indent', 'outdent'], ['html']]" ></text-angular>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="youtube_link" style="text-align:left">Youtube Link :</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" id="youtube_link" placeholder="Youtube Link" name="youtube_link" ng-pattern="/^(http(s)?:\/\/)?((w){3}.)?youtu(be|.be)?(\.com)?\/.+$/" ng-model="faq.youtube_link" >
+                        <span class="" ng-show="form.youtube_link.$error.pattern" style="color:maroon">link should not contain any special character and number.</span>
+                    </div>
+                </div>
+                                
+                <div class="form-group">
+                    <label class="control-label col-sm-3" for="" style="text-align:left"></label>
+                    <div class="col-sm-8">
+                        <a href="#/admindashboard"><button type="button" class="btn btn-primary" >Back to dashboard</button></a>
+                        <button type="submit" class="btn btn-primary" ng-click="addFaq(faq);" ng-disabled="form.$invalid">{{btnTitle}}</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+</div>
