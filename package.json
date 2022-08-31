@@ -30,7 +30,7 @@
     "html-pdf": "^2.2.0",
     "interfax": "^0.8.1",
     "jsonwebtoken": "^7.4.1",
-    "moment-timezone": "^0.5.13",
+    "moment-timezone": "^0.5.35",
     "mongoose": "^4.11.3",
     "ng-multiselect-dropdown": "^0.2.5",
     "ng-video": "^1.0.3",
