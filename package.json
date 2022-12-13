@@ -19,7 +19,7 @@
     "co": "^4.6.0",
     "cron": "^1.3.0",
     "crypto": "0.0.3",
-    "express": "^4.12.3",
+    "express": "^4.17.3",
     "express-device": "^0.4.2",
     "fcm-node": "^1.0.16",
     "formidable": "^1.1.1",
